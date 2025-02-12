@@ -4,10 +4,6 @@ teaching: 15
 exercises: 5
 ---
 
-```{r load_config, include=FALSE}
-library(yaml)
-config <- yaml.load_file("lesson_config.yaml")
-```
 
 ::: questions
  - Why would I be interested in High Performance Computing (HPC)?
