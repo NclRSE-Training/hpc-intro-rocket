@@ -18,10 +18,10 @@ carpentry: 'incubator'
 carpentry_description: 'Lesson Description'
 
 # Overall title for pages.
-title: 'Lesson Title' # FIXME
+title: 'Introduction to HPC' # FIXME
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
+created: 2025-02-12 # FIXME
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries' # FIXME
@@ -34,13 +34,13 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/carpentries/workbench-template-md' # FIXME
+source: 'https://carolbooth2.github.io/hpc-intro-draft4/' # FIXME
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org' # FIXME
+contact: 'workshoporganisation@group.newcastle.ac.uk' # FIXME
 
 # Navigation ------------------------------------------------
 #
@@ -65,11 +65,18 @@ contact: 'team@carpentries.org' # FIXME
 # - another-learner.md
 
 # Order of episodes in your lesson
-episodes: 
-- introduction.md
+episodes:
+  - 11-hpc-intro.Rmd
+  - 12-cluster.Rmd
+  - 13-scheduler.Rmd
+  - 14-modules.Rmd
+  - 15-transferring-files.Rmd
+  - 17-resources.Rmd
+  - 18-responsibility.Rmd
 
 # Information for Learners
-learners: 
+learners:
+  - reference.md
 
 # Information for Instructors
 instructors: 
