@@ -66,17 +66,17 @@ contact: 'workshoporganisation@group.newcastle.ac.uk' # FIXME
 
 # Order of episodes in your lesson
 episodes:
-  - 11-hpc-intro.Rmd
-  - 12-cluster.Rmd
-  - 13-scheduler.Rmd
-  - 14-modules.Rmd
-  - 15-transferring-files.Rmd
-  - 17-resources.Rmd
-  - 18-responsibility.Rmd
+#  - 11-hpc-intro.Rmd
+#  - 12-cluster.Rmd
+#  - 13-scheduler.Rmd
+#  - 14-modules.Rmd
+#  - 15-transferring-files.Rmd
+#  - 17-resources.Rmd
+#  - 18-responsibility.Rmd
 
 # Information for Learners
 learners:
-  - reference.md
+#  - reference.md
 
 # Information for Instructors
 instructors: 
