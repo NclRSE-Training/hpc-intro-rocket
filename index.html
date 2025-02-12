@@ -197,20 +197,12 @@
                   <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Summary and Setup
         </span>
-      </button>
+      
     </div><!--/div.accordion-header-->
-
-    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
-      <div class="accordion-body">
-        <ul><li><a href="#data-sets">Data Sets</a></li>
-<li><a href="#software-setup">Software Setup</a></li>
-        </ul></div><!--/div.accordion-body-->
-    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -283,17 +275,39 @@ any links that you are not going to use.
  -->
 
 
-      <section id="setup"><p>FIXME: Setup instructions live in this document. Please specify the
-tools and the data sets the Learner needs to have installed.</p>
-<section><h2 class="section-heading" id="data-sets">Data Sets<a class="anchor" aria-label="anchor" href="#data-sets"></a></h2>
-<hr class="half-width"><!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
---><p>Download the <a href="https://example.com/FIXME" class="external-link">data zip file</a>
-and unzip it to your Desktop</p>
-</section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
-<hr class="half-width"><div id="details" class="callout discussion">
+      <section id="setup"><div class="section level1">
+<h1 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a></h1>
+<p>There are several pieces of software you will wish to install before
+the workshop. Though installation help will be provided at the workshop,
+we recommend that these tools are installed (or at least downloaded)
+beforehand.</p>
+<div id="bash-and-ssh" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="bash-and-ssh" class="callout-inner">
+<h3 class="callout-title">Bash and SSH</h3>
+<div class="callout-content">
+<p>This lesson requires a terminal application (<code>bash</code>,
+<code>zsh</code>, or others) with the ability to securely connect to a
+remote machine (<code>ssh</code>).</p>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="where-to-type-commands-how-to-open-a-new-shell">Where to type commands: How to open a new shell<a class="anchor" aria-label="anchor" href="#where-to-type-commands-how-to-open-a-new-shell"></a></h2>
+<p>The shell is a program that enables us to send commands to the
+computer and receive output. It is also referred to as the terminal or
+command line.</p>
+<p>Some computers include a default Unix Shell program. The steps below
+describe some methods for identifying and opening a Unix Shell program
+if you already have one installed. There are also options for
+identifying and downloading a Unix Shell program, a Linux/UNIX emulator,
+or a program to access a Unix Shell on a server.</p>
+</div>
+<div class="section level2">
+<h2 id="shell-setup">Shell Setup<a class="anchor" aria-label="anchor" href="#shell-setup"></a></h2>
+<div id="details" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -301,54 +315,194 @@ and unzip it to your Desktop</p>
 <h3 class="callout-title">Details</h3>
 <div class="callout-content">
 <p>Setup for different systems can be presented in dropdown menus via a
-<code>spoiler</code> tag. They will join to this discussion block, so
+<code>solution</code> tag. They will join to this discussion block, so
 you can give a general overview of the software used in this lesson here
 and fill out the individual operating systems (and potentially add more,
 e.g. online setup) in the solutions blocks.</p>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
   Windows
-  </h3>
+  </h4>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<p>Use PuTTY</p>
+<p>Computers with Windows operating systems do not automatically have a
+Unix Shell program installed. In this lesson, we encourage you to use an
+emulator included in MobaXterm for Windows, which gives you access to
+both Bash shell commands and SSH.</p>
+<p>Once installed, you can open a terminal by running the program
+MobaXterm from the Windows start menu.</p>
+<div class="section level4">
+<h4 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h4>
+<ul><li>
+<a href="https://mobaxterm.mobatek.net/download-home-edition.html" class="external-link">MobaXterm</a>
+— <em>Recommended</em>
+</li>
+<li>
+<a href="https://gitforwindows.org/" class="external-link">Git for Windows</a> —
+Alternative option used by other Software Carpentries</li>
+<li>
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" class="external-link">Windows
+Subsystem for Linux</a> — advanced option for Windows 10</li>
+</ul><div id="alternatives-to-mobaxterm-and-git-for-windows" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="alternatives-to-mobaxterm-and-git-for-windows" class="callout-inner">
+<h3 class="callout-title">Alternatives to MobaXterm and Git for
+Windows</h3>
+<div class="callout-content">
+<p>Other solutions are available for running Bash commands on Windows.
+There is now a Bash shell command-line tool available for Windows 10.
+Additionally, you can run Bash commands on a remote computer or server
+that already has a Unix Shell, from your Windows machine. This can
+usually be done through a Secure Shell (SSH) client. One such client
+available for free for Windows computers is PuTTY. See the reference
+below for information on installing and using PuTTY, using the Windows
+10 command-line tool, or installing and using a Unix/Linux emulator.</p>
+<p>For advanced users, you may choose one of the following
+alternatives:</p>
+<ul><li>Install the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" class="external-link">Windows
+Subsystem for Linux</a>
+</li>
+<li>Use the Windows <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core?view=powershell-7" class="external-link">Powershell</a>
+</li>
+<li>Read up on <a href="https://faculty.smu.edu/reynolds/unixtut/windows.html" class="external-link">Using a
+Unix/Linux emulator (Cygwin) or Secure Shell (SSH) client (Putty)</a>
+&gt; ## Warning &gt; &gt; Commands in the Windows Subsystem for Linux
+(WSL), Powershell, or Cygwin &gt; may differ slightly from those shown
+in the lesson or presented in the &gt; workshop. Please ask if you
+encounter such a mismatch — you’re &gt; probably not alone.</li>
+</ul></div>
 </div>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
   MacOS
-  </h3>
+  </h4>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>Use Terminal.app</p>
+<p>On macOS, the default Unix Shell is accessible by running the
+Terminal program from the <code>/Application/Utilities</code> folder in
+Finder.</p>
+<p>To open Terminal, try one or both of the following:</p>
+<ul><li>In Finder, select the Go menu, then select Utilities. Locate
+Terminal in the Utilities folder and open it.</li>
+<li>Use the Mac ‘Spotlight’ computer search function. Search for:
+<code>Terminal</code> and press <kbd>Return</kbd>.</li>
+</ul><div class="section level4">
+<h4 id="reference-1">Reference<a class="anchor" aria-label="anchor" href="#reference-1"></a></h4>
+<p><a href="https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/" class="external-link">How
+to Use Terminal on a Mac</a></p>
 </div>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">
-  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
   Linux
-  </h3>
+  </h4>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<p>Use Terminal</p>
+<p>On most versions of Linux, the default Unix Shell is accessible by
+running the <a href="https://help.gnome.org/users/gnome-terminal/stable/" class="external-link">(Gnome)
+Terminal</a> or <a href="https://konsole.kde.org/" class="external-link">(KDE) Konsole</a> or
+<a href="https://en.wikipedia.org/wiki/Xterm" class="external-link">xterm</a>, which can be
+found via the applications menu or the search bar.</p>
+<div class="section level4">
+<h4 id="special-cases">Special cases<a class="anchor" aria-label="anchor" href="#special-cases"></a></h4>
+<p>If none of the options above address your circumstances, try an
+online search for: <code>Unix shell [your operating system]</code>.</p>
+<p>This setup takes you through getting ready for the course by ensuring
+you have an SSH client installed and registering for an ARCHER2 account
+(you can also use an existing ARCHER2 account if you are already a
+user).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="setup-an-ssh-client">Setup an SSH client<a class="anchor" aria-label="anchor" href="#setup-an-ssh-client"></a></h2>
+<div id="details-1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="details-1" class="callout-inner">
+<h3 class="callout-title">Details</h3>
+<div class="callout-content">
+<p>All attendees should have an SSH client installed. SSH is a tool that
+allows us to connect to and use a remote computer as our own. Please
+follow the directions below to install an SSH client for your system if
+you do not already have one.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4">
+  Windows
+  </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<p>Modern versions of Windows have SSH available in Powershell. You can
+test if it is available by typing <code>ssh --help</code> in Powershell.
+If it is installed, you should see some useful output. If it is not
+installed, you will get an error. If SSH is not available in Powershell,
+then you should install MobaXterm as described below.</p>
+<p>An alternative is to install MobaXterm from <a href="https://mobaxterm.mobatek.net" class="external-link">https://mobaxterm.mobatek.net</a>.
+You will want to get the Home edition (Installer edition). However, if
+Powershell works, you do not need this.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5">
+  macOS
+  </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div class="accordion-body">
+<p>macOS comes with SSH pre-installed, so you should not need to install
+anything. Use your “Terminal” app.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6">
+  Linux
+  </h4>
+</button>
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div class="accordion-body">
+<p>Linux users do not need to install anything, you should be set! Use
+your terminal application.</p>
 </div>
 </div>
 </div>
@@ -357,7 +511,10 @@ e.g. online setup) in the solutions blocks.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
+</div>
+</div>
+
+      </section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
