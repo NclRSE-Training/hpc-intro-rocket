@@ -105,7 +105,7 @@ computer we are logged onto can be checked with the `hostname` command. (You
 may also notice that the current hostname is also part of our prompt!)
 
 ```bash
-Rocket-login 1 -> hostname
+[userid@login01 ~]$ hostname
 ```
 
 ```bash
@@ -138,7 +138,7 @@ are you working on?
 Use `pwd` to **p**rint the **w**orking **d**irectory path:
 
 ```bash
-Rocket-login 1 -> pwd
+[userid@login01 ~]$  pwd
 ```
 
 You can run `ls` to **l**i**s**t the directory contents, though it's
@@ -146,7 +146,7 @@ possible nothing will show up (if no files have been provided). To be sure,
 use the `-a` flag to show hidden files, too.
 
 ```bash
-Rocket-login 1 -> ls -a
+[userid@login01 ~]$  ls -a
 ```
 
 At a minimum, this will show the current directory as `.`, and the parent
@@ -176,8 +176,7 @@ head node.
 If you want to transfer larger amounts of data to or from the cluster, some
 systems offer dedicated nodes for data transfers only. The motivation for
 this lies in the fact that larger data transfers should not obstruct
-operation of the login node for anybody else. Check with your cluster's
-documentation or its support team if such a transfer node is available. As a
+operation of the login node for anybody else. Rocket does not have a dedicated transfer node but do check for this onother HPC systems you may use. As a
 rule of thumb, consider all transfers of a volume larger than 500 MB to 1 GB
 as large. But these numbers change, e.g., depending on the network connection
 of yourself and of your cluster or other factors.
@@ -189,18 +188,25 @@ or hard tasks that require a lot of computational resources.
 
 All interaction with the worker nodes is handled by a specialized piece of
 software called a scheduler (the scheduler used in this lesson is called
-**`r config$sched$name`**). We'll learn more about how to use the
+**Slurm**). We'll learn more about how to use the
 scheduler to submit jobs next, but for now, it can also tell us more
 information about the worker nodes.
 
-For example, we can view all of the worker nodes by running the command
-``r config$sched$info``.
+For example, we can view all of the worker nodes by running the command **sinfo**.
 
 ```bash
-`r config$remote$prompt` `r config$sched$info`
+[userid@login01 ~]$ sinfo
 ```
 
-```{r, child=paste(snippets, '/cluster/queue-info.snip', sep=''), eval=TRUE}
+```
+PARTITION   AVAIL  TIMELIMIT  NODES  STATE NODELIST
+dell-gpu       up 21-00:00:0      1   idle gpu01
+defq*          up 2-00:00:00      6   drng sb[019,025,029,062,069,073]
+defq*          up 2-00:00:00      1  drain sb060
+defq*          up 2-00:00:00     45    mix sb[001,003-004,006-007,009-012,014-015,017,023,027-028,032-036,038-039,041-045,047,050,053-054,058-059,061,066-068,072,078,084,086,092,104,108,110]
+defq*          up 2-00:00:00     58  alloc sb[002,005,008,013,016,018,020-022,024,026,030-031,037,040,046,048-049,051-052,055-057,063-065,070-071,074-077,079-083,085,087-091,093-103,105-107,109]
+short          up      10:00      6   drng sb[019,025,029,062,069,073]
+
 ```
 
 There are also specialized machines used for managing disk storage, user
@@ -232,8 +238,8 @@ Note that, if you're logged in to the remote computer cluster, you need to
 log out first. To do so, type `Ctrl+d` or `exit`:
 
 ```bash
-`r config$remote$prompt` exit
-`r config$local$prompt`
+[userid@login01 ~]$  exit
+[user@laptop ~]$ 
 ```
 
 ::: solution
@@ -245,14 +251,14 @@ a Linux system are:
 
 Run system utilities
 ```bash
-`r config$local$prompt` nproc --all
-`r config$local$prompt` free -m
+[user@laptop ~]$  nproc --all
+[user@laptop ~]$  free -m
 ```
 
 Read from `/proc`
 ```bash
-`r config$local$prompt` cat /proc/cpuinfo
-`r config$local$prompt` cat /proc/meminfo
+[user@laptop ~]$  cat /proc/cpuinfo
+[user@laptop ~]$  cat /proc/meminfo
 ```
 
 Run system monitor
