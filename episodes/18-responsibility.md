@@ -234,36 +234,36 @@ tests that you can use to extrapolate how long it will take to transfer your
 data.
 Say you have a "data" folder containing 10,000 or so files, a healthy mix of
 small and large ASCII and binary data. Which of the following would be the
-best way to transfer them to `r config$remote$name`?
+best way to transfer them to Rocket?
 
  1. Using `scp`?
  
 ```bash
-`r config$local$prompt` scp -r data `r config$remote$user`@`r config$remote$login`:~/
+[user@laptop ~]$ scp -r data userid@rocket.hpc:~/
 ```
 
 
  2. Using `rsync`?
 
 ```bash
-`r config$local$prompt` rsync -ra data `r config$remote$user`@`r config$remote$login`:~/
+[user@laptop ~]$ rsync -ra data userid@rocket.hpc:~/
 ```
 
  3. Using `rsync` with compression?
 ```bash
-`r config$local$prompt` rsync -raz data `r config$remote$user`@`r config$remote$login`:~/
+[user@laptop ~]$ rsync -raz data userid@rocket.hpc:~/
 ```
 
  4. Creating a `tar` archive first for `rsync`?
 ```bash
-`r config$local$prompt` tar -cvf data.tar data
-`r config$local$prompt` rsync -raz data.tar `r config$remote$user`@`r config$remote$login`:~/
+[user@laptop ~]$ tar -cvf data.tar data
+[user@laptop ~]$ rsync -raz data.tar userid@rocket.hpc:~/
 ```
 
  5. Creating a compressed `tar` archive for `rsync`?
 ```bash
-`r config$local$prompt` tar -cvzf data.tar.gz data
-`r config$local$prompt` rsync -ra data.tar.gz `r config$remote$user`@`r config$remote$login`:~/
+[user@laptop ~]$ tar -cvzf data.tar.gz data
+[user@laptop ~]$ rsync -ra data.tar.gz userid@rocket.hpc:~/
 ```
 
 ::: solution
