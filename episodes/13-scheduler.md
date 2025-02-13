@@ -109,7 +109,8 @@ compute nodes. On ARCHER2, this is the `/work` file system. The path is similar 
 `r config$remote$prompt_work` cp ~/example-job.sh .
 `r config$remote$prompt_work` `r config$sched$submit$name` `r config$sched$submit$options` example-job.sh
 ```
-```{r, child=paste(snippets, '/scheduler/basic-job-script.Rmd', sep=''), eval=TRUE}
+```output
+Submitted batch job 36855
 ```
 
 That's better! And that's all we need to do to submit a job. Our work is done --- now the
@@ -122,8 +123,14 @@ status, we check the queue using the command
 `r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
 ```
 
-```{r, child=paste(snippets, '/scheduler/basic-job-status.Rmd', sep=''), eval=TRUE}
+```output
+JOBID USER         ACCOUNT     NAME           ST REASON START_TIME         T...
+36856 yourUsername yourAccount example-job.sh R  None   2017-07-01T16:47:02 ...
 ```
+
+We can see all the details of our job, most importantly that it is in the `R`
+or `RUNNING` state. Sometimes our jobs might need to wait in a queue
+(`PENDING`) or have an error (`E`).
 
 The best way to check our job's status is with ``r config$sched$status``. Of
 course, running ``r config$sched$status`` repeatedly to check on things can be
@@ -192,7 +199,9 @@ Submit the job and monitor its status:
 `r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
 ```
 
-```{r, child=paste(snippets, '/scheduler/job-with-name-status.Rmd', sep=''), eval=TRUE}
+```output
+JOBID USER         ACCOUNT     NAME     ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
+38191 yourUsername yourAccount new_name PD Priority N/A        0:00 1:00:00   1     1
 ```
 
 Fantastic, we've successfully changed the name of our job!
@@ -208,8 +217,11 @@ stuck with your site's default resources, which is probably not what you want.
 
 The following are several key resource requests:
 
-```{r, child=paste(snippets, '/scheduler/option-flags-list.Rmd', sep=''), eval=TRUE}
-```
+* `--nodes=<nodes>` - Number of nodes to use
+* `--ntasks-per-node=<tasks-per-node>` - Number of parallel processes per node
+* `--cpus-per-task=<cpus-per-task>` - Number of cores to assign to each parallel process
+* `--time=<days-hours:minutes:seconds>` - Maximum real-world time (walltime)
+your job will be allowed to run. The `<days>` part can be omitted.
 
 Note that just *requesting* these resources does not make your job run faster,
 nor does it necessarily mean that you will consume all of these resources. It
@@ -224,7 +236,7 @@ later episode of this lesson.
 ::: callout
 ## Command line options or job script options?
 All of the options we specify can be supplied on the command line (as we
-do here for `--partition=standard`) or in the job script (as we have done
+do here for `--partition=defq`) or in the job script (as we have done
 for the job name above). These are interchangeable. It is often more convenient
 to put the options in the job script as it avoids lots of typing at the command
 line.
@@ -245,7 +257,7 @@ on the command line (e.g. `--partition`) into the script at this point.
 ```output
 `r config$remote$bash_shebang`
 `r config$sched$comment` `r config$sched$flag$time` 00:01:15
-`r config$sched$comment` --partition=standard
+`r config$sched$comment` --partition=defq
 `r config$sched$comment` --qos=`r config$sched$qos`
 echo -n "This script is running on "
 sleep 60 # time in seconds
@@ -262,8 +274,15 @@ Why are the `r config$sched$name` runtime and `sleep` time not identical?
 :::
 
 
-```{r, child=paste(snippets, '/scheduler/print-sched-variables.Rmd', sep=''), eval=TRUE}
-```
+::: challenge
+## Job environment variables
+
+When Slurm runs a job, it sets a number of environment variables for the job. One of these will
+let us check our work from the last problem. The `SLURM_CPUS_PER_TASK` variable is set to the
+number of CPUs we requested with `-c`. Using the `SLURM_CPUS_PER_TASK` variable, modify your job
+so that it prints how many CPUs have been allocated.
+
+:::
 
 Resource requests are typically binding. If you exceed them, your job will be
 killed. Let's use walltime as an example. We will request 30 seconds of
@@ -294,9 +313,13 @@ log file.
 `r config$remote$prompt_work` watch -n 15 `r config$sched$status` `r config$sched$flag$user`
 ```
 
-```{r, child=paste(snippets, '/scheduler/runtime-exceeded-job.Rmd', sep=''), eval=TRUE}
+```bash
+`r config$remote$prompt_work` cat slurm-38193.out
 ```
-```{r, child=paste(snippets, '/scheduler/runtime-exceeded-output.Rmd', sep=''), eval=TRUE}
+```output
+This job is running on:
+sb060
+slurmstepd: error: *** JOB 38193 ON cn01 CANCELLED AT 2017-07-02T16:35:48 DUE TO TIME LIMIT ***
 ```
 
 Our job was killed for exceeding the amount of resources it requested. Although
@@ -336,7 +359,11 @@ you to cancel it before it is killed!).
 `r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
 ```
 
-```{r, child=paste(snippets, '/scheduler/terminate-job-begin.Rmd', sep=''), eval=TRUE}
+```output
+Submitted batch job 38759
+
+JOBID USER         ACCOUNT     NAME           ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
+38759 yourUsername yourAccount example-job.sh PD Priority N/A        0:00 1:00      1     1
 ```
 
 Now cancel the job with its job number (printed in your terminal). Absence of any
@@ -348,11 +375,16 @@ job info indicates that the job has been successfully cancelled.
 `r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
 ```
 
-```{r, child=paste(snippets, '/scheduler/terminate-job-cancel.Rmd', sep=''), eval=TRUE}
+```output
+JOBID  USER  ACCOUNT  NAME  ST  REASON  START_TIME  TIME  TIME_LEFT  NODES  CPUS
 ```
 
-```{r, child=paste(snippets, '/scheduler/terminate-multiple-jobs.Rmd', sep=''), eval=TRUE}
-```
+::: challenge
+## Cancelling multiple jobs
+We can also cancel all of our jobs at once using the `-u` option. This will delete all jobs for a
+specific user (in this case us). Note that you can only delete your own jobs.
+Try submitting multiple jobs and then cancelling them all with `scancel -u yourUsername`.
+:::
 
 ## Other Types of Jobs
 
@@ -366,8 +398,38 @@ genome index for alignment with a tool like
 [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml). Fortunately, we can
 run these types of tasks as a one-off with ``r config$sched$interactive``.
 
-```{r, child=paste(snippets, '/scheduler/using-nodes-interactively.Rmd', sep=''), eval=TRUE}
+`srun` runs a single command in the queue system and then exits.
+Let's demonstrate this by running the
+`hostname` command with `srun`. (We can cancel an `srun` job with `Ctrl-c`.)
+
+```bash
+`r config$host_prompt_work` srun `r config$sched$submit$options` --time=00:01:00 hostname
 ```
+```output
+nid001976
+```
+
+`srun` accepts all of the same options as `sbatch`. However, instead of specifying these in a
+script, these options are specified on the command-line when starting a job.
+
+Typically, the resulting shell environment will be the same as that for
+`sbatch`.
+
+### Interactive jobs
+
+Sometimes, you will need a lot of resource for interactive use. Perhaps it's our first time running
+an analysis or we are attempting to debug something that went wrong with a previous job.
+Fortunately, SLURM makes it easy to start an interactive job with `srun`:
+
+```bash
+`r config$host_prompt_work` srun `r config$sched$submit$options` --pty /bin/bash
+```
+
+You should be presented with a bash prompt. Note that the prompt may change
+to reflect your new location, in this case the compute node we are logged on.
+You can also verify this with `hostname`.
+
+When you are done with the interactive job, type `exit` to quit your session.
 
 ## Running parallel jobs using MPI
 
@@ -389,21 +451,58 @@ parallel MPI programs typically requires four things:
     compute nodes each have 32 cores we often want to specify 32 parallel processes per node.
   - The command and arguments for our parallel program.
 
-```{r, child=paste(snippets, '/resources/pi-mpi-details.Rmd', sep=''), eval=TRUE}
+::: prereq
+
+## Required Files
+
+The program used in this example can be retrieved using wget or a browser and copied to the remote.
+
+**Using wget**: 
+```bash
+`r config$remote$prompt` wget `r config$url``r config$baseurl`/files/pi-mpi.py
 ```
+
+**Using a web browser**:
+
+[`r config$url``r config$baseurl`/files/pi-mpi.py](`r config$url``r config$baseurl`/files/pi-mpi.py)
+
+:::
 
 To illustrate this process, we will use a simple MPI parallel program that estimates the value of Pi.
 (We will meet this example program in more detail in a later episode.) Here is a job submission
 script that runs the program across two compute nodes on the cluster. Create a file
 (e.g. called: `run-pi-mpi.slurm`) with the contents of this script in it.
 
-```{r, child=paste(snippets, '/scheduler/parallel-script.Rmd', sep=''), eval=TRUE}
+```bash
+#!/bin/bash
+
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --time=00:05:00
+
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+
+module load cray-python
+
+srun python pi-mpi.py 10000000
 ```
 
 The parallel launch line for our program can be seen towards the bottom of the script:
 
-```{r, child=paste(snippets, '/scheduler/parallel-launch-desc.Rmd', sep=''), eval=TRUE}
+```bash
+srun python pi-mpi.py 10000000
 ```
+
+And this corresponds to the four required items we described above:
+
+  1. Parallel launch program: in this case the parallel launch program is
+     called `srun`; the additional argument controls which cores are used.
+  2. Number of parallel processes per node: in this case this is 16,
+     and is specified by the option `--ntasks-per-node=16` option.
+  2. Total number of parallel processes: in this case this is also 16, because
+     we specified 1 node and 16 parallel processes per node.
+  4. Our program and arguments: in this case this is `python pi-mpi.py 10000000`.`
 
 As for our other jobs, we launch using the ``r config$sched$submit$name`` command.
 
@@ -413,11 +512,58 @@ As for our other jobs, we launch using the ``r config$sched$submit$name`` comman
 
 The program generates no output with all details printed to the job log.
 
-```{r, child=paste(snippets, '/scheduler/parallel-challenge.Rmd', sep=''), eval=TRUE}
-```
+::: challenge
+## Running parallel jobs
+Modify the pi-mpi-run script that you used above to use all 128 cores on
+one node.  Check the output to confirm that it used the correct number
+of cores in parallel for the calculation.
 
-```{r, child=paste(snippets, '/scheduler/parallel-challenge2.Rmd', sep=''), eval=TRUE}
+::: solution
+Here is a modified script
+
+```bash
+#!/bin/bash
+
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --time=00:00:30
+
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=128
+
+module load cray-python
+srun python pi-mpi.py 10000000
 ```
+:::
+:::
+
+::: challenge
+## Configuring parallel jobs
+You will see in the job output that information is displayed about
+where each MPI process is running, in particular which node it is
+on.
+
+Modify the pi-mpi-run script that you run a total of 2 nodes and 16 processes;
+but to use only 8 tasks on each of two nodes.
+Check the output file to ensure that you understand the job
+distribution.
+
+::: solution
+```bash
+#!/bin/bash
+
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+#SBATCH --time=00:00:30
+
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=8
+
+module load cray-python
+srun python pi-mpi.py 10000000
+```
+:::
+:::
 
 ::: keypoints
  - "The scheduler handles how compute resources are shared between users."

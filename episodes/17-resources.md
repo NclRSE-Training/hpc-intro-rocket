@@ -54,8 +54,22 @@ be using
 
 ## Accessing the software and input
 
-```{r, child=paste(snippets, '/resources/pi-mpi-details.Rmd', sep=''), eval=TRUE}
+::: prereq
+
+## Required Files
+
+The program used in this example can be retrieved using wget or a browser and copied to the remote.
+
+**Using wget**: 
+```bash
+`r config$remote$prompt` wget `r config$url``r config$baseurl`/files/pi-mpi.py
 ```
+
+**Using a web browser**:
+
+[`r config$url``r config$baseurl`/files/pi-mpi.py](`r config$url``r config$baseurl`/files/pi-mpi.py)
+
+:::
 
 ## Baseline: running in serial
 
@@ -77,7 +91,30 @@ application worked or not.
 
 ::: solution
 
-```{r, child=paste(snippets, '/resources/serial-submit.Rmd', sep=''), eval=TRUE}
+Creating a file called `submit-pi-mpi.slurm`:
+
+```bash
+#!/bin/bash
+#SBATCH --partition=`r config$sched$partition`
+#SBATCH --qos=`r config$sched$qos`
+
+#SBATCH --job-name=pi-mpi
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --time=00:15:00
+srun python pi-mpi.py 10000000
+```
+
+Run application using a single process (i.e. in serial) with a blocking `srun` command:
+```bash
+module load cray-python
+`r config$sched$prompt_work` srun --partition=`r config$sched$partition` --qos=`r config$sched$qos` python pi-mpi.py 10000000
+```
+
+Submit with to the batch queue with:
+
+```bash
+`r config$sched$prompt_work` `r config$sched$submit.name` submit-pi-mpi.slurm
 ```
 
 Output in the job log should look something like:
@@ -115,8 +152,8 @@ use ``r config$sched$hist` `r config$sched$flag$histdetail`` with the job ID, e.
 `r config$remote$prompt_work` `r config$sched$hist` `r config$sched$flag$histdetail` 12345
 ```
 ```output
-```{r, child=paste(snippets, '/resources/job-detail.Rmd', sep=''), eval=TRUE}
-```
+JOBID USER         ACCOUNT     NAME           ST REASON START_TIME         T...
+36856 yourUsername yourAccount example-job.sh R  None   2017-07-01T16:47:02 ...
 ```
 
 ## Running in parallel and benchmarking performance
@@ -128,8 +165,53 @@ Note that we also now have a good estimate of how long the application takes to 
 provide a better setting for the walltime for future jobs we submit. Lets now look at how
 the runtime varies with core count.
 
-```{r, child=paste(snippets, '/resources/runtime-exercise.Rmd', sep=''), eval=TRUE}
-```
+::: challenge
+## Benchmarking the parallel performance
+Modify your job script to run on multiple cores and evaluate the performance of `pi-mpi.py`
+on a variety of different core counts and use multiple runs to complete a table like the one
+below.
+If you examine the log file you will see that it contains two timings: the total time taken by the
+entire program and the time taken solely by the calculation. The calculation of Pi from the Monte-Carlo counts
+is not parallelised so this is a serial overhead, performed by a single processor.
+The calculation part is, in theory, perfectly parallel (each processor operates on independent sets of unique random numbers
+) so this should get faster on more cores. The Calculation core seconds is the
+*calculation time* multiplied by the number of cores.
+
+| Cores      | Overall run time (s) | Calculation time (s) | Calculation core seconds |
+|------------|----------------------|----------------------|--------------------------|
+| 1 (serial) |                      |                      |                          |
+| 2          |                      |                      |                          |
+| 4          |                      |                      |                          |
+| 8          |                      |                      |                          |
+| 16         |                      |                      |                          |
+| 32         |                      |                      |                          |
+| 64         |                      |                      |                          |
+| 128        |                      |                      |                          |
+| 256        |                      |                      |                          |
+
+Look at your results – do they make sense? Given the structure of the code, you would
+expect the performance of the calculation to increase
+linearly with the number of cores: this would give a roughly constant figure for the Calculation core
+seconds. Is this what you observe?
+
+::: solution
+
+The table below shows example timings for runs on `r config$remote$name`
+
+| Cores      | Overall run time (s) | Calculation time (s) |       Calculation core seconds |
+|-----------:|---------------------:|---------------------:|-------------------------------:|
+|          1 |                3.931 |                3.854 |                          3.854 |
+|          2 |                2.002 |                1.930 |                          3.859 |
+|          4 |                1.048 |                0.972 |                          3.888 |
+|          8 |                0.572 |                0.495 |                          3.958 |
+|         16 |                0.613 |                0.536 |                          8.574 |
+|         32 |                0.360 |                0.278 |                          8.880 |
+|         64 |                0.249 |                0.163 |                         10.400 |
+|        128 |                0.170 |                0.083 |                         10.624 |
+|        256 |                0.187 |                0.135 |                         34.560 |
+
+:::
+:::
 
 ## Understanding the performance
 
@@ -150,8 +232,73 @@ We will now use our performance results to compute these two metrics for the sha
 and use the metrics to evaluate the performance and make some decisions about the most 
 effective use of resources.
 
-```{r, child=paste(snippets, '/resources/perf-exercise.Rmd', sep=''), eval=TRUE}
-```
+::: challenge
+## Computing the speedup and parallel efficiency
+Use your *Overall run times* from above to fill in a table like the one below.
+
+| Cores      | Overall run time (s) | Actual speedup  | Ideal speedup | Parallel efficiency |
+|------------|----------------------|-----------------|----------------|---------------------|
+| 1 (serial) |        $t_{c1}$      |       -         |       1        |          1         |
+| 2          |        $t_{c2}$      | $s_2 = t_{c1}/t_{c2}$ | $i_2 = 2$ |  $s_2 / i_2$     |
+| 4          |        $t_{c4}$      | $s_4 = t_{c1}/t_{c4}$ | $i_4 = 4$ |  $s_4 / i_4$     |                   
+| 8          |                      |                 |                |                     | 
+| 16         |                      |                 |                |                     |
+| 32         |                      |                 |                |                     |
+| 64         |                      |                 |                |                     |             
+| 128        |                      |                 |                |                     |
+| 256        |                      |                 |                |                     |
+
+Given your results, try to answer the following questions:
+
+1. What is the core count where you get the **most** efficient use of resources, irrespective
+  of run time?
+2. What is the core count where you get the fastest solution, irrespective of efficiency?
+3. What do you think a good core count choice would be for this application that balances
+   time to solution and efficiency? Why did you choose this option?
+
+::: solution
+
+The table below gives example results for `r config$remote$name` based on the example 
+runtimes given in the solution above.
+
+| Cores      | Overall run time (s) | Actual speedup | Ideal speedup | Parallel efficiency |
+|-----------:|---------------------:|---------------:|--------------:|--------------------:|
+|          1 |                3.931 |          1.000 |         1.000 |               1.000 |
+|          2 |                2.002 |          1.963 |         2.000 |               0.982 |
+|          4 |                1.048 |          3.751 |         4.000 |               0.938 |
+|          8 |                0.572 |          6.872 |         8.000 |               0.859 |
+|         16 |                0.613 |          6.408 |        16.000 |               0.401 |
+|         32 |                0.360 |         10.928 |        32.000 |               0.342 |
+|         64 |                0.249 |         15.767 |        64.000 |               0.246 |
+|        128 |                0.170 |         23.122 |       128.000 |               0.181 |
+|        256 |                0.187 |         21.077 |       256.000 |               0.082 |
+
+### What is the core count where you get the **most** efficient use of resources?
+Just using a single core is the cheapest (and always will be unless your speedup is better
+than perfect – “super-linear” speedup). However, it may not be possible to run on small
+numbers of cores depending on how much memory you need or other technical constraints.
+**Note:** on most high-end systems, nodes are not shared between users. This means you are
+charged for all the CPU-cores on a node regardless of whether you actually use them. Typically
+we would be running on many hundreds of CPU-cores not a few tens, so the real question in
+practice is: what is the optimal number of nodes to use?
+### What is the core count where you get the fastest solution, irrespective of efficiency?
+256 cores gives the fastest time to solution.
+The fastest time to solution does not often make the most efficient use of resources so 
+to use this option, you may end up wasting your resources. Sometimes, when there is 
+time pressure to run the calculations, this may be a valid approach to running 
+applications.
+### What do you think a good core count choice would be for this application to use?
+
+8 cores is probably a good number of cores to use with a parallel efficiency of 86%.
+Usually, the best choice is one that delivers good parallel efficiency with an acceptable
+time to solution. Note that *acceptable time to solution* differs depending on circumstances
+so this is something that the individual researcher will have to assess. Good parallel
+efficiency is often considered to be 70% or greater though many researchers will be happy
+to run in a regime with parallel efficiency greater than 60%. As noted above, running with
+worse parallel efficiency may also be useful if the time to solution is an overriding factor.
+
+:::
+:::
 
 ## Tips
 

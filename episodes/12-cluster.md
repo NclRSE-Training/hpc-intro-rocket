@@ -298,7 +298,7 @@ each resource is.
 ```bash
 [userid@login01 ~]$  df -Th
 ```
-
+:::
 :::
 
 ::: discussion
@@ -324,6 +324,7 @@ run. Try running this command to see the name, CPUs and memory available on one 
 ```bash
 [userid@login01 ~]$  sinfo -n -o "%n %c %m" -o "%n %c %m"
 ```
+:::
 :::
 
 ::: discussion
