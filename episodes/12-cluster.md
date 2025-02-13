@@ -84,14 +84,13 @@ userName@hostname`, where the "@" symbol is used to separate the two parts of a
 single argument.
 
 Go ahead and open your terminal or graphical SSH client, then log in to the
-cluster using your username and the remote computer you can reach from the
-outside world, `r config$remote$location`.
+cluster using your username.
 
 ```bash
-`r config$local$prompt` ssh `r config$remote$user`@`r config$remote$login`
+[user@laptop ~]$ ssh userid@rocket.hpc
 ```
 
-Remember to replace ``r config$remote$user`` with your username or the one
+Remember to replace **userid** with your username or the one
 supplied by the instructors. You may be asked for your password. Watch out: the
 characters you type after the password prompt are not displayed on the screen.
 Normal output will resume once you press `Enter`.
@@ -106,11 +105,11 @@ computer we are logged onto can be checked with the `hostname` command. (You
 may also notice that the current hostname is also part of our prompt!)
 
 ```bash
-`r config$remote$prompt` hostname
+Rocket-login 1 -> hostname
 ```
 
 ```bash
-`r config$remote$host`
+login01.cluster
 ```
 
 ::: challenge
@@ -128,7 +127,7 @@ differences you spot with your neighbors.
 
 ## It's a Beautiful Day in the Neighborhood
 
-The deepest layer should differ: ``r config$remote$user`` is uniquely yours.
+The deepest layer should differ: **userid** is uniquely yours.
 Are there differences in the path at higher levels?
 
 If both of you have empty directories, they will look identical. If you
@@ -139,7 +138,7 @@ are you working on?
 Use `pwd` to **p**rint the **w**orking **d**irectory path:
 
 ```bash
-`r config$remote$prompt` pwd
+Rocket-login 1 -> pwd
 ```
 
 You can run `ls` to **l**i**s**t the directory contents, though it's
@@ -147,7 +146,7 @@ possible nothing will show up (if no files have been provided). To be sure,
 use the `-a` flag to show hidden files, too.
 
 ```bash
-`r config$remote$prompt` ls -a
+Rocket-login 1 -> ls -a
 ```
 
 At a minimum, this will show the current directory as `.`, and the parent
