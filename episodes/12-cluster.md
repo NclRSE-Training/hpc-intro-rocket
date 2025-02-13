@@ -263,7 +263,7 @@ Read from `/proc`
 
 Run system monitor
 ```bash
-`r config$local$prompt` htop
+[user@laptop ~]$  htop
 ```
 
 :::
@@ -278,16 +278,16 @@ Now compare the resources of your computer with those of the head node.
 ::: solution
 
 ```bash
-`r config$local$prompt` ssh `r config$remote$user`@`r config$remote$login`
-`r config$remote$prompt` nproc --all
-`r config$remote$prompt` free -m
+[user@laptop ~]$  ssh userid@rocket.hpc
+[userid@login01 ~]$  nproc --all
+[userid@login01 ~]$  free -m
 ```
 
 You can get more information about the processors using `lscpu`,
 and a lot of detail about the memory by reading the file `/proc/meminfo`:
 
 ```bash
-`r config$remote$prompt` less /proc/meminfo
+[userid@login01 ~]$  less /proc/meminfo
 ```
 
 You can also explore the available filesystems using `df` to show **d**isk
@@ -296,7 +296,7 @@ i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
 each resource is.
 
 ```bash
-`r config$remote$prompt` df -Th
+[userid@login01 ~]$  df -Th
 ```
 :::
 :::
@@ -305,7 +305,7 @@ each resource is.
 The local filesystems (ext, tmp, xfs, zfs) will depend on whether you're
 on the same login node (or compute node, later on). Networked filesystems
 (beegfs, cifs, gpfs, nfs, pvfs) will be similar --- but may include
-`r config$remote$user`, depending on how it is [mounted](
+userid, depending on how it is [mounted](
 https://en.wikipedia.org/wiki/Mount_(computing)).
 :::
 
@@ -315,10 +315,16 @@ https://en.wikipedia.org/wiki/Mount_(computing)).
 This is an important point to remember: files saved on one node
 (computer) are often available everywhere on the cluster!
 
-:::
+::: challenge
+## Explore a Worker Node
 
-```{r, child=paste(snippets, '/cluster/specific-node-info.Rmd', sep=''), eval=TRUE}
+Finally, let's look at the resources available on the worker nodes where your jobs will actually
+run. Try running this command to see the name, CPUs and memory available on one of the worker nodes:
+
+```bash
+[userid@login01 ~]$  sinfo -n -o "%n %c %m" -o "%n %c %m"
 ```
+:::
 
 ::: discussion
 ## Compare Your Computer, the login node and the compute node
