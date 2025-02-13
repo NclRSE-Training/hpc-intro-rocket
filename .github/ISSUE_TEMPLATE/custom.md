@@ -1,5 +1,5 @@
 ---
-name: Lesson Adaptation Issues
+name: Tasks to adapt Lesson
 about: Tasks needed to adapt existing materials
 title: ''
 labels: ''
