@@ -399,7 +399,7 @@ browser and copied to the remote.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <p><strong>Using a web browser</strong>:</p>
 <p><a href="../%60r%20config%24url%60%60r%20config%24baseurl%60/files/hpc-intro-data.tar.gz"><code>r config$url``r config$baseurl</code>/files/hpc-intro-data.tar.gz</a></p>
@@ -425,13 +425,13 @@ machine.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> curl <span class="at">-O</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  curl <span class="at">-O</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <p>or</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <div id="tar.gz" class="callout discussion">
 <div class="callout-square">
@@ -458,13 +458,13 @@ new users, but we’ll break it down.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> scp path/to/local/file.txt <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:/path/on/<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$name</span><span class="kw">`</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp path/to/local/file.txt userid@rocket.hpc:/path/on/Rocket</span></code></pre>
 </div>
 <p>To <em>download from</em> another computer:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> scp <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:/path/on/<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$name</span><span class="kw">`</span>/file.txt path/to/local/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp userid@rocket.hpc:/path/on/Rocket/file.txt path/to/local/</span></code></pre>
 </div>
 <p>Note that everything after the <code>:</code> is relative to our home
 directory on the remote computer. We can leave it at that if we don’t
@@ -472,7 +472,7 @@ care where the file goes.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> scp local-file.txt <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp local-file.txt userid@rocket.hpc:</span></code></pre>
 </div>
 <div id="upload-a-file" class="callout challenge">
 <div class="callout-square">
@@ -482,7 +482,7 @@ care where the file goes.</p>
 <h3 class="callout-title">Upload a File</h3>
 <div class="callout-content">
 <p>Copy the file you just downloaded from the Internet to your home
-directory on <code>r config$remote$name</code>.</p>
+directory on Rocket.</p>
 </div>
 </div>
 </div>
@@ -496,19 +496,18 @@ directory on <code>r config$remote$name</code>.</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> scp hpc-intro-data.tar.gz <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:~/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp hpc-intro-data.tar.gz userid@rocket.hpc:~/</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="why-not-download-on-r-configremotename-directly" class="callout discussion">
+<div id="why-not-download-on-rocket-directly" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="why-not-download-on-r-configremotename-directly" class="callout-inner">
-<h3 class="callout-title">Why Not Download on
-<code>r config$remote$name</code> Directly?</h3>
+<div id="why-not-download-on-rocket-directly" class="callout-inner">
+<h3 class="callout-title">Why Not Download on Rocket Directly?</h3>
 <div class="callout-content">
 <p>Some computer clusters are behind firewalls set to only allow
 transfers initiated from the <em>outside</em>. This means that the
@@ -545,10 +544,10 @@ following:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> ssh <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> curl <span class="at">-O</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  ssh userid@rocket.hpc</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ curl <span class="at">-O</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">or</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <p>Did it work? If not, what does the terminal output tell you about
 what happened?</p>
@@ -563,7 +562,7 @@ directory tree rooted at the folder name you provided.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> scp <span class="at">-r</span> some-local-folder <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:target-directory/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp <span class="at">-r</span> some-local-folder userid@rocket.hpc:target-directory/</span></code></pre>
 </div>
 <div id="caution" class="callout">
 <div class="callout-square">
@@ -615,7 +614,7 @@ backup folders. The syntax is similar to <code>scp</code>. To transfer
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> rsync <span class="at">-avzP</span> path/to/local/file.txt <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:directory/path/on/<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$name</span><span class="kw">`</span>/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">-avzP</span> path/to/local/file.txt userid@rocket.hpc:directory/path/on/Rocket/</span></code></pre>
 </div>
 <p>The <code>a</code> (archive) option preserves file timestamps and
 permissions among other things; the <code>v</code> (verbose) option
@@ -628,7 +627,7 @@ also displays the progress of the transfer.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> rsync <span class="at">-avzP</span> path/to/local/dir <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:directory/path/on/<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$name</span><span class="kw">`</span>/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">-avzP</span> path/to/local/dir userid@rocket.hpc:directory/path/on/Rocket/</span></code></pre>
 </div>
 <p>As written, this will place the local directory and its contents
 under the specified directory on the remote system. If the trailing
@@ -641,7 +640,7 @@ the destination directory.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> rsync <span class="at">-avzP</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:path/on/<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$name</span><span class="kw">`</span>/file.txt path/to/local/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">-avzP</span> userid@rocket.hpc:path/on/Rocket/file.txt path/to/local/</span></code></pre>
 </div>
 </div>
 </div>
@@ -675,7 +674,7 @@ page if you’re unsure.</p>
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> rsync test.txt <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync test.txt userid@rocket.hpc:</span></code></pre>
 </div>
 </div>
 </div>
@@ -690,10 +689,10 @@ page if you’re unsure.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> rsync <span class="at">--help</span> <span class="kw">|</span> <span class="fu">grep</span> port</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">--help</span> <span class="kw">|</span> <span class="fu">grep</span> port</span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>     <span class="ex">--port=PORT</span>             specify double-colon alternate port number</span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="ex">See</span> https://rsync.samba.org/ for updates, bug reports, and answers</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> rsync <span class="at">--port</span><span class="op">=</span>768 test.txt <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span>:</span></code></pre>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">--port</span><span class="op">=</span>768 test.txt userid@rocket.hpc:</span></code></pre>
 </div>
 </div>
 </div>
@@ -727,8 +726,8 @@ Note that you can concatenate the two flags, instead of writing
 <div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> ssh <span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$user</span><span class="kw">`</span>@<span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$login</span><span class="kw">`</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> tar <span class="at">-tf</span> hpc-lesson-data.tar.gz</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  ssh userid@rocket.hpc</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ tar <span class="at">-tf</span> hpc-lesson-data.tar.gz</span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="ex">hpc-intro-data/</span></span>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/</span></span>
 <span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01971Z.txt</span></span>
@@ -758,7 +757,7 @@ might look familiar. Let’s see about that compression, using
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> du <span class="at">-sh</span> hpc-lesson-data.tar.gz</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ du <span class="at">-sh</span> hpc-lesson-data.tar.gz</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="ex">36K</span>     hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <div id="files-occupy-at-least-one-block" class="callout">
@@ -809,7 +808,7 @@ flags.</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> tar <span class="at">-xvzf</span> hpc-lesson-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ tar <span class="at">-xvzf</span> hpc-lesson-data.tar.gz</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -841,7 +840,7 @@ flag concatenation, though the command works identically either way.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> du <span class="at">-sh</span> hpc-lesson-data</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ du <span class="at">-sh</span> hpc-lesson-data</span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="ex">144K</span>    hpc-intro-data</span></code></pre>
 </div>
 </div>
@@ -866,7 +865,7 @@ the archive filename, then provide a directory to compress:</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$local$prompt</span><span class="kw">`</span> tar <span class="at">-cvzf</span> compressed_data.tar.gz hpc-intro-data</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  tar <span class="at">-cvzf</span> compressed_data.tar.gz hpc-intro-data</span></code></pre>
 </div>
 <div id="working-with-windows" class="callout discussion">
 <div class="callout-square">
