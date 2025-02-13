@@ -489,14 +489,13 @@ worked or not.</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#SBATCH --qos=`r config$sched$qos`</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#SBATCH --job-name=pi-mpi</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --tasks-per-node=1</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#SBATCH --time=00:15:00</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="ex">srun</span> python pi-mpi.py 10000000</span></code></pre>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#SBATCH --partition=short</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#SBATCH --job-name=pi-mpi</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#SBATCH --tasks-per-node=1</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#SBATCH --time=00:15:00</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="ex">srun</span> python pi-mpi.py 10000000</span></code></pre>
 </div>
 <p>Run application using a single process (i.e. in serial) with a
 blocking <code>srun</code> command:</p>
@@ -504,13 +503,13 @@ blocking <code>srun</code> command:</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">module</span> load cray-python</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$prompt_work</span><span class="kw">`</span> srun <span class="at">--partition</span><span class="op">=</span><span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$partition</span><span class="kw">`</span> <span class="at">--qos</span><span class="op">=</span><span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$qos</span><span class="kw">`</span> python pi-mpi.py 10000000</span></code></pre>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short python pi-mpi.py 10000000</span></code></pre>
 </div>
 <p>Submit with to the batch queue with:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit</span>.name<span class="kw">`</span> submit-pi-mpi.slurm</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun submit-pi-mpi.slurm</span></code></pre>
 </div>
 <p>Output in the job log should look something like:</p>
 <div class="codewrapper">
@@ -545,13 +544,12 @@ previous job (as you do not have to find the output file to look up the
 performance) but the number is not as accurate as the performance
 recorded by the application itself and also includes static overheads
 from running the job (such as loading modules and startup time) that can
-skew the timings. To do this on use
-<code>r config$sched$hist` `r config$sched$flag$histdetail</code> with
+skew the timings. To do this on use <code>sacct -l -j 12345</code> with
 the job ID, e.g.:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$hist</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$histdetail</span><span class="kw">`</span> 12345</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sacct <span class="at">-l</span> <span class="at">-j</span> 12345</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -639,8 +637,8 @@ figure for the Calculation core seconds. Is this what you observe?</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>The table below shows example timings for runs on
-<code>r config$remote$name</code></p>
+<p>The table below shows example timings for runs on ARCHER2 (HPC at
+Edinburgh)</p>
 <table class="table"><colgroup><col width="13%"><col width="25%"><col width="25%"><col width="36%"></colgroup><thead><tr class="header"><th align="right">Cores</th>
 <th align="right">Overall run time (s)</th>
 <th align="right">Calculation time (s)</th>
@@ -785,9 +783,8 @@ choose this option?</li>
 </button>
 <div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
-<p>The table below gives example results for
-<code>r config$remote$name</code> based on the example runtimes given in
-the solution above.</p>
+<p>The table below gives example results for ARCHER2 (HPC at Edinburgh)
+based on the example runtimes given in the solution above.</p>
 <table class="table"><colgroup><col width="13%"><col width="25%"><col width="18%"><col width="17%"><col width="24%"></colgroup><thead><tr class="header"><th align="right">Cores</th>
 <th align="right">Overall run time (s)</th>
 <th align="right">Actual speedup</th>
