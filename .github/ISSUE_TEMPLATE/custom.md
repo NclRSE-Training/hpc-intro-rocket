@@ -6,7 +6,7 @@ labels: ''
 assignees: ''
 
 ---
-
+File to edit: **  **
 - [ ] remove R snippets
 - [ ] replace R codes (starting `r config$) with Rocket-specific text
 - [ ] compare with similar episode in https://nclrse-training.github.io/hpc-intro-cirrus
