@@ -35,8 +35,8 @@ why sometimes your job do not start instantly as in your laptop.
 
 ![The waiter scheduler](fig/restaurant_queue_manager.svg){caption="" alt="Compare a job scheduler to a waiter in a restaurant"}
 
-The scheduler used in this lesson is `r config$sched$name`. Although
-`r config$sched$name` is not used everywhere, running jobs is quite similar
+The scheduler used in this lesson is Slurm. Although
+Slurm is not used everywhere, running jobs is quite similar
 regardless of what software is being used. The exact syntax might change, but
 the concepts remain the same.
 
@@ -53,13 +53,13 @@ terminal-based text editors installed. Use whichever you prefer. Unsure? `nano`
 is a pretty good, basic choice.
 
 ```bash
-`r config$remote$prompt` nano example-job.sh
-`r config$remote$prompt` chmod +x example-job.sh
-`r config$remote$prompt` cat example-job.sh
+[userid@login01 ~]$  nano example-job.sh
+[userid@login01 ~]$  chmod +x example-job.sh
+[userid@login01 ~]$  cat example-job.sh
 ```
 
 ```output
-`r config$remote$bash_shebang`
+#!/bin/bash
 
 echo -n "This script is running on "
 hostname
@@ -71,13 +71,13 @@ hostname
 Run the script. Does it execute on the cluster or just our login node?
 
 ```bash
-`r config$remote$prompt` ./example-job.sh
+[userid@login01 ~]$  ./example-job.sh
 ```
 
 ::: solution
 
 ```output
-This script is running on `r config$remote$host`
+This script is running on login01
 ```
 This job runs on the login node.
 :::
@@ -86,10 +86,10 @@ This job runs on the login node.
 If you completed the previous challenge successfully, you probably realise that
 there is a distinction between running the job through the scheduler and just
 "running it". To submit this job to the scheduler, we use the
-``r config$sched$submit$name`` command.
+`sbatch` command.
 
 ```bash
-`r config$remote$prompt` `r config$sched$submit$name` `r config$sched$submit$options` example-job.sh
+[userid@login01 ~]$  sbatch --partition=short example-job.sh
 ```
 
 ```output
@@ -105,9 +105,9 @@ compute nodes. On ARCHER2, this is the `/work` file system. The path is similar 
 `/work` at the start. Lets move there now, copy our job script across and resubmit:
 
 ```bash
-`r config$remote$prompt` cd /work/ta133/ta133/userid
-`r config$remote$prompt_work` cp ~/example-job.sh .
-`r config$remote$prompt_work` `r config$sched$submit$name` `r config$sched$submit$options` example-job.sh
+[userid@login01 ~]$  cd /nobackup/proj/training/userid
+[userid@login01 userid]$  cp ~/example-job.sh .
+[userid@login01 userid]$  sbatch --partition=short example-job.sh
 ```
 ```output
 Submitted batch job 36855
@@ -117,10 +117,10 @@ That's better! And that's all we need to do to submit a job. Our work is done --
 scheduler takes over and tries to run the job for us. While the job is waiting
 to run, it goes into a list of jobs called the *queue*. To check on our job's
 status, we check the queue using the command
-``r config$sched$status` `r config$sched$flag$user``.
+`squeue -u userid`.
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
+[userid@login01 userid]$  squeue -u userid
 ```
 
 ```output
@@ -132,8 +132,8 @@ We can see all the details of our job, most importantly that it is in the `R`
 or `RUNNING` state. Sometimes our jobs might need to wait in a queue
 (`PENDING`) or have an error (`E`).
 
-The best way to check our job's status is with ``r config$sched$status``. Of
-course, running ``r config$sched$status`` repeatedly to check on things can be
+The best way to check our job's status is with `squeue`. Of
+course, running `squeue` repeatedly to check on things can be
 a little tiresome. To see a real-time view of our jobs, we can use the `watch`
 command. `watch` reruns a given command at 2-second intervals. This is too
 frequent, and will likely upset your system administrator. You can change the
@@ -141,8 +141,8 @@ interval to a more reasonable value, for example 15 seconds, with the `-n 15`
 parameter. Let's try using it to monitor another job.
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$submit$name` `r config$sched$submit$options` example-job.sh
-`r config$remote$prompt_work` watch -n 15 `r config$sched$status` `r config$sched$flag$user`
+[userid@login01 userid]$  sbatch --partition=short example-job.sh
+[userid@login01 userid]$  watch -n 15 squeue -u userid
 ```
 
 You should see an auto-updating display of your job's status. When it finishes,
@@ -168,24 +168,24 @@ resources we must customize our job script.
 Comments in UNIX shell scripts (denoted by `#`) are typically ignored, but
 there are exceptions. For instance the special `#!` comment at the beginning of
 scripts specifies what program should be used to run it (you'll typically see
-``r config$local$bash_shebang``). Schedulers like `r config$sched$name` also
+`#!/bin/bash`). Schedulers like Slurm also
 have a special comment used to denote special scheduler-specific options.
 Though these comments differ from scheduler to scheduler,
-`r config$sched$name`'s special comment is ``r config$sched$comment``. Anything
-following the ``r config$sched$comment`` comment is interpreted as an
+Slurm's special comment is `#SBATCH`. Anything
+following the `#SBATCH` comment is interpreted as an
 instruction to the scheduler.
 
 Let's illustrate this by example. By default, a job's name is the name of the
-script, but the ``r config$sched$flag$name`` option can be used to change the
+script, but the `--job-name` option can be used to change the
 name of a job. Add an option to the script:
 
 ```bash
-`r config$remote$prompt_work` cat example-job.sh
+[userid@login01 userid]$  cat example-job.sh
 ```
 
 ```output
-`r config$remote$bash_shebang`
-`r config$sched$comment` `r config$sched$flag$name` new_name
+#!/bin/bash
+#SBATCH--job-name new_name
 
 echo -n "This script is running on "
 hostname
@@ -195,8 +195,8 @@ echo "This script has finished successfully."
 Submit the job and monitor its status:
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$submit$name` `r config$sched$submit$options` example-job.sh
-`r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
+[userid@login01 userid]$  sbatch --partition=short example-job.sh
+[userid@login01 userid]$  squeue -u userid
 ```
 
 ```output
@@ -251,14 +251,14 @@ on the command line (e.g. `--partition`) into the script at this point.
 ::: solution
 
 ```bash
-`r config$remote$prompt_work` cat example-job.sh
+[userid@login01 userid]$  cat example-job.sh
 ```
 
 ```output
-`r config$remote$bash_shebang`
-`r config$sched$comment` `r config$sched$flag$time` 00:01:15
-`r config$sched$comment` --partition=defq
-`r config$sched$comment` --qos=`r config$sched$qos`
+#!/bin/bash
+#SBATCH--time 00:01:15
+#SBATCH--partition=defq
+#SBATCH--qos=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
 hostname
@@ -266,10 +266,10 @@ echo "This script has finished successfully."
 ```
 
 ```bash
-`r config$remote$prompt` `r config$sched$submit$name` example-job.sh
+[userid@login01 ~]$  sbatch example-job.sh
 ```
 
-Why are the `r config$sched$name` runtime and `sleep` time not identical?
+Why are the Slurm runtime and `sleep` time not identical?
 :::
 :::
 
@@ -289,15 +289,15 @@ killed. Let's use walltime as an example. We will request 30 seconds of
 walltime, and attempt to run a job for two minutes.
 
 ```bash
-`r config$remote$prompt_work` cat example-job.sh
+[userid@login01 userid]$  cat example-job.sh
 ```
 
 ```output
-`r config$remote$bash_shebang`
-`r config$sched$comment` `r config$sched$flag$name` long_job
-`r config$sched$comment` `r config$sched$flag$time` 00:00:30
-`r config$sched$comment` --partition=`r config$sched$partition`
-`r config$sched$comment` --qos=`r config$sched$qos`
+#!/bin/bash
+#SBATCH--job-name long_job
+#SBATCH--time 00:00:30
+#SBATCH--partition=short
+#SBATCH--qos=short
 
 echo "This script is running on ... "
 sleep 120 # time in seconds
@@ -309,12 +309,12 @@ Submit the job and wait for it to finish. Once it is has finished, check the
 log file.
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$submit$name` example-job.sh
-`r config$remote$prompt_work` watch -n 15 `r config$sched$status` `r config$sched$flag$user`
+[userid@login01 userid]$  sbatch example-job.sh
+[userid@login01 userid]$  watch -n 15 squeue -u userid
 ```
 
 ```bash
-`r config$remote$prompt_work` cat slurm-38193.out
+[userid@login01 userid]$  cat slurm-38193.out
 ```
 ```output
 This job is running on:
@@ -327,7 +327,7 @@ this appears harsh, this is actually a feature. Strict adherence to resource
 requests allows the scheduler to find the best possible place for your jobs.
 Even more importantly, it ensures that another user cannot use more resources
 than they've been given. If another user messes up and accidentally attempts to
-use all of the cores or memory on a node, `r config$sched$name` will either
+use all of the cores or memory on a node, Slurm will either
 restrain their job to the requested resources or kill the job outright. Other
 jobs on the node will be unaffected. This means that one user cannot mess up
 the experience of others, the only jobs affected by a mistake in scheduling
@@ -350,13 +350,13 @@ might have been run earlier in the gaps between other users' jobs.
 ## Cancelling a Job
 
 Sometimes we'll make a mistake and need to cancel a job. This can be done with
-the ``r config$sched$del`` command. Let's submit a job and then cancel it using
+the `scancel` command. Let's submit a job and then cancel it using
 its job number (remember to change the walltime so that it runs long enough for
 you to cancel it before it is killed!).
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$submit$name` example-job.sh
-`r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
+[userid@login01 userid]$  example-job.sh example-job.sh
+[userid@login01 userid]$  squeue -u userid
 ```
 
 ```output
@@ -370,9 +370,9 @@ Now cancel the job with its job number (printed in your terminal). Absence of an
 job info indicates that the job has been successfully cancelled.
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$del` 38759
+[userid@login01 userid]$  scancel 38759
 # It might take a minute for the job to disappear from the queue...
-`r config$remote$prompt_work` `r config$sched$status` `r config$sched$flag$user`
+[userid@login01 userid]$  squeue -u userid
 ```
 
 ```output
@@ -389,21 +389,21 @@ Try submitting multiple jobs and then cancelling them all with `scancel -u yourU
 ## Other Types of Jobs
 
 Up to this point, we've focused on running jobs in batch mode.
-`r config$sched$name` also provides the ability to start an interactive session.
+Slurm also provides the ability to start an interactive session.
 
 There are very frequently tasks that need to be done interactively. Creating an
 entire job script might be overkill, but the amount of resources required is
 too much for a login node to handle. A good example of this might be building a
 genome index for alignment with a tool like
 [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml). Fortunately, we can
-run these types of tasks as a one-off with ``r config$sched$interactive``.
+run these types of tasks as a one-off with `srun`.
 
 `srun` runs a single command in the queue system and then exits.
 Let's demonstrate this by running the
 `hostname` command with `srun`. (We can cancel an `srun` job with `Ctrl-c`.)
 
 ```bash
-`r config$host_prompt_work` srun `r config$sched$submit$options` --time=00:01:00 hostname
+[userid@login01 userid]$  srun --partition=short --time=00:01:00 hostname
 ```
 ```output
 nid001976
@@ -422,7 +422,7 @@ an analysis or we are attempting to debug something that went wrong with a previ
 Fortunately, SLURM makes it easy to start an interactive job with `srun`:
 
 ```bash
-`r config$host_prompt_work` srun `r config$sched$submit$options` --pty /bin/bash
+[userid@login01 userid]$  srun --partition=short --pty /bin/bash
 ```
 
 You should be presented with a bash prompt. Note that the prompt may change
@@ -455,11 +455,13 @@ parallel MPI programs typically requires four things:
 
 ## Required Files
 
+** to update for Rocket ** example omp and mpi jobs at /nobackup/proj/training/parallel_examples/
+
 The program used in this example can be retrieved using wget or a browser and copied to the remote.
 
 **Using wget**: 
 ```bash
-`r config$remote$prompt` wget `r config$url``r config$baseurl`/files/pi-mpi.py
+[userid@login01 ~]$  wget `r config$url``r config$baseurl`/files/pi-mpi.py
 ```
 
 **Using a web browser**:
@@ -477,7 +479,7 @@ script that runs the program across two compute nodes on the cluster. Create a f
 #!/bin/bash
 
 #SBATCH --partition=`r config$sched$partition`
-#SBATCH --qos=`r config$sched$qos`
+**#SBATCH --qos=short**
 #SBATCH --time=00:05:00
 
 #SBATCH --nodes=1
@@ -504,10 +506,10 @@ And this corresponds to the four required items we described above:
      we specified 1 node and 16 parallel processes per node.
   4. Our program and arguments: in this case this is `python pi-mpi.py 10000000`.`
 
-As for our other jobs, we launch using the ``r config$sched$submit$name`` command.
+As for our other jobs, we launch using the `sbatch` command.
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$submit$name` run-pi-mpi.slurm
+[userid@login01 userid]$  example-job.sh run-pi-mpi.slurm
 ```
 
 The program generates no output with all details printed to the job log.
@@ -525,7 +527,7 @@ Here is a modified script
 #!/bin/bash
 
 #SBATCH --partition=`r config$sched$partition`
-#SBATCH --qos=`r config$sched$qos`
+#SBATCH --qos=short
 #SBATCH --time=00:00:30
 
 #SBATCH --nodes=1
@@ -553,7 +555,7 @@ distribution.
 #!/bin/bash
 
 #SBATCH --partition=`r config$sched$partition`
-#SBATCH --qos=`r config$sched$qos`
+#SBATCH --qos=short
 #SBATCH --time=00:00:30
 
 #SBATCH --nodes=2
