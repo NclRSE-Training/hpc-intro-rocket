@@ -70,33 +70,34 @@ you are using.
 To see available software modules, use `module avail`:
 
 ```bash
-`r config$remote$prompt_work` module avail
+[userid@login01 userid]$  module avail
 ```
 ```output
------------ /work/y07/shared/archer2-modules/modulefiles-cse-pyvenvs -----------
-tensorflow/2.3.1-py38  torch/1.6.0-py38  
+------------------------------------------- /mnt/storage/apps/at11.0/share/modules --------------------------------------------
+   modulefiles/at11.0-powerpc64le-linux-gnu
 
------------ /work/y07/shared/archer2-modules/modulefiles-cse-pymods ------------
-python-netCDF4/1.5.5.1  
+---------------------------------------------- /mnt/storage/apps/eb/modules/all -----------------------------------------------
+   ABINIT/8.2.2-intel-2017.03-GCC-6.3
+   ABINIT/8.4.4-foss-2017b
+   ABINIT/8.4.4-intel-2017.03-GCC-6.3
+   ABINIT/8.10.1-intel-2018b
+   ABINIT/9.4.2-foss-2021b                                          (D)
+   ABRicate/1.0.0-gompi-2021a
+   AFNI/20160329-intel-2017.03-GCC-6.3-Python-2.7.12
+   ALE/1.0.0-foss-2021a
+   ANSYS/17.0
+   ANSYS/18.1
+   ANSYS/19.4
+   ANSYS/2020-R2
+   ANSYS/2021
+   ANSYS/2022-R1
+   ANSYS/2024R1                                                     (D)
+   ANTLR/2.7.7-GCCcore-11.2.0-Java-11.0.2
+   ANTLR/2.7.7-GCCcore-11.3.0-Java-11.0.2                           (D)
+   ANTs/2.3.1-foss-2018b-Python-3.6.6
+   ANTs/2.3.2-foss-2019b-Python-3.7.4
+   ANTs/2.3.5-foss-2021a                                            (D)
 
------------- /work/y07/shared/archer2-modules/modulefiles-cse-utils ------------
-bolt/0.7                  ncview/ncview-2.1.7-gcc-10.1.0  vmd/1.9.3-mpi-gcc10  
-cmake/3.18.4              reframe/3.2                     xios/2.5-gcc10       
-ed/1.16-gcc10             tcl/8.4.20-gcc10                xthi/1.0             
-epcc-job-env              tcl/8.5.0-gcc10                 xthi/1.0-gcc10       
-epcc-reframe/0.1          tcl/8.6.0-gcc10                 
-genmaskcpu/1.0            tcl/8.6.10-gcc10(default)       
-gnuplot/5.4.1-gcc-10.1.0  tk/8.5.6-gcc10                  
-lzip/1.20-gcc10           tk/8.6.10-gcc10(default)        
-nco/4.9.6                 visidata/2.1                    
-nco/4.9.6-gcc-10.1.0      vmd/1.9.3-gcc10(default)        
-
------------- /work/y07/shared/archer2-modules/modulefiles-cse-libs -------------
-adios/1.13.1     hypre/2.18.0             mumps/5.2.1     superlu-dist/6.1.1  
-boost/1.72.0     libxml2/2.9.7-gcc-9.3.0  parmetis/4.0.3  superlu/5.2.1       
-glm/0.9.9.6      matio/1.5.18             petsc/3.13.3    trilinos/12.18.1    
-gmp/6.1.2-gcc10  metis/5.1.0              scotch/6.0.10   
-...
 ```
 
 ### Listing Currently Loaded Modules
@@ -106,17 +107,10 @@ loaded in your environment. If you have no modules loaded, you will see a
 message telling you so
 
 ```bash
-`r config$remote$prompt_work` module list
+[userid@login01 userid]$ module list
 ```
 ```output
-Currently Loaded Modulefiles:
- 1) cpe-cray                          8) perftools-base/20.10.0(default)                                  
- 2) cce/10.0.4(default)               9) xpmem/2.2.35-7.0.1.0_1.9__gd50fabf.shasta(default)               
- 3) craype/2.7.2(default)            10) cray-mpich/8.0.16(default)                                       
- 4) craype-x86-rome                  11) cray-libsci/20.10.1.2(default)                                   
- 5) libfabric/1.11.0.0.233(default)  12) bolt/0.7                                                         
- 6) craype-network-ofi               13) /work/y07/shared/archer2-modules/modulefiles-cse/epcc-setup-env  
- 7) cray-dsmml/0.1.2(default)        14) /usr/local/share/epcc-module/epcc-module-loader  
+No modules loaded
 ```
 
 ## Loading and Unloading Software
@@ -129,7 +123,7 @@ command. `which` looks for programs the same way that Bash does,
 so we can use it to tell us where a particular piece of software is stored.
 
 ```bash
-`r config$host_prompt` which ncdump
+[userid@login01 ~]$ which ncdump
 ```
 ```output
 which: no ncdump in (/usr/local/maven/bin:/lus/cls01095/work/y07/shared/bolt/0.7/bin:/work/y07/shared/utils/bin:/opt/cray/pe/perftools/20.10.0/bin:/opt/cray/pe/papi/6.0.0.4/bin:/opt/cray/libfabric/1.11.0.0.233/bin:/opt/cray/pe/craype/2.7.2/bin:/opt/cray/pe/cce/10.0.4/cce-clang/x86_64/bin:/opt/cray/pe/cce/10.0.4/binutils/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/10.0.4/binutils/cross/x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/10.0.4/utils/x86_64/bin:/usr/local/Modules/bin:/usr/local/bin:/usr/bin:/bin:/opt/cray/pe/bin:/usr/lib/mit/bin)
@@ -138,8 +132,8 @@ which: no ncdump in (/usr/local/maven/bin:/lus/cls01095/work/y07/shared/bolt/0.7
 We can find the `ncdump` command by using `module load`:
 
 ```bash
-`r config$host_work` module load cray-hdf5
-`r config$host_work` module load cray-netcdf
+[userid@login01 userid]$  module load cray-hdf5
+[userid@login01 userid]$  module load cray-netcdf
 which ncdump
 ```
 ```output
@@ -156,7 +150,7 @@ through for a command before giving up and telling us it can't find it.
 As with all environment variables we can print it out using `echo`.
 
 ```bash
-`r config$host_work` echo $PATH
+[userid@login01 userid]$  echo $PATH
 ```
 ```output
 /opt/cray/pe/netcdf/4.7.4.2/bin:/opt/cray/pe/python/3.8.5.0/bin:/lus/cls01095/work/z19/z19/aturner/.local/bin:/lus/cls01095/work/y07/shared/bolt/0.7/bin:/work/y07/shared/utils/bin:/usr/local/maven/bin:/opt/cray/pe/perftools/20.10.0/bin:/opt/cray/pe/papi/6.0.0.4/bin:/opt/cray/libfabric/1.11.0.0.233/bin:/opt/cray/pe/craype/2.7.2/bin:/opt/cray/pe/cce/10.0.4/cce-clang/x86_64/bin:/opt/cray/pe/cce/10.0.4/binutils/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/10.0.4/binutils/cross/x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/10.0.4/utils/x86_64/bin:/usr/local/Modules/bin:/home/z19/z19/aturner/bin:/usr/local/bin:/usr/bin:/bin:/opt/cray/pe/bin:/usr/lib/mit/bin
@@ -168,7 +162,7 @@ ran the `module load` command, it added a directory to the beginning of our
 `$PATH`. Let's examine what's there:
 
 ```bash
-`r config$host_work` ls /opt/cray/pe/netcdf/4.7.4.2/bin
+[userid@login01 userid]$  ls /opt/cray/pe/netcdf/4.7.4.2/bin
 ```
 ```output
 nc-config  nccopy  ncdump  ncgen  ncgen3  ncxx4-config  nf-config
@@ -195,7 +189,7 @@ either of these example cases, it helps to be very specific about what software 
 Let's examine the output of `module avail` more closely.
 
 ```bash
-`r config$host_work` module avail cray-netcdf
+[userid@login01 userid]$  module avail cray-netcdf
 ```
 ```output
 --------------------------- /opt/cray/pe/modulefiles ---------------------------
@@ -227,20 +221,20 @@ compute node).
 ::: solution
 
 ```bash
-`r config$remote$prompt_work` nano ncdump-module.sh
-`r config$remote$prompt_work` cat ncdump-module.sh
+[userid@login01 userid]$  nano ncdump-module.sh
+[userid@login01 userid]$  cat ncdump-module.sh
 ```
 ```output
-`r config$remote$bash_shebang`
-`r config$sched$comment` --partition=standard
-`r config$sched$comment` --qos=`r config$sched$qos`
+#!/bin/bash
+#SBATCH --partition=short
+#SBATCH --qos=short
 module load epcc-job-env
 module load cray-netcdf
 ncdump --version
 ```
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$submit.name` python-module.sh
+[userid@login01 userid]$  srun python-module.sh
 ```
 :::
 :::
