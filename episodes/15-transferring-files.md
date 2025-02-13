@@ -22,7 +22,7 @@ The program used in this example can be retrieved using wget or a browser and co
 
 **Using wget**: 
 ```bash
-`r config$remote$prompt` wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[userid@login01 ~]$ wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
 ```
 
 **Using a web browser**: 
@@ -48,11 +48,11 @@ and `wget https://some/link/to/a/file`. Try it out by downloading
 some material we'll use later on, from a terminal on your local machine.
 
 ```bash
-`r config$local$prompt` curl -O `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[user@laptop ~]$  curl -O `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
 ```
 or
 ```bash
-`r config$local$prompt` wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[user@laptop ~]$  wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
 ```
 
 ::: discussion
@@ -72,37 +72,37 @@ The syntax can be a little complex for new users, but we'll break it down.
 To *upload to* another computer:
 
 ```bash
-`r config$local$prompt` scp path/to/local/file.txt `r config$remote$user`@`r config$remote$login`:/path/on/`r config$remote$name`
+[user@laptop ~]$  scp path/to/local/file.txt userid@rocket.hpc:/path/on/Rocket
 ```
 
 To *download from* another computer:
 
 ```bash
-`r config$local$prompt` scp `r config$remote$user`@`r config$remote$login`:/path/on/`r config$remote$name`/file.txt path/to/local/
+[user@laptop ~]$  scp userid@rocket.hpc:/path/on/Rocket/file.txt path/to/local/
 ```
 
 Note that everything after the `:` is relative to our home directory on the
 remote computer. We can leave it at that if we don't care where the file goes.
 
 ```bash
-`r config$local$prompt` scp local-file.txt `r config$remote$user`@`r config$remote$login`:
+[user@laptop ~]$  scp local-file.txt userid@rocket.hpc:
 ```
 
 ::: challenge
 ## Upload a File
 Copy the file you just downloaded from the Internet to your home directory on
-`r config$remote$name`.
+Rocket.
 
 ::: solution
 
 ```bash
-`r config$local$prompt` scp hpc-intro-data.tar.gz `r config$remote$user`@`r config$remote$login`:~/
+[user@laptop ~]$  scp hpc-intro-data.tar.gz userid@rocket.hpc:~/
 ```
 :::
 :::
 
 ::: discussion
-## Why Not Download on `r config$remote$name` Directly?
+## Why Not Download on Rocket Directly?
 Some computer clusters are behind firewalls set to only allow transfers
 initiated from the *outside*. This means that the `curl` command will fail,
 as an address outside the firewall is unreachable from the inside. To get
@@ -124,10 +124,10 @@ OK!
 Using `curl` or `wget` commands like the following:
 
 ```bash
-`r config$local$prompt` ssh `r config$remote$user`@`r config$remote$login`
-`r config$remote$prompt` curl -O `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[user@laptop ~]$  ssh userid@rocket.hpc
+[userid@login01 ~]$ curl -O `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
 or
-`r config$remote$prompt` wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[userid@login01 ~]$ wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
 ```
 
 Did it work? If not, what does the terminal output tell you about what
@@ -141,7 +141,7 @@ reaches the bottom of the directory tree rooted at the folder name you
 provided.
 
 ```bash
-`r config$local$prompt` scp -r some-local-folder `r config$remote$user`@`r config$remote$login`:target-directory/
+[user@laptop ~]$  scp -r some-local-folder userid@rocket.hpc:target-directory/
 ```
 
 ::: callout
@@ -181,7 +181,7 @@ The syntax is similar to `scp`. To transfer *to* another computer with
 commonly used options:
 
 ```bash
-`r config$local$prompt` rsync -avzP path/to/local/file.txt `r config$remote$user`@`r config$remote$login`:directory/path/on/`r config$remote$name`/
+[user@laptop ~]$  rsync -avzP path/to/local/file.txt userid@rocket.hpc:directory/path/on/Rocket/
 ```
 
 The `a` (archive) option preserves file timestamps and permissions among
@@ -194,7 +194,7 @@ displays the progress of the transfer.
 To recursively copy a directory, we can use the same options:
 
 ```bash
-`r config$local$prompt` rsync -avzP path/to/local/dir `r config$remote$user`@`r config$remote$login`:directory/path/on/`r config$remote$name`/
+[user@laptop ~]$  rsync -avzP path/to/local/dir userid@rocket.hpc:directory/path/on/Rocket/
 ```
 
 As written, this will place the local directory and its contents under the
@@ -208,7 +208,7 @@ The `a` (archive) option implies recursion.
 To download a file, we simply change the source and destination:
 
 ```bash
-`r config$local$prompt` rsync -avzP `r config$remote$user`@`r config$remote$login`:path/on/`r config$remote$name`/file.txt path/to/local/
+[user@laptop ~]$  rsync -avzP userid@rocket.hpc:path/on/Rocket/file.txt path/to/local/
 ```
 :::
 
@@ -229,16 +229,16 @@ Say we have to connect `rsync` through port 768 instead of 22. How would we
 modify this command?
 
 ```bash
-`r config$local$prompt` rsync test.txt `r config$remote$user`@`r config$remote$login`:
+[user@laptop ~]$  rsync test.txt userid@rocket.hpc:
 ```
 
 ::: solution
 
 ```bash
-`r config$local$prompt` rsync --help | grep port
+[user@laptop ~]$  rsync --help | grep port
      --port=PORT             specify double-colon alternate port number
 See https://rsync.samba.org/ for updates, bug reports, and answers
-`r config$local$prompt` rsync --port=768 test.txt `r config$remote$user`@`r config$remote$login`:
+[user@laptop ~]$  rsync --port=768 test.txt userid@rocket.hpc:
 ```
 :::
 :::
@@ -270,8 +270,8 @@ computer. Note that you can concatenate the two flags, instead of writing
 `-t -f` separately.
 
 ```bash
-`r config$local$prompt` ssh `r config$remote$user`@`r config$remote$login`
-`r config$remote$prompt` tar -tf hpc-lesson-data.tar.gz
+[user@laptop ~]$  ssh userid@rocket.hpc
+[userid@login01 ~]$ tar -tf hpc-lesson-data.tar.gz
 hpc-intro-data/
 hpc-intro-data/north-pacific-gyre/
 hpc-intro-data/north-pacific-gyre/NENE01971Z.txt
@@ -301,7 +301,7 @@ familiar. Let's see about that compression, using `du` for "**d**isk
 **u**sage".
 
 ```bash
-`r config$remote$prompt` du -sh hpc-lesson-data.tar.gz
+[userid@login01 ~]$ du -sh hpc-lesson-data.tar.gz
 36K     hpc-intro-data.tar.gz
 ```
 
@@ -333,7 +333,7 @@ Hint: `tar` lets you concatenate flags.
 #### Commands
 
 ```bash
-`r config$remote$prompt` tar -xvzf hpc-lesson-data.tar.gz
+[userid@login01 ~]$ tar -xvzf hpc-lesson-data.tar.gz
 ```
 ```output
 hpc-intro-data/
@@ -363,7 +363,7 @@ Note that we did not type out `-x -v -z -f`, thanks to the flag
 concatenation, though the command works identically either way.
 
 ```bash
-`r config$remote$prompt` du -sh hpc-lesson-data
+[userid@login01 ~]$ du -sh hpc-lesson-data
 144K    hpc-intro-data
 ```
 :::
@@ -378,7 +378,7 @@ extracting it --- set a `c` flag instead of `x`, set the archive filename,
 then provide a directory to compress:
 
 ```bash
-`r config$local$prompt` tar -cvzf compressed_data.tar.gz hpc-intro-data
+[user@laptop ~]$  tar -cvzf compressed_data.tar.gz hpc-intro-data
 ```
 
 ::: discussion
