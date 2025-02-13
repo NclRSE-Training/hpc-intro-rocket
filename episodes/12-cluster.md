@@ -298,7 +298,7 @@ each resource is.
 ```bash
 [userid@login01 ~]$  df -Th
 ```
-:::
+
 :::
 
 ::: discussion
