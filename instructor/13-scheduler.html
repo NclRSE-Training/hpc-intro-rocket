@@ -404,11 +404,10 @@ to wait for a while in a queue to get in to a popular restaurant, then
 you may now understand why sometimes your job do not start instantly as
 in your laptop.</p>
 <figure><img src="../fig/restaurant_queue_manager.svg" caption="" alt="Compare a job scheduler to a waiter in a restaurant" class="figure mx-auto d-block"><div class="figcaption">The waiter scheduler</div>
-</figure><p>The scheduler used in this lesson is
-<code>r config$sched$name</code>. Although
-<code>r config$sched$name</code> is not used everywhere, running jobs is
-quite similar regardless of what software is being used. The exact
-syntax might change, but the concepts remain the same.</p>
+</figure><p>The scheduler used in this lesson is Slurm. Although Slurm is not
+used everywhere, running jobs is quite similar regardless of what
+software is being used. The exact syntax might change, but the concepts
+remain the same.</p>
 </section><section><h2 class="section-heading" id="running-a-batch-job">Running a Batch Job<a class="anchor" aria-label="anchor" href="#running-a-batch-job"></a></h2>
 <hr class="half-width"><p>The most basic use of the scheduler is to run a command
 non-interactively. Any command (or series of commands) that you want to
@@ -421,14 +420,14 @@ prefer. Unsure? <code>nano</code> is a pretty good, basic choice.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> nano example-job.sh</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> chmod +x example-job.sh</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  nano example-job.sh</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  chmod +x example-job.sh</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>`r config$remote$bash_shebang`
+<pre class="output" tabindex="0"><code>#!/bin/bash
 
 echo -n "This script is running on "
 hostname</code></pre>
@@ -445,7 +444,7 @@ node?</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> ./example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  ./example-job.sh</span></code></pre>
 </div>
 </div>
 </div>
@@ -455,12 +454,12 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>This script is running on `r config$remote$host`</code></pre>
+<pre class="output" tabindex="0"><code>This script is running on login01</code></pre>
 </div>
 <p>This job runs on the login node.</p>
 </div>
@@ -470,11 +469,11 @@ node?</p>
 <p>If you completed the previous challenge successfully, you probably
 realise that there is a distinction between running the job through the
 scheduler and just “running it”. To submit this job to the scheduler, we
-use the <code>r config$sched$submit$name</code> command.</p>
+use the <code>sbatch</code> command.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$options</span><span class="kw">`</span> example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -494,9 +493,9 @@ job script across and resubmit:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> cd /work/ta133/ta133/userid</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> cp ~/example-job.sh .</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$options</span><span class="kw">`</span> example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  cd /nobackup/proj/training/userid</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cp ~/example-job.sh .</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -507,12 +506,11 @@ job script across and resubmit:</p>
 is done — now the scheduler takes over and tries to run the job for us.
 While the job is waiting to run, it goes into a list of jobs called the
 <em>queue</em>. To check on our job’s status, we check the queue using
-the command
-<code>r config$sched$status` `r config$sched$flag$user</code>.</p>
+the command <code>squeue -u userid</code>.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$status</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$user</span><span class="kw">`</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -524,20 +522,19 @@ the command
 the <code>R</code> or <code>RUNNING</code> state. Sometimes our jobs
 might need to wait in a queue (<code>PENDING</code>) or have an error
 (<code>E</code>).</p>
-<p>The best way to check our job’s status is with
-<code>r config$sched$status</code>. Of course, running
-<code>r config$sched$status</code> repeatedly to check on things can be
-a little tiresome. To see a real-time view of our jobs, we can use the
-<code>watch</code> command. <code>watch</code> reruns a given command at
-2-second intervals. This is too frequent, and will likely upset your
-system administrator. You can change the interval to a more reasonable
-value, for example 15 seconds, with the <code>-n 15</code> parameter.
-Let’s try using it to monitor another job.</p>
+<p>The best way to check our job’s status is with <code>squeue</code>.
+Of course, running <code>squeue</code> repeatedly to check on things can
+be a little tiresome. To see a real-time view of our jobs, we can use
+the <code>watch</code> command. <code>watch</code> reruns a given
+command at 2-second intervals. This is too frequent, and will likely
+upset your system administrator. You can change the interval to a more
+reasonable value, for example 15 seconds, with the <code>-n 15</code>
+parameter. Let’s try using it to monitor another job.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$options</span><span class="kw">`</span> example-job.sh</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> watch <span class="at">-n</span> 15 <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$status</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$user</span><span class="kw">`</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  watch <span class="at">-n</span> 15 squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <p>You should see an auto-updating display of your job’s status. When it
 finishes, it will disappear from the queue. Press <code>Ctrl-c</code>
@@ -566,27 +563,24 @@ get access to these resources we must customize our job script.</p>
 typically ignored, but there are exceptions. For instance the special
 <code>#!</code> comment at the beginning of scripts specifies what
 program should be used to run it (you’ll typically see
-<code>r config$local$bash_shebang</code>). Schedulers like
-<code>r config$sched$name</code> also have a special comment used to
-denote special scheduler-specific options. Though these comments differ
-from scheduler to scheduler, <code>r config$sched$name</code>’s special
-comment is <code>r config$sched$comment</code>. Anything following the
-<code>r config$sched$comment</code> comment is interpreted as an
-instruction to the scheduler.</p>
+<code>#!/bin/bash</code>). Schedulers like Slurm also have a special
+comment used to denote special scheduler-specific options. Though these
+comments differ from scheduler to scheduler, Slurm’s special comment is
+<code>#SBATCH</code>. Anything following the <code>#SBATCH</code>
+comment is interpreted as an instruction to the scheduler.</p>
 <p>Let’s illustrate this by example. By default, a job’s name is the
-name of the script, but the <code>r config$sched$flag$name</code> option
-can be used to change the name of a job. Add an option to the
-script:</p>
+name of the script, but the <code>--job-name</code> option can be used
+to change the name of a job. Add an option to the script:</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>`r config$remote$bash_shebang`
-`r config$sched$comment` `r config$sched$flag$name` new_name
+<pre class="output" tabindex="0"><code>#!/bin/bash
+#SBATCH--job-name new_name
 
 echo -n "This script is running on "
 hostname
@@ -596,8 +590,8 @@ echo "This script has finished successfully."</code></pre>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$options</span><span class="kw">`</span> example-job.sh</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$status</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$user</span><span class="kw">`</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -670,20 +664,20 @@ options we have been specifying on the command line
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>`r config$remote$bash_shebang`
-`r config$sched$comment` `r config$sched$flag$time` 00:01:15
-`r config$sched$comment` --partition=defq
-`r config$sched$comment` --qos=`r config$sched$qos`
+<pre class="output" tabindex="0"><code>#!/bin/bash
+#SBATCH--time 00:01:15
+#SBATCH--partition=defq
+#SBATCH--qos=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
 hostname
@@ -692,10 +686,10 @@ echo "This script has finished successfully."</code></pre>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sbatch example-job.sh</span></code></pre>
 </div>
-<p>Why are the <code>r config$sched$name</code> runtime and
-<code>sleep</code> time not identical?</p>
+<p>Why are the Slurm runtime and <code>sleep</code> time not
+identical?</p>
 </div>
 </div>
 </div>
@@ -722,16 +716,16 @@ seconds of walltime, and attempt to run a job for two minutes.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>`r config$remote$bash_shebang`
-`r config$sched$comment` `r config$sched$flag$name` long_job
-`r config$sched$comment` `r config$sched$flag$time` 00:00:30
-`r config$sched$comment` --partition=`r config$sched$partition`
-`r config$sched$comment` --qos=`r config$sched$qos`
+<pre class="output" tabindex="0"><code>#!/bin/bash
+#SBATCH--job-name long_job
+#SBATCH--time 00:00:30
+#SBATCH--partition=short
+#SBATCH--qos=short
 
 echo "This script is running on ... "
 sleep 120 # time in seconds
@@ -743,13 +737,13 @@ check the log file.</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> example-job.sh</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> watch <span class="at">-n</span> 15 <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$status</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$user</span><span class="kw">`</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch example-job.sh</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  watch <span class="at">-n</span> 15 squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> cat slurm-38193.out</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat slurm-38193.out</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -764,11 +758,11 @@ Strict adherence to resource requests allows the scheduler to find the
 best possible place for your jobs. Even more importantly, it ensures
 that another user cannot use more resources than they’ve been given. If
 another user messes up and accidentally attempts to use all of the cores
-or memory on a node, <code>r config$sched$name</code> will either
-restrain their job to the requested resources or kill the job outright.
-Other jobs on the node will be unaffected. This means that one user
-cannot mess up the experience of others, the only jobs affected by a
-mistake in scheduling will be their own.</p>
+or memory on a node, Slurm will either restrain their job to the
+requested resources or kill the job outright. Other jobs on the node
+will be unaffected. This means that one user cannot mess up the
+experience of others, the only jobs affected by a mistake in scheduling
+will be their own.</p>
 <div id="but-how-much-does-it-cost" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -791,15 +785,14 @@ in the gaps between other users’ jobs.</p>
 </div>
 </section><section><h2 class="section-heading" id="cancelling-a-job">Cancelling a Job<a class="anchor" aria-label="anchor" href="#cancelling-a-job"></a></h2>
 <hr class="half-width"><p>Sometimes we’ll make a mistake and need to cancel a job. This can be
-done with the <code>r config$sched$del</code> command. Let’s submit a
-job and then cancel it using its job number (remember to change the
-walltime so that it runs long enough for you to cancel it before it is
-killed!).</p>
+done with the <code>scancel</code> command. Let’s submit a job and then
+cancel it using its job number (remember to change the walltime so that
+it runs long enough for you to cancel it before it is killed!).</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> example-job.sh</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$status</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$user</span><span class="kw">`</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  example-job.sh example-job.sh</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -815,9 +808,9 @@ cancelled.</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$del</span><span class="kw">`</span> 38759</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  scancel 38759</span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co"># It might take a minute for the job to disappear from the queue...</span></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$status</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$flag$user</span><span class="kw">`</span></span></code></pre>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -840,16 +833,15 @@ jobs and then cancelling them all with
 </div>
 </div>
 </section><section><h2 class="section-heading" id="other-types-of-jobs">Other Types of Jobs<a class="anchor" aria-label="anchor" href="#other-types-of-jobs"></a></h2>
-<hr class="half-width"><p>Up to this point, we’ve focused on running jobs in batch mode.
-<code>r config$sched$name</code> also provides the ability to start an
-interactive session.</p>
+<hr class="half-width"><p>Up to this point, we’ve focused on running jobs in batch mode. Slurm
+also provides the ability to start an interactive session.</p>
 <p>There are very frequently tasks that need to be done interactively.
 Creating an entire job script might be overkill, but the amount of
 resources required is too much for a login node to handle. A good
 example of this might be building a genome index for alignment with a
 tool like <a href="https://ccb.jhu.edu/software/hisat2/index.shtml" class="external-link">HISAT2</a>.
 Fortunately, we can run these types of tasks as a one-off with
-<code>r config$sched$interactive</code>.</p>
+<code>srun</code>.</p>
 <p><code>srun</code> runs a single command in the queue system and then
 exits. Let’s demonstrate this by running the <code>hostname</code>
 command with <code>srun</code>. (We can cancel an <code>srun</code> job
@@ -857,7 +849,7 @@ with <code>Ctrl-c</code>.)</p>
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$host_prompt_work</span><span class="kw">`</span> srun <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$options</span><span class="kw">`</span> <span class="at">--time</span><span class="op">=</span>00:01:00 hostname</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short <span class="at">--time</span><span class="op">=</span>00:01:00 hostname</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -878,7 +870,7 @@ makes it easy to start an interactive job with <code>srun</code>:</p>
 <div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$host_prompt_work</span><span class="kw">`</span> srun <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$options</span><span class="kw">`</span> <span class="at">--pty</span> /bin/bash</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short <span class="at">--pty</span> /bin/bash</span></code></pre>
 </div>
 <p>You should be presented with a bash prompt. Note that the prompt may
 change to reflect your new location, in this case the compute node we
@@ -916,13 +908,15 @@ to specify 32 parallel processes per node.</li>
 <div id="required-files" class="callout-inner">
 <h3 class="callout-title">Required Files</h3>
 <div class="callout-content">
+<p>** to update for Rocket ** example omp and mpi jobs at
+/nobackup/proj/training/parallel_examples/</p>
 <p>The program used in this example can be retrieved using wget or a
 browser and copied to the remote.</p>
 <p><strong>Using wget</strong>:</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt</span><span class="kw">`</span> wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/pi-mpi.py</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/pi-mpi.py</span></code></pre>
 </div>
 <p><strong>Using a web browser</strong>:</p>
 <p><a href="../%60r%20config%24url%60%60r%20config%24baseurl%60/files/pi-mpi.py"><code>r config$url``r config$baseurl</code>/files/pi-mpi.py</a></p>
@@ -941,7 +935,7 @@ script in it.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co">#SBATCH --qos=`r config$sched$qos`</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="ex">**#SBATCH</span> <span class="at">--qos</span><span class="op">=</span>short<span class="pp">**</span></span>
 <span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="co">#SBATCH --time=00:05:00</span></span>
 <span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
@@ -970,12 +964,12 @@ option.</li>
 because we specified 1 node and 16 parallel processes per node.</li>
 <li>Our program and arguments: in this case this is
 <code>python pi-mpi.py 10000000</code>.`</li>
-</ol><p>As for our other jobs, we launch using the
-<code>r config$sched$submit$name</code> command.</p>
+</ol><p>As for our other jobs, we launch using the <code>sbatch</code>
+command.</p>
 <div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="kw">`</span><span class="ex">r</span> config<span class="va">$remote$prompt_work</span><span class="kw">`</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$sched$submit$name</span><span class="kw">`</span> run-pi-mpi.slurm</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  example-job.sh run-pi-mpi.slurm</span></code></pre>
 </div>
 <p>The program generates no output with all details printed to the job
 log.</p>
@@ -997,7 +991,7 @@ of cores in parallel for the calculation.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is a modified script</p>
 <div class="codewrapper sourceCode" id="cb35">
@@ -1006,7 +1000,7 @@ of cores in parallel for the calculation.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="co">#SBATCH --qos=`r config$sched$qos`</span></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="co">#SBATCH --qos=short</span></span>
 <span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="co">#SBATCH --time=00:00:30</span></span>
 <span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a></span>
 <span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
@@ -1040,7 +1034,7 @@ output file to ensure that you understand the job distribution.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1048,7 +1042,7 @@ output file to ensure that you understand the job distribution.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#SBATCH --qos=`r config$sched$qos`</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#SBATCH --qos=short</span></span>
 <span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co">#SBATCH --time=00:00:30</span></span>
 <span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a></span>
 <span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="co">#SBATCH --nodes=2</span></span>
