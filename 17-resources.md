@@ -95,8 +95,7 @@ Creating a file called `submit-pi-mpi.slurm`:
 
 ```bash
 #!/bin/bash
-#SBATCH --partition=`r config$sched$partition`
-#SBATCH --qos=`r config$sched$qos`
+#SBATCH --partition=short
 
 #SBATCH --job-name=pi-mpi
 #SBATCH --nodes=1
@@ -108,13 +107,13 @@ srun python pi-mpi.py 10000000
 Run application using a single process (i.e. in serial) with a blocking `srun` command:
 ```bash
 module load cray-python
-`r config$sched$prompt_work` srun --partition=`r config$sched$partition` --qos=`r config$sched$qos` python pi-mpi.py 10000000
+[userid@login01 userid]$  srun --partition=short python pi-mpi.py 10000000
 ```
 
 Submit with to the batch queue with:
 
 ```bash
-`r config$sched$prompt_work` `r config$sched$submit.name` submit-pi-mpi.slurm
+[userid@login01 userid]$  srun submit-pi-mpi.slurm
 ```
 
 Output in the job log should look something like:
@@ -146,10 +145,10 @@ job was faster or not than a previous job (as you do not have to find the output
 to look up the performance) but the number is not as accurate as the performance recorded
 by the application itself and also includes static overheads from running the job
 (such as loading modules and startup time) that can skew the timings. To do this on
-use ``r config$sched$hist` `r config$sched$flag$histdetail`` with the job ID, e.g.:
+use `sacct -l -j 12345` with the job ID, e.g.:
 
 ```bash
-`r config$remote$prompt_work` `r config$sched$hist` `r config$sched$flag$histdetail` 12345
+[userid@login01 userid]$  sacct -l -j 12345
 ```
 ```output
 JOBID USER         ACCOUNT     NAME           ST REASON START_TIME         T...
@@ -196,7 +195,7 @@ seconds. Is this what you observe?
 
 ::: solution
 
-The table below shows example timings for runs on `r config$remote$name`
+The table below shows example timings for runs on ARCHER2 (HPC at Edinburgh)
 
 | Cores      | Overall run time (s) | Calculation time (s) |       Calculation core seconds |
 |-----------:|---------------------:|---------------------:|-------------------------------:|
@@ -258,7 +257,7 @@ Given your results, try to answer the following questions:
 
 ::: solution
 
-The table below gives example results for `r config$remote$name` based on the example 
+The table below gives example results for ARCHER2 (HPC at Edinburgh) based on the example 
 runtimes given in the solution above.
 
 | Cores      | Overall run time (s) | Actual speedup | Ideal speedup | Parallel efficiency |
