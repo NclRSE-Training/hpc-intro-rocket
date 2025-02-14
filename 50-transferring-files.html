@@ -397,10 +397,10 @@ browser and copied to the remote.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ wget http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <p><strong>Using a web browser</strong>:</p>
-<p><a href="%60r%20config%24url%60%60r%20config%24baseurl%60/files/hpc-intro-data.tar.gz"><code>r config$url``r config$baseurl</code>/files/hpc-intro-data.tar.gz</a></p>
+<p><a href="http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz" class="external-link">http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz</a></p>
 </div>
 </div>
 </div>
@@ -423,13 +423,13 @@ machine.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  curl <span class="at">-O</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  curl <span class="at">-O</span> http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <p>or</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  wget http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <div id="tar.gz" class="callout discussion">
 <div class="callout-square">
@@ -489,7 +489,7 @@ directory on Rocket.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -535,7 +535,7 @@ local machine over SSH? Note that it may well fail, and that’s OK!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Using <code>curl</code> or <code>wget</code> commands like the
 following:</p>
@@ -543,9 +543,9 @@ following:</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  ssh userid@rocket.hpc</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ curl <span class="at">-O</span> <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ curl <span class="at">-O</span> http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz</span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">or</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ wget <span class="kw">`</span><span class="ex">r</span> config<span class="va">$url</span><span class="kw">``</span><span class="ex">r</span> config<span class="va">$baseurl</span><span class="kw">`</span>/files/hpc-intro-data.tar.gz</span></code></pre>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ wget http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <p>Did it work? If not, what does the terminal output tell you about
 what happened?</p>
@@ -682,7 +682,7 @@ page if you’re unsure.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -801,7 +801,7 @@ flags.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Commands </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
