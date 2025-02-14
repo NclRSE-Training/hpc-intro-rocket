@@ -236,7 +236,7 @@ later episode of this lesson.
 ::: callout
 ## Command line options or job script options?
 All of the options we specify can be supplied on the command line (as we
-do here for `--partition=defq`) or in the job script (as we have done
+do here for `--partition=short`) or in the job script (as we have done
 for the job name above). These are interchangeable. It is often more convenient
 to put the options in the job script as it avoids lots of typing at the command
 line.
@@ -257,7 +257,7 @@ on the command line (e.g. `--partition`) into the script at this point.
 ```output
 #!/bin/bash
 #SBATCH--time 00:01:15
-#SBATCH--partition=defq
+#SBATCH--partition=short
 #SBATCH--qos=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
@@ -478,7 +478,7 @@ script that runs the program across two compute nodes on the cluster. Create a f
 ```bash
 #!/bin/bash
 
-#SBATCH --partition=`r config$sched$partition`
+#SBATCH --partition=short
 **#SBATCH --qos=short**
 #SBATCH --time=00:05:00
 
@@ -526,7 +526,7 @@ Here is a modified script
 ```bash
 #!/bin/bash
 
-#SBATCH --partition=`r config$sched$partition`
+#SBATCH --partition=short
 #SBATCH --qos=short
 #SBATCH --time=00:00:30
 
@@ -554,7 +554,7 @@ distribution.
 ```bash
 #!/bin/bash
 
-#SBATCH --partition=`r config$sched$partition`
+#SBATCH --partition=short
 #SBATCH --qos=short
 #SBATCH --time=00:00:30
 
