@@ -454,7 +454,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -638,7 +638,7 @@ resources effectively in a later episode of this lesson.</p>
 <h3 class="callout-title">Command line options or job script options?</h3>
 <div class="callout-content">
 <p>All of the options we specify can be supplied on the command line (as
-we do here for <code>--partition=defq</code>) or in the job script (as
+we do here for <code>--partition=short</code>) or in the job script (as
 we have done for the job name above). These are interchangeable. It is
 often more convenient to put the options in the job script as it avoids
 lots of typing at the command line.</p>
@@ -664,7 +664,7 @@ options we have been specifying on the command line
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -676,7 +676,7 @@ options we have been specifying on the command line
 </h3>
 <pre class="output" tabindex="0"><code>#!/bin/bash
 #SBATCH--time 00:01:15
-#SBATCH--partition=defq
+#SBATCH--partition=short
 #SBATCH--qos=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
@@ -934,7 +934,7 @@ script in it.</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#SBATCH --partition=short</span></span>
 <span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="ex">**#SBATCH</span> <span class="at">--qos</span><span class="op">=</span>short<span class="pp">**</span></span>
 <span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="co">#SBATCH --time=00:05:00</span></span>
 <span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a></span>
@@ -991,7 +991,7 @@ of cores in parallel for the calculation.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is a modified script</p>
 <div class="codewrapper sourceCode" id="cb35">
@@ -999,7 +999,7 @@ of cores in parallel for the calculation.</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="co">#SBATCH --partition=short</span></span>
 <span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a><span class="co">#SBATCH --qos=short</span></span>
 <span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="co">#SBATCH --time=00:00:30</span></span>
 <span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a></span>
@@ -1034,14 +1034,14 @@ output file to ensure that you understand the job distribution.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#SBATCH --partition=`r config$sched$partition`</span></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#SBATCH --partition=short</span></span>
 <span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#SBATCH --qos=short</span></span>
 <span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co">#SBATCH --time=00:00:30</span></span>
 <span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a></span>
