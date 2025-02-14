@@ -62,7 +62,7 @@ The program used in this example can be retrieved using wget or a browser and co
 
 **Using wget**: 
 ```bash
-`r config$remote$prompt` wget http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py
+[username3@login02 ]$ wget http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py
 ```
 
 **Using a web browser**:
