@@ -22,12 +22,12 @@ The program used in this example can be retrieved using wget or a browser and co
 
 **Using wget**: 
 ```bash
-[userid@login01 ~]$ wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[userid@login01 ~]$ wget http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz
 ```
 
 **Using a web browser**: 
 
-[`r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz](`r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz)
+[http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz](http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz)
 :::
 
 Computing with a remote computer offers very limited use if we cannot get files
@@ -48,11 +48,11 @@ and `wget https://some/link/to/a/file`. Try it out by downloading
 some material we'll use later on, from a terminal on your local machine.
 
 ```bash
-[user@laptop ~]$  curl -O `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[user@laptop ~]$  curl -O http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz
 ```
 or
 ```bash
-[user@laptop ~]$  wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[user@laptop ~]$  wget http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz
 ```
 
 ::: discussion
@@ -125,9 +125,9 @@ Using `curl` or `wget` commands like the following:
 
 ```bash
 [user@laptop ~]$  ssh userid@rocket.hpc
-[userid@login01 ~]$ curl -O `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[userid@login01 ~]$ curl -O http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz
 or
-[userid@login01 ~]$ wget `r config$url``r config$baseurl`/files/hpc-intro-data.tar.gz
+[userid@login01 ~]$ wget http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz
 ```
 
 Did it work? If not, what does the terminal output tell you about what
