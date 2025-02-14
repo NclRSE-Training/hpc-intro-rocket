@@ -62,12 +62,12 @@ The program used in this example can be retrieved using wget or a browser and co
 
 **Using wget**: 
 ```bash
-`r config$remote$prompt` wget `r config$url``r config$baseurl`/files/pi-mpi.py
+`r config$remote$prompt` wget http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py
 ```
 
 **Using a web browser**:
 
-[`r config$url``r config$baseurl`/files/pi-mpi.py](`r config$url``r config$baseurl`/files/pi-mpi.py)
+[http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py](http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py)
 
 :::
 
