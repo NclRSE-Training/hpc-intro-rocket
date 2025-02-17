@@ -60,6 +60,28 @@ Talk to your neighbour, office mate or [rubber duck](https://rubberduckdebugging
  * How could more computing help you do more or better research?
 :::
 
+## Jargon Busting
+
+### Your Personal Computer
+
+We are probably all familiar with a laptop or a desktop computer (some call it a PC for Personal Computer). These computers are aimed at individual users. Each one of us in the classroom has our own computer in front of us and we can work independantly of one another. It is good for performaing local and personal tasks but it has limited resources.
+
+
+### Shared Computing Resources
+
+What happens when we want to share resources, like printers or files? In the late 1950s the US military built a network of computers that used modems and normal telephone lines connect to one another. Things have progressed quite a bit since then. Today our computers can talk to one another in several ways. At most universities you might notice that the desktop computers have a wire (called an Ethernet cable) that connects it to the university's network. Laptops and other devices such as phones and tablets can also connect to networks using WiFi which is a wireless technology using radio waves. However what happens if we want a computer to perform a task which requires much more hardware than what our desktop of laptop can provide us with.
+
+### A Large Computer
+
+
+
+### Cloud Systems
+
+### A Cluster or Supercomputer
+
+
+
+
 ## A Standard Laptop for Standard Tasks
 
 Today, people coding or analysing data typically work with laptops.
