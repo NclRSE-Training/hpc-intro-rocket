@@ -47,10 +47,22 @@ command (or series of commands) that you want to run on the cluster is called a
 *job*, and the process of using a scheduler to run the job is called *batch job
 submission*.
 
-In this case, the job we want to run is just a shell script. Let's create a
-demo shell script to run as a test. The landing pad will have a number of
-terminal-based text editors installed. Use whichever you prefer. Unsure? `nano`
-is a pretty good, basic choice.
+In this case, the job we want to run is a shell script -- essentially a
+text file containing a list of UNIX commands to be executed in a sequential
+manner. Our shell script will have three parts:
+
+* On the very first line, add `#!/bin/bash. The `#!`
+  (pronounced "hash-bang" or "shebang") tells the computer what program is
+  meant to process the contents of this file. In this case, we are telling it
+  that the commands that follow are written for the command-line shell (what
+  we've been doing everything in so far).
+* Anywhere below the first line, we'll add an `echo` command with a friendly
+  greeting. When run, the shell script will print whatever comes after `echo`
+  in the terminal.
+  * `echo -n` will print everything that follows, _without_ ending
+    the line by printing the new-line character.
+* On the last line, we'll invoke the `hostname` command, which will print the
+  name of the machine the script is run on.
 
 ```bash
 [userid@login01 ~]$  nano example-job.sh
