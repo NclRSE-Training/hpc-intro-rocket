@@ -349,7 +349,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Working with the scheduler</h1>
-        <p>Last updated on 2025-02-14 |
+        <p>Last updated on 2025-02-17 |
 
         <a href="https://carolbooth2.github.io/hpc-intro-draft4/edit/main/episodes/30-scheduler.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -413,11 +413,25 @@ remain the same.</p>
 non-interactively. Any command (or series of commands) that you want to
 run on the cluster is called a <em>job</em>, and the process of using a
 scheduler to run the job is called <em>batch job submission</em>.</p>
-<p>In this case, the job we want to run is just a shell script. Let’s
-create a demo shell script to run as a test. The landing pad will have a
-number of terminal-based text editors installed. Use whichever you
-prefer. Unsure? <code>nano</code> is a pretty good, basic choice.</p>
-<div class="codewrapper sourceCode" id="cb1">
+<p>In this case, the job we want to run is a shell script – essentially
+a text file containing a list of UNIX commands to be executed in a
+sequential manner. Our shell script will have three parts:</p>
+<ul><li>On the very first line, add <code>#!/bin/bash. The</code>#!`
+(pronounced “hash-bang” or “shebang”) tells the computer what program is
+meant to process the contents of this file. In this case, we are telling
+it that the commands that follow are written for the command-line shell
+(what we’ve been doing everything in so far).</li>
+<li>Anywhere below the first line, we’ll add an <code>echo</code>
+command with a friendly greeting. When run, the shell script will print
+whatever comes after <code>echo</code> in the terminal.
+<ul><li>
+<code>echo -n</code> will print everything that follows,
+<em>without</em> ending the line by printing the new-line
+character.</li>
+</ul></li>
+<li>On the last line, we’ll invoke the <code>hostname</code> command,
+which will print the name of the machine the script is run on.</li>
+</ul><div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  nano example-job.sh</span>
@@ -1132,7 +1146,7 @@ any links that you are not going to use.
   "url": "https://hpc-intro-draft4.github.io/NA/instructor/30-scheduler.html",
   "identifier": "https://hpc-intro-draft4.github.io/NA/instructor/30-scheduler.html",
   "dateCreated": "2025-02-12",
-  "dateModified": "2025-02-14",
+  "dateModified": "2025-02-17",
   "datePublished": "2025-02-17"
 }
 
