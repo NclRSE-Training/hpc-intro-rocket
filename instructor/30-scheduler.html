@@ -468,7 +468,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -593,19 +593,35 @@ schedule our job. If you do not specify requirements (such as the amount
 of time you need), you will likely be stuck with your site’s default
 resources, which is probably not what you want.</p>
 <p>The following are several key resource requests:</p>
-<ul><li>
-<code>--nodes=&lt;nodes&gt;</code> - Number of nodes to use</li>
-<li>
-<code>--ntasks-per-node=&lt;tasks-per-node&gt;</code> - Number of
-parallel processes per node</li>
-<li>
-<code>--cpus-per-task=&lt;cpus-per-task&gt;</code> - Number of cores
-to assign to each parallel process</li>
-<li>
-<code>--time=&lt;days-hours:minutes:seconds&gt;</code> - Maximum
-real-world time (walltime) your job will be allowed to run. The
-<code>&lt;days&gt;</code> part can be omitted.</li>
-</ul><p>Note that just <em>requesting</em> these resources does not make your
+<p><code>--account=&lt;project&gt;</code> your account is typically your
+project code, for example <code>training</code>. Rocket does not charge
+users but other HPCs use the –account option for charging to a project
+budget.</p>
+<p><code>--partition=&lt;partition&gt;</code> The partition specifies
+the set of nodes you want to run on. More information on available
+partitions is given in the <a href="http://www.ncl.ac.uk/itservice/research/hpc" class="external-link">Rocket
+documentation</a>.</p>
+<p>Other common options that are used are:</p>
+<p><code>--time=&lt;hh:mm:ss&gt;</code> the maximum walltime for your
+job. e.g. For a 6.5 hour walltime, you would use
+<code>--time=06:30:00</code>.</p>
+<p><code>--job-name=&lt;jobname&gt;</code> set a name for the job to
+help identify it in Slurm command output.</p>
+<p>In addition, parallel jobs will also need to specify how many nodes,
+parallel processes and threads they require.</p>
+<p><code>--exclusive</code> to ensure that you have exclusive access to
+a compute node</p>
+<p><code>--nodes=&lt;number&gt;</code> the number of nodes to use for
+the job.</p>
+<p><code>--tasks-per-node=&lt;processes per node&gt;</code> the number
+of parallel processes (e.g. MPI ranks) per node.</p>
+<p><code>--cpus-per-task=&lt;threads per task&gt;</code> the number of
+threads per parallel process (e.g. number of OpenMP threads per MPI task
+for hybrid MPI/OpenMP jobs). Note: you must also set the
+<code>OMP_NUM_THREADS</code> environment variable if using OpenMP in
+your job and usually add the <code>--cpu-bind=cores</code> option to
+<code>srun</code></p>
+<p>Note that just <em>requesting</em> these resources does not make your
 job run faster, nor does it necessarily mean that you will consume all
 of these resources. It only means that these are made available to you.
 Your job may end up using less memory, or less time, or fewer tasks or
@@ -647,7 +663,7 @@ options we have been specifying on the command line
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -974,7 +990,7 @@ of cores in parallel for the calculation.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Here is a modified script</p>
 <div class="codewrapper sourceCode" id="cb32">
@@ -1017,7 +1033,7 @@ output file to ensure that you understand the job distribution.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
