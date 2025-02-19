@@ -255,7 +255,6 @@ on the command line (e.g. `--partition`) into the script at this point.
 #!/bin/bash
 #SBATCH--time 00:01:15
 #SBATCH--partition=short
-#SBATCH--qos=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
 hostname
@@ -294,7 +293,6 @@ walltime, and attempt to run a job for two minutes.
 #SBATCH--job-name long_job
 #SBATCH--time 00:00:30
 #SBATCH--partition=short
-#SBATCH--qos=short
 
 echo "This script is running on ... "
 sleep 120 # time in seconds
@@ -476,7 +474,6 @@ script that runs the program across two compute nodes on the cluster. Create a f
 #!/bin/bash
 
 #SBATCH --partition=short
-**#SBATCH --qos=short**
 #SBATCH --time=00:05:00
 
 #SBATCH --nodes=1
@@ -524,7 +521,6 @@ Here is a modified script
 #!/bin/bash
 
 #SBATCH --partition=short
-#SBATCH --qos=short
 #SBATCH --time=00:00:30
 
 #SBATCH --nodes=1
@@ -552,9 +548,7 @@ distribution.
 #!/bin/bash
 
 #SBATCH --partition=short
-#SBATCH --qos=short
 #SBATCH --time=00:00:30
-
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=8
 
