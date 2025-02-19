@@ -198,11 +198,27 @@ stuck with your site's default resources, which is probably not what you want.
 
 The following are several key resource requests:
 
-* `--nodes=<nodes>` - Number of nodes to use
-* `--ntasks-per-node=<tasks-per-node>` - Number of parallel processes per node
-* `--cpus-per-task=<cpus-per-task>` - Number of cores to assign to each parallel process
-* `--time=<days-hours:minutes:seconds>` - Maximum real-world time (walltime)
-your job will be allowed to run. The `<days>` part can be omitted.
+`--account=<project>` your account is typically your project code, for example `training`. Rocket does not charge users but other HPCs use the --account option for charging to a project budget.
+
+`--partition=<partition>` The partition specifies the set of nodes you want to run on. More information on available partitions is given in the [Rocket documentation](http://www.ncl.ac.uk/itservice/research/hpc).
+
+Other common options that are used are:
+
+`--time=<hh:mm:ss>` the maximum walltime for your job. e.g. For a 6.5 hour walltime, you would use `--time=06:30:00`.
+
+`--job-name=<jobname>` set a name for the job to help identify it in Slurm command output.
+
+In addition, parallel jobs will also need to specify how many nodes, parallel processes and threads they require.
+
+`--exclusive` to ensure that you have exclusive access to a compute node
+
+`--nodes=<number>` the number of nodes to use for the job.
+
+`--tasks-per-node=<processes per node>` the number of parallel processes (e.g. MPI ranks) per node.
+
+`--cpus-per-task=<threads per task>` the number of threads per parallel process (e.g. number of OpenMP threads per MPI task for hybrid MPI/OpenMP jobs). Note: you must also set the `OMP_NUM_THREADS` environment variable if using OpenMP in your job and usually add the `--cpu-bind=cores` option to `srun`
+
+
 
 Note that just *requesting* these resources does not make your job run faster,
 nor does it necessarily mean that you will consume all of these resources. It
