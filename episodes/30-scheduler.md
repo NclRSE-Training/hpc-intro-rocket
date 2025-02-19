@@ -367,7 +367,7 @@ its job number (remember to change the walltime so that it runs long enough for
 you to cancel it before it is killed!).
 
 ```bash
-[userid@login01 userid]$  example-job.sh example-job.sh
+[userid@login01 userid]$  sbatch example-job.sh
 [userid@login01 userid]$  squeue -u userid
 ```
 
