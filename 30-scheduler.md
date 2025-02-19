@@ -367,7 +367,7 @@ its job number (remember to change the walltime so that it runs long enough for
 you to cancel it before it is killed!).
 
 ```bash
-[userid@login01 userid]$  example-job.sh example-job.sh
+[userid@login01 userid]$  sbatch example-job.sh
 [userid@login01 userid]$  squeue -u userid
 ```
 
@@ -418,7 +418,9 @@ Let's demonstrate this by running the
 [userid@login01 userid]$  srun --partition=short --time=00:01:00 hostname
 ```
 ```output
-nid001976
+srun: job 17866477 queued and waiting for resources
+srun: job 17866477 has been allocated resources
+sb013.cluster
 ```
 
 `srun` accepts all of the same options as `sbatch`. However, instead of specifying these in a
@@ -443,137 +445,6 @@ You can also verify this with `hostname`.
 
 When you are done with the interactive job, type `exit` to quit your session.
 
-## Running parallel jobs using MPI
-
-As we have already seen, the power of HPC systems comes from *parallelism*, i.e. having lots of
-processors/disks etc. connected together rather than having more powerful components than your
-laptop or workstation. Often, when running research programs on HPC you will need to run a
-program that has been built to use the MPI (Message Passing Interface) parallel library. The MPI
-library allows programs to exploit multiple processing cores in parallel to allow researchers
-to model or simulate faster on larger problem sizes. The details of how MPI work are not important
-for this course or even to use programs that have been built using MPI; however, MPI programs 
-typically have to be launched in job submission scripts in a different way to serial programs and
-users of parallel programs on HPC systems need to know how to do this. Specifically, launching
-parallel MPI programs typically requires four things:
-
-  - A special parallel launch program such as `mpirun`, `mpiexec`, `srun` or `aprun`.
-  - A specification of how many processes to use in parallel. For example, our parallel program
-    may use 256 processes in parallel.
-  - A specification of how many parallel processes to use per compute node. For example, if our
-    compute nodes each have 32 cores we often want to specify 32 parallel processes per node.
-  - The command and arguments for our parallel program.
-
-::: prereq
-
-## Required Files
-
-** to update for Rocket ** example omp and mpi jobs at /nobackup/proj/training/parallel_examples/
-
-The program used in this example can be retrieved using wget or a browser and copied to the remote.
-
-**Using wget**: 
-```bash
-[userid@login01 ~]$  wget http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py
-```
-
-**Using a web browser**:
-
-[http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py](http://training.researchcomputing.ncl.ac.uk/training-materials/pi-mpi.py)
-
-:::
-
-To illustrate this process, we will use a simple MPI parallel program that estimates the value of Pi.
-(We will meet this example program in more detail in a later episode.) Here is a job submission
-script that runs the program across two compute nodes on the cluster. Create a file
-(e.g. called: `run-pi-mpi.slurm`) with the contents of this script in it.
-
-```bash
-#!/bin/bash
-
-#SBATCH --partition=short
-#SBATCH --time=00:05:00
-
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=16
-
-module load cray-python
-
-srun python pi-mpi.py 10000000
-```
-
-The parallel launch line for our program can be seen towards the bottom of the script:
-
-```bash
-srun python pi-mpi.py 10000000
-```
-
-And this corresponds to the four required items we described above:
-
-  1. Parallel launch program: in this case the parallel launch program is
-     called `srun`; the additional argument controls which cores are used.
-  2. Number of parallel processes per node: in this case this is 16,
-     and is specified by the option `--ntasks-per-node=16` option.
-  2. Total number of parallel processes: in this case this is also 16, because
-     we specified 1 node and 16 parallel processes per node.
-  4. Our program and arguments: in this case this is `python pi-mpi.py 10000000`.`
-
-As for our other jobs, we launch using the `sbatch` command.
-
-```bash
-[userid@login01 userid]$  example-job.sh run-pi-mpi.slurm
-```
-
-The program generates no output with all details printed to the job log.
-
-::: challenge
-## Running parallel jobs
-Modify the pi-mpi-run script that you used above to use all 128 cores on
-one node.  Check the output to confirm that it used the correct number
-of cores in parallel for the calculation.
-
-::: solution
-Here is a modified script
-
-```bash
-#!/bin/bash
-
-#SBATCH --partition=short
-#SBATCH --time=00:00:30
-
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=128
-
-module load cray-python
-srun python pi-mpi.py 10000000
-```
-:::
-:::
-
-::: challenge
-## Configuring parallel jobs
-You will see in the job output that information is displayed about
-where each MPI process is running, in particular which node it is
-on.
-
-Modify the pi-mpi-run script that you run a total of 2 nodes and 16 processes;
-but to use only 8 tasks on each of two nodes.
-Check the output file to ensure that you understand the job
-distribution.
-
-::: solution
-```bash
-#!/bin/bash
-
-#SBATCH --partition=short
-#SBATCH --time=00:00:30
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=8
-
-module load cray-python
-srun python pi-mpi.py 10000000
-```
-:::
-:::
 
 ::: keypoints
  - "The scheduler handles how compute resources are shared between users."
