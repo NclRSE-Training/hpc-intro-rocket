@@ -119,8 +119,8 @@ status, we check the queue using the command
 ```
 
 ```output
-             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          17866473    short example-   userid PD       0:00      1 (None)
+JOBID PARTITION     NAME     USER   ST    TIME  NODES NODELIST(REASON)
+36855 short         example- userid PD    0:00  1     (None)
 ```
 
 We can see all the details of our job, most importantly that it is in the `R`
@@ -273,11 +273,28 @@ Why are the Slurm runtime and `sleep` time not identical?
 ::: challenge
 ## Job environment variables
 
-When Slurm runs a job, it sets a number of environment variables for the job. One of these will
-let us check our work from the last problem. The `SLURM_CPUS_PER_TASK` variable is set to the
-number of CPUs we requested with `-c`. Using the `SLURM_CPUS_PER_TASK` variable, modify your job
-so that it prints how many CPUs have been allocated.
+When Slurm runs a job, it sets a number of environment variables for the job. One of these will let us check what directory our job script was submitted from. The `SLURM_SUBMIT_DIR` variable is set to the directory from which our job was submitted.
 
+Using the `SLURM_SUBMIT_DIR` variable, modify your job so that it prints out the location from which the job was submitted.
+
+::: solution
+```bash
+[userid@login01 ~]$  nano example-job.sh
+[userid@login01 ~]$  cat example-job.sh
+```
+
+```output
+#!/bin/bash
+#SBATCH --partition=short
+#SBATCH --time=00:01 # timeout in HH:MM
+
+echo -n "This script is running on "
+hostname
+
+echo "This job was launched in the following directory:"
+echo ${SLURM_SUBMIT_DIR}
+```
+:::
 :::
 
 Resource requests are typically binding. If you exceed them, your job will be
@@ -305,16 +322,15 @@ log file.
 
 ```bash
 [userid@login01 userid]$  sbatch example-job.sh
-[userid@login01 userid]$  watch -n 15 squeue -u userid
+[userid@login01 userid]$  squeue -u userid
 ```
 
 ```bash
-[userid@login01 userid]$  cat slurm-38193.out
+[userid@login01 userid]$  cat slurm-17866475.out
 ```
 ```output
-This job is running on:
-sb060
-slurmstepd: error: *** JOB 38193 ON cn01 CANCELLED AT 2017-07-02T16:35:48 DUE TO TIME LIMIT ***
+This script is running on ...
+slurmstepd: error: *** JOB 17866475 ON sb013 CANCELLED AT 2025-02-19T07:00:57 DUE TO TIME LIMIT ***
 ```
 
 Our job was killed for exceeding the amount of resources it requested. Although
@@ -330,6 +346,7 @@ will be their own.
 
 ::: callout
 ## But how much does it cost?
+Rocket does not currently charge you to run jobs but other HPCs do charge.
 Although your job will be killed if it exceeds the selected runtime,
 a job that completes within the time limit is only charged for the
 time it actually used. However, you should always try and specify a
@@ -357,8 +374,8 @@ you to cancel it before it is killed!).
 ```output
 Submitted batch job 38759
 
-JOBID USER         ACCOUNT     NAME           ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
-38759 userid yourAccount example-job.sh PD Priority N/A        0:00 1:00      1     1
+JOBID PARTITION     NAME     USER      ST    TIME  NODES NODELIST(REASON)
+38759  short        long_job   ncb176  R     1:13      1 sb013
 ```
 
 Now cancel the job with its job number (printed in your terminal). Absence of any
@@ -371,7 +388,7 @@ job info indicates that the job has been successfully cancelled.
 ```
 
 ```output
-JOBID  USER  ACCOUNT  NAME  ST  REASON  START_TIME  TIME  TIME_LEFT  NODES  CPUS
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 ```
 
 ::: challenge
