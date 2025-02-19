@@ -105,28 +105,11 @@ there is a distinction between running the job through the scheduler and just
 ```
 
 ```output
-sbatch: Warning: Your job has no time specification (--time=) and the default time is short. You can cancel your job with 'scancel <JOB_ID>' if you wish to resubmit.
-sbatch: Warning: It appears your working directory may be on the home filesystem. It is /home2/home/ta133/ta133/userid. This is not available from the compute nodes - please check that this is what you intended. You can cancel your job with 'scancel <JOBID>' if you wish to resubmit.
-Submitted batch job 286949
-```
-
-Ah! What went wrong here? Slurm is telling us that the file system we are currently on, `/home`, is not available
-on the compute nodes and that we are getting the default, short runtime. We will deal with the runtime 
-later, but we need to move to a different file system to submit the job and have it visible to the 
-compute nodes. On ARCHER2, this is the `/work` file system. The path is similar to home but with 
-`/work` at the start. Lets move there now, copy our job script across and resubmit:
-
-```bash
-[userid@login01 ~]$  cd /nobackup/proj/training/userid
-[userid@login01 userid]$  cp ~/example-job.sh .
-[userid@login01 userid]$  sbatch --partition=short example-job.sh
-```
-```output
 Submitted batch job 36855
 ```
 
-That's better! And that's all we need to do to submit a job. Our work is done --- now the
-scheduler takes over and tries to run the job for us. While the job is waiting
+Our work is done --- now the scheduler takes over and tries to run the job for us. 
+While the job is waiting
 to run, it goes into a list of jobs called the *queue*. To check on our job's
 status, we check the queue using the command
 `squeue -u userid`.
@@ -136,37 +119,23 @@ status, we check the queue using the command
 ```
 
 ```output
-JOBID USER         ACCOUNT     NAME           ST REASON START_TIME         T...
-36856 userid yourAccount example-job.sh R  None   2017-07-01T16:47:02 ...
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          17866473    short example-   userid PD       0:00      1 (None)
 ```
 
 We can see all the details of our job, most importantly that it is in the `R`
 or `RUNNING` state. Sometimes our jobs might need to wait in a queue
-(`PENDING`) or have an error (`E`).
+(`PD` or `PENDING`) or become terminated, for example due to `OUT_OF_MEMORY` (`OOM`) error, `TIMEOUT` (`TO`) or some other `FAILED` (`F`) condition.
 
-The best way to check our job's status is with `squeue`. Of
-course, running `squeue` repeatedly to check on things can be
-a little tiresome. To see a real-time view of our jobs, we can use the `watch`
-command. `watch` reruns a given command at 2-second intervals. This is too
-frequent, and will likely upset your system administrator. You can change the
-interval to a more reasonable value, for example 15 seconds, with the `-n 15`
-parameter. Let's try using it to monitor another job.
-
-```bash
-[userid@login01 userid]$  sbatch --partition=short example-job.sh
-[userid@login01 userid]$  watch -n 15 squeue -u userid
-```
-
-You should see an auto-updating display of your job's status. When it finishes,
-it will disappear from the queue. Press `Ctrl-c` when you want to stop the
-`watch` command.
 
 ::: discussion
 ## Where's the Output?
 On the login node, this script printed output to the terminal --- but
 when we exit `watch`, there's nothing. Where'd it go?
 HPC job output is typically redirected to a file in the directory you
-launched it from. Use `ls` to find and read the file.
+launched it from. Use `ls` to find and `cat` to read the file.
+
+On some HPC systems you may need to redirect the output explictly in your job submission script. You can achieve this by setting the options for error `--error=<error_filename>` and output `--output=<output_filename>` filenames. On Rocket this is handled by default with output and error files named according to the job submission id.
 :::
 
 ## Customising a Job
