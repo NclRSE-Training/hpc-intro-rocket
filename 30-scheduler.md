@@ -137,7 +137,7 @@ status, we check the queue using the command
 
 ```output
 JOBID USER         ACCOUNT     NAME           ST REASON START_TIME         T...
-36856 yourUsername yourAccount example-job.sh R  None   2017-07-01T16:47:02 ...
+36856 userid yourAccount example-job.sh R  None   2017-07-01T16:47:02 ...
 ```
 
 We can see all the details of our job, most importantly that it is in the `R`
@@ -213,7 +213,7 @@ Submit the job and monitor its status:
 
 ```output
 JOBID USER         ACCOUNT     NAME     ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
-38191 yourUsername yourAccount new_name PD Priority N/A        0:00 1:00:00   1     1
+38191 userid yourAccount new_name PD Priority N/A        0:00 1:00:00   1     1
 ```
 
 Fantastic, we've successfully changed the name of our job!
@@ -375,7 +375,7 @@ you to cancel it before it is killed!).
 Submitted batch job 38759
 
 JOBID USER         ACCOUNT     NAME           ST REASON   START_TIME TIME TIME_LEFT NODES CPUS
-38759 yourUsername yourAccount example-job.sh PD Priority N/A        0:00 1:00      1     1
+38759 userid yourAccount example-job.sh PD Priority N/A        0:00 1:00      1     1
 ```
 
 Now cancel the job with its job number (printed in your terminal). Absence of any
@@ -395,7 +395,7 @@ JOBID  USER  ACCOUNT  NAME  ST  REASON  START_TIME  TIME  TIME_LEFT  NODES  CPUS
 ## Cancelling multiple jobs
 We can also cancel all of our jobs at once using the `-u` option. This will delete all jobs for a
 specific user (in this case us). Note that you can only delete your own jobs.
-Try submitting multiple jobs and then cancelling them all with `scancel -u yourUsername`.
+Try submitting multiple jobs and then cancelling them all with `scancel -u userid`.
 :::
 
 ## Other Types of Jobs
