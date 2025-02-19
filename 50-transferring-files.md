@@ -56,6 +56,8 @@ or
 ```
 
 ::: discussion
+
+
 ## `tar.gz`?
 This is an archive file format, just like `.zip`, commonly used and supported
 by default on Linux, which is the operating system the majority of HPC
@@ -171,34 +173,17 @@ A trailing slash on the target directory is optional, and has no effect for
 `scp -r`, but is important in other commands, like `rsync`.
 
 ## Transferring files to and from Campus Storage for Research Data (RDW)
-============ start of section to be edited ================
+RDW is mounted on Rocket at `/rdw`.  You can use scp and rsync to transfer data to RDW in the same way as copying to any other directory on Rocket.  
 
-Transferring data to and from Rocket
-From Rocket, use the command line tool, rsync to transfer data to RDW.  Ensure you have read and understood the options before running the command.  Get started by running through this useful tutorial: https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories 
-Check what the options mean:  At the command line, type man rsync, or see https://www.computerhope.com/unix/rsync.htm 
 
-Basic sync
-========
 Try out a dry run:
-Rsync  --dry-run -av dir1/ dir2
+```bash
+rsync  --dry-run -av dir1/ dir2
+```
 Run ‘for real’:
+```bash
 rsync -av dir1/ dir2
-
-Fast network, new files from Rocket
-===========================
-Try out a dry run:
-rsync --dry-run -avv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log1
-Run ‘for real’:
-rsync -avv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log2
-Fast Connections
-Transfers from Rocket to RDW don’t leave our fast data centre network.  If you're using rsync with a fast network or disk to disk in the same machine:
-
-Don’t use compression -z
-Do use --inplace
-
-Why?  compression uses lots of CPU, Rsync usually creates a temp file on disk before copying.  For fast transfers, this places too much load on the CPU and hard drive.  --inplace tells rsync not to create the temp file but send the data straight away.  It doesn’t matter if the connection is interrupted, because rsync keeps track and tries again.  Always re-run transfer command to ensure nothing was missed.  The second run should be very fast, just listing all the files and not copying anything.
-
-For a slow connection like the internet, DO use compression and DON’T use --inplace.  
+```
 
 ======== end of section to be edited ================
 
@@ -245,6 +230,40 @@ To download a file, we simply change the source and destination:
 [user@laptop ~]$  rsync -avzP userid@rocket.hpc:path/on/Rocket/file.txt path/to/local/
 ```
 :::
+
+::: discussion
+
+## Large copies over fast and slow networks with `rsync`
+When you're copying a lot of data, it's important to keep track in case the copy is interrupted.  Rsync is great because it can pick up where it left off, rather than starting the copy all over again.  It's useful to output to a log so you can see what was transferred and find any errors that need to be addressed.
+
+### Fast Connections
+Transfers from Rocket to RDW don’t leave our fast data centre network.  If you're using rsync with a fast network or disk to disk in the same machine:
+
+Don’t use compression -z
+Do use --inplace
+
+Why?  compression uses lots of CPU, Rsync usually creates a temp file on disk before copying.  For fast transfers, this places too much load on the CPU and hard drive.  --inplace tells rsync not to create the temp file but send the data straight away.  It doesn’t matter if the connection is interrupted, because rsync keeps track and tries again.  Always re-run transfer command to ensure nothing was missed.  The second run should be very fast, just listing all the files and not copying anything.
+
+### Slow Connections
+For a slow connection like the internet, DO use compression and DON’T use --inplace.  
+:::
+
+:::challenge
+### Back up data from rocket to RDW
+Set up an rsync command to copy files and provide helpful output to a log file.
+
+:::solution
+Try out a dry run:
+```bash
+rsync --dry-run -avv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log1
+```
+Run ‘for real’:
+```bash
+rsync -avv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log2
+```
+:::
+:::
+
 
 ::: discussion
 ## A Note on Ports
