@@ -135,6 +135,7 @@ happened?
 :::
 :::
 
+## Transferring a Directory
 To copy a whole directory, we add the `-r` flag, for "**r**ecursive": copy the
 item specified, and every item below it, and every item below those... until it
 reaches the bottom of the directory tree rooted at the folder name you
