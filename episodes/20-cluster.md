@@ -164,12 +164,16 @@ types of tasks. The node where you are right now is called the *head node*,
 *login node*, *landing pad*, or *submit node*. A login node serves as an access
 point to the cluster.
 
+
+::: callout 
+## Avoid running jobs on the login node !
 As a gateway, it is well suited for uploading and downloading files, setting up
 software, and running quick tests. Generally speaking, the login node should
 not be used for time-consuming or resource-intensive tasks. You should be alert
 to this, and check with your site's operators or documentation for details of
 what is and isn't allowed. In these lessons, we will avoid running jobs on the
 login node.
+:::
 
 The real work on a cluster gets done by the *worker* (or *compute*) *nodes*.
 Worker nodes come in many shapes and sizes, but generally are dedicated to long
@@ -344,4 +348,5 @@ scheduler, and use it to start running our scripts and programs!
    type (amount of RAM, processor architecture, availability of network mounted
    filesystems, etc.)."
  - "Files saved on one node are available on all nodes."
+ - "Avoid running jobs on the login node"
 :::
