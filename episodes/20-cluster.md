@@ -1,5 +1,5 @@
 ---
-title: "Working on a remote HPC system"
+title: "Working on an HPC system"
 teaching: 25
 exercises: 10
 ---
@@ -8,11 +8,11 @@ exercises: 10
 ::: questions
  - What is an HPC system?
  - How does an HPC system work?
- - How do I log on to a remote HPC system?
+ - How do I log on to an HPC system?
 :::
 
 ::: objectives
- - Connect to a remote HPC system.
+ - Connect to an HPC system.
  - Understand the general HPC system architecture.
 :::
 
@@ -169,18 +169,7 @@ software, and running quick tests. Generally speaking, the login node should
 not be used for time-consuming or resource-intensive tasks. You should be alert
 to this, and check with your site's operators or documentation for details of
 what is and isn't allowed. In these lessons, we will avoid running jobs on the
-head node.
-
-::: callout
-## Dedicated Transfer Nodes
-If you want to transfer larger amounts of data to or from the cluster, some
-systems offer dedicated nodes for data transfers only. The motivation for
-this lies in the fact that larger data transfers should not obstruct
-operation of the login node for anybody else. Rocket does not have a dedicated transfer node but do check for this onother HPC systems you may use. As a
-rule of thumb, consider all transfers of a volume larger than 500 MB to 1 GB
-as large. But these numbers change, e.g., depending on the network connection
-of yourself and of your cluster or other factors.
-:::
+login node.
 
 The real work on a cluster gets done by the *worker* (or *compute*) *nodes*.
 Worker nodes come in many shapes and sizes, but generally are dedicated to long
@@ -273,7 +262,7 @@ Run system monitor
 ::: challenge
 ## Explore the login node
 
-Now compare the resources of your computer with those of the head node.
+Now compare the resources of your computer with those of the login node.
 
 ::: solution
 
@@ -330,7 +319,7 @@ run. Try running this command to see the name, CPUs and memory available on one 
 ::: discussion
 ## Compare Your Computer, the login node and the compute node
 Compare your laptop's number of processors and memory with the numbers you
-see on the cluster head node and worker node. Discuss the differences with
+see on the cluster login node and worker node. Discuss the differences with
 your neighbor.
 
 What implications do you think the differences might have on running your
