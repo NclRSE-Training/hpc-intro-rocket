@@ -215,7 +215,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="20-cluster.html">2. Working on a remote HPC system</a>
+        <a href="20-cluster.html">2. Working on an HPC system</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -346,7 +346,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Accessing software via Modules</h1>
-        <p>Last updated on 2025-02-14 |
+        <p>Last updated on 2025-02-25 |
 
         <a href="https://carolbooth2.github.io/hpc-intro-draft4/edit/main/episodes/40-modules.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -491,26 +491,24 @@ a particular piece of software is stored.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which ncdump</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which R</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>which: no ncdump in (/usr/local/maven/bin:/lus/cls01095/work/y07/shared/bolt/0.7/bin:/work/y07/shared/utils/bin:/opt/cray/pe/perftools/20.10.0/bin:/opt/cray/pe/papi/6.0.0.4/bin:/opt/cray/libfabric/1.11.0.0.233/bin:/opt/cray/pe/craype/2.7.2/bin:/opt/cray/pe/cce/10.0.4/cce-clang/x86_64/bin:/opt/cray/pe/cce/10.0.4/binutils/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/10.0.4/binutils/cross/x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/10.0.4/utils/x86_64/bin:/usr/local/Modules/bin:/usr/local/bin:/usr/bin:/bin:/opt/cray/pe/bin:/usr/lib/mit/bin)</code></pre>
+<pre class="output" tabindex="0"><code>/usr/bin/which: no R in (/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/ncb176/bin/:/opt/ibutils/bin:/mnt/nfs/home/ncb176/bin/:/mnt/nfs/home/ncb176/.local/bin:/mnt/nfs/home/userid/bin)</code></pre>
 </div>
-<p>We can find the <code>ncdump</code> command by using
-<code>module load</code>:</p>
+<p>We can find <code>R</code> by using <code>module load</code>:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module load cray-hdf5</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module load cray-netcdf</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">which</span> ncdump</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module load R</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  which R</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>/opt/cray/pe/netcdf/4.7.4.2/bin/ncdump</code></pre>
+<pre class="output" tabindex="0"><code>/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin/R</code></pre>
 </div>
 <p>So, what just happened?</p>
 <p>To understand the output, first we need to understand the nature of
@@ -528,7 +526,8 @@ environment variables we can print it out using <code>echo</code>.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>/opt/cray/pe/netcdf/4.7.4.2/bin:/opt/cray/pe/python/3.8.5.0/bin:/lus/cls01095/work/z19/z19/aturner/.local/bin:/lus/cls01095/work/y07/shared/bolt/0.7/bin:/work/y07/shared/utils/bin:/usr/local/maven/bin:/opt/cray/pe/perftools/20.10.0/bin:/opt/cray/pe/papi/6.0.0.4/bin:/opt/cray/libfabric/1.11.0.0.233/bin:/opt/cray/pe/craype/2.7.2/bin:/opt/cray/pe/cce/10.0.4/cce-clang/x86_64/bin:/opt/cray/pe/cce/10.0.4/binutils/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/10.0.4/binutils/cross/x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/10.0.4/utils/x86_64/bin:/usr/local/Modules/bin:/home/z19/z19/aturner/bin:/usr/local/bin:/usr/bin:/bin:/opt/cray/pe/bin:/usr/lib/mit/bin</code></pre>
+<pre class="output" tabindex="0"><code>/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin:/mnt/storage/apps/eb/software/libgit2/1.5.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/GDAL/3.6.2-foss-2022b/bin:/mnt/storage/apps/eb/software/Qhull/2020.2-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Brunsli/0.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/OpenEXR/3.1.5-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Xerces-C++/3.2.4-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/giflib/5.2.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/CFITSIO/4.2.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/HDF/4.2.15-GCCcore-12.2.0/bin
+...</code></pre>
 </div>
 <p>You’ll notice a similarity to the output of the <code>which</code>
 command. In this case, there’s only one difference: the different
@@ -538,27 +537,68 @@ command, it added a directory to the beginning of our
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  ls /opt/cray/pe/netcdf/4.7.4.2/bin</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  ls /mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>nc-config  nccopy  ncdump  ncgen  ncgen3  ncxx4-config  nf-config</code></pre>
+<pre class="output" tabindex="0"><code>R  Rscript</code></pre>
 </div>
 <p>In summary, <code>module load</code> will add software to your
 <code>$PATH</code>. <code>module load</code> may also load additional
 modules with software dependencies.</p>
 <p>To unload a module, use <code>module unload</code> with the relevant
 module name.</p>
-<div id="unload" class="callout discussion">
+<div id="unload" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="unload" class="callout-inner">
 <h3 class="callout-title">Unload!</h3>
 <div class="callout-content">
-<p>Confirm you can unload the <code>cray-netcdf</code> module and check
-what happens to the <code>PATH</code> environment variable.</p>
+<p>Confirm you can unload the <code>R</code> module and check what
+happens to the <code>PATH</code> environment variable.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">module</span> unload R</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>/mnt/storage/apps/eb/software/libgit2/1.5.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/GDAL/3.6.2-foss-2022b/bin:/mnt/storage/apps/eb/software/Qhull/2020.2-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Brunsli/0.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/OpenEXR/3.1.5-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Xerces-C++/3.2.4-GCCcore-12.2.0/bin:
+...</code></pre>
+</div>
+<p>What happened?</p>
+<p>$PATH still contains a lot of software which wasn’t there before!
+Looking carefully, we can see that
+<code>/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin</code> (the
+path to <code>R</code>) is no longer at the start of the list. We
+unloaded R, but not all its software dependencies. To unload R and all
+its dependencies, use <code>module purge</code>.</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">module</span> purge R</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/ncb176/bin:/opt/ibutils/bin:/mnt/nfs/home/ncb176/.local/bin</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -572,21 +612,54 @@ compatibility with a file format you use. In either of these example
 cases, it helps to be very specific about what software is loaded.</p>
 <p>Let’s examine the output of <code>module avail</code> more
 closely.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module avail cray-netcdf</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module avail Python/3</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>--------------------------- /opt/cray/pe/modulefiles ---------------------------
-cray-netcdf-hdf5parallel/4.7.4.0           cray-netcdf/4.7.4.0
-cray-netcdf-hdf5parallel/4.7.4.2(default)  cray-netcdf/4.7.4.2(default)  </code></pre>
+<pre class="output" tabindex="0"><code>----------------------- /mnt/storage/apps/eb/modules/all -----------------------
+   GitPython/3.1.24-GCCcore-11.2.0
+   Python/3.6.1-goolf-2017a
+   Python/3.6.1-intel-2017.03-GCC-6.3
+   Python/3.6.3-foss-2017b
+   Python/3.6.6-foss-2018b
+   Python/3.6.6-intel-2018b
+   Python/3.7.0-foss-2018b                                   (D)
+   Python/3.7.0-intel-2018b
+   Python/3.7.2-GCCcore-8.2.0
+   Python/3.7.4-GCCcore-8.3.0
+   Python/3.7.5-GCCcore-8.3.0
+   Python/3.8.2-GCCcore-9.3.0
+   Python/3.8.6-GCCcore-10.2.0
+   Python/3.9.5-GCCcore-10.3.0-bare
+   Python/3.9.5-GCCcore-10.3.0
+   Python/3.9.6-GCCcore-11.2.0-bare
+   Python/3.9.6-GCCcore-11.2.0
+   Python/3.10.4-GCCcore-11.3.0-bare
+   Python/3.10.4-GCCcore-11.3.0
+   Python/3.10.8-GCCcore-12.2.0-bare
+   Python/3.10.8-GCCcore-12.2.0
+   Python/3.11.3-GCCcore-12.3.0
+   protobuf-python/3.3.0-intel-2017.03-GCC-6.3-Python-2.7.13
+   protobuf-python/3.3.0-intel-2017.03-GCC-6.3-Python-3.6.1
+   protobuf-python/3.13.0-foss-2020a-Python-3.8.2
+   protobuf-python/3.14.0-GCCcore-10.2.0
+   protobuf-python/3.17.3-GCCcore-10.3.0                     (D)
+
+  Where:
+   D:  Default Module
+
+Use "module spider" to find all possible modules and extensions.
+Use "module keyword key1 key2 ..." to search for all possible modules matching
+any of the "keys".
+
+</code></pre>
 </div>
-<p>Note that we have two different versions of <code>cray-netcdf</code>
-(and also two versions of something else
-<code>cray-netcdf-hdf5parallel</code> which match our search).</p>
+<p>Note that we have several different versions of <code>Python3</code>
+plus .</p>
 <div id="using-module-swap" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -595,12 +668,12 @@ cray-netcdf-hdf5parallel/4.7.4.2(default)  cray-netcdf/4.7.4.2(default)  </code>
 <h3 class="callout-title">Using <code>module swap</code>
 </h3>
 <div class="callout-content">
-<p>Load module <code>cray-netcdf</code> as before. Note that if we do
-not specifify a particular version, we load a default version. If we
-wish to change versions, we can use
+<p>Load module <code>ANSYS</code> as before. Note that if we do not
+specifify a particular version, we load a default version. If we wish to
+change versions, we can use
 <code>module swap &lt;old-module&gt; &lt;new-module&gt;</code>. Try this
-to obtain <code>cray-netcdf/4.7.4.0</code>. Check what has happened to
-the location of the <code>ncdump</code> utility.</p>
+to obtain <code>ANSYS/2022-R1</code>. Check what has happened to the
+location of the <code>ANSYS</code> software.</p>
 </div>
 </div>
 </div>
@@ -618,18 +691,18 @@ node).</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  nano ncdump-module.sh</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat ncdump-module.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  nano ncdump-module.sh</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat ncdump-module.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -641,10 +714,10 @@ module load epcc-job-env
 module load cray-netcdf
 ncdump --version</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun python-module.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun python-module.sh</span></code></pre>
 </div>
 </div>
 </div>
@@ -658,7 +731,8 @@ ncdump --version</code></pre>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>“Load software with <code>module load softwareName</code>.”</li>
-<li>“Unload software with <code>module purge</code>”</li>
+<li>“Unload software with <code>module unload</code> or
+<code>module purge</code>”</li>
 <li>“The module system handles software versioning and package conflicts
 for you automatically.”</li>
 </ul></div>
@@ -704,7 +778,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.11" class="external-link">sandpaper (0.16.11)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.7" class="external-link">pegboard (0.7.7)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.5" class="external-link">varnish (1.0.5)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.11" class="external-link">sandpaper (0.16.11)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.5" class="external-link">varnish (1.0.5)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -726,8 +800,8 @@ any links that you are not going to use.
   "url": "https://hpc-intro-draft4.github.io/NA/40-modules.html",
   "identifier": "https://hpc-intro-draft4.github.io/NA/40-modules.html",
   "dateCreated": "2025-02-12",
-  "dateModified": "2025-02-14",
-  "datePublished": "2025-02-19"
+  "dateModified": "2025-02-25",
+  "datePublished": "2025-02-25"
 }
 
   </script><script>
