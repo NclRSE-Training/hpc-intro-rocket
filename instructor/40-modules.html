@@ -246,6 +246,7 @@
         <ul><li><a href="#environment-modules">Environment Modules</a></li>
 <li><a href="#loading-and-unloading-software">Loading and Unloading Software</a></li>
 <li><a href="#software-versioning">Software versioning</a></li>
+<li><a href="#default-versions-and-module-swap">Default Versions and Module Swap</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -726,29 +727,10 @@ closely.</p>
 
 Use "module spider" to find all possible modules and extensions.
 Use "module keyword key1 key2 ..." to search for all possible modules matching
-any of the "keys".
-
-</code></pre>
+any of the "keys".</code></pre>
 </div>
 <p>Note that we have several different versions of <code>Python3</code>
 plus .</p>
-<div id="using-module-swap" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="using-module-swap" class="callout-inner">
-<h3 class="callout-title">Using <code>module swap</code>
-</h3>
-<div class="callout-content">
-<p>Load module <code>ANSYS</code> as before. Note that if we do not
-specifify a particular version, we load a default version. If we wish to
-change versions, we can use
-<code>module swap &lt;old-module&gt; &lt;new-module&gt;</code>. Try this
-to obtain <code>ANSYS/2022-R1</code>. Check what has happened to the
-location of the <code>ANSYS</code> software.</p>
-</div>
-</div>
-</div>
 <div id="using-software-modules-in-scripts" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -756,7 +738,7 @@ location of the <code>ANSYS</code> software.</p>
 <div id="using-software-modules-in-scripts" class="callout-inner">
 <h3 class="callout-title">Using Software Modules in Scripts</h3>
 <div class="callout-content">
-<p>Create a job that is able to run <code>ncdump --version</code>.
+<p>Create a job that is able to run <code>python3 --version</code>.
 Running a job is just like logging on to the system (you should not
 assume a module loaded on the login node is loaded on a compute
 node).</p>
@@ -773,28 +755,32 @@ node).</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  nano ncdump-module.sh</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat ncdump-module.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  nano python-module.sh</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat python-module.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>#!/bin/bash
-#SBATCH --partition=short
-#SBATCH --qos=short
-module load epcc-job-env
-module load cray-netcdf
-ncdump --version</code></pre>
+
+#SBATCH --partition=defq
+#SBATCH --time=00:00:30
+
+module load Python
+
+python3 --version</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun python-module.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch python-module.sh</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="default-versions-and-module-swap">Default Versions and Module Swap<a class="anchor" aria-label="anchor" href="#default-versions-and-module-swap"></a></h2>
+<hr class="half-width"><p>gcc example here similar to <a href="https://nclrse-training.github.io/hpc-intro-cirrus/14-modules/index.html#software-versioning" class="external-link uri">https://nclrse-training.github.io/hpc-intro-cirrus/14-modules/index.html#software-versioning</a></p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
