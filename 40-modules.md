@@ -115,46 +115,69 @@ No modules loaded
 
 ## Loading and Unloading Software
 
-To load a software module, use `module load`. Let's say we would like
-to use the NetCDF utility `ncdump`. 
+To load a software module, use `module load`. In this example we will use Python 3.
 
-On login, `ncdump` is not available. We can test this by using the `which`
-command. `which` looks for programs the same way that Bash does,
-so we can use it to tell us where a particular piece of software is stored.
+Initially, Python 3 is not loaded. We can test this by using the which command. which looks for programs the same way that Bash does, so we can use it to tell us where a particular piece of software is stored.
 
 ```bash
-[userid@login01 ~]$ which R
+[userid@login01 ~]$ which python3
 ```
+If the `python3` command was unavailable, we would see output like
 ```output
-/usr/bin/which: no R in (/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/ncb176/bin/:/opt/ibutils/bin:/mnt/nfs/home/ncb176/bin/:/mnt/nfs/home/ncb176/.local/bin:/mnt/nfs/home/userid/bin)
+/usr/bin/which: no python3 in (/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/userid/bin/:/opt/ibutils/bin:/mnt/nfs/home/userid/bin/:/mnt/nfs/home/userid/.local/bin:/mnt/nfs/home/userid/bin)
 ```
-
-We can find `R` by using `module load`:
+Note that this wall of text is really a list, with values separated by the : character. The output is telling us that the which command searched the following directories for python3, without success:
 
 ```bash
-[userid@login01 userid]$  module load R
-[userid@login01 userid]$  which R
+usr/local/bin
+/usr/bin
+/usr/local/sbin
+/usr/sbin
+/mnt/nfs/home/userid/bin/
+/opt/ibutils/bin
+/mnt/nfs/home/userid/bin/
+/mnt/nfs/home/userid/.local/bin
+/mnt/nfs/home/userid/bin
 ```
+
+:::callout
+Watch out for system provided python, it may not be the version you need.
+On Rocket, `which python` returns `/usr/bin/python`, but this turns out to be a link to Python2:
+```bash
+[userid@login01 ~]$ which python
+/usr/bin/python
+[userid@login01 ~]$ ls -l /usr/bin/python
+lrwxrwxrwx. 1 root root 7 Nov  6 10:01 /usr/bin/python -> python2
+```
+:::
+
+We can load the `python3` command with `module load`:
+
+```bash
+[userid@login01 ~]$ module load Python
+[userid@login01 ~]$ which python3
+```
+
 ```output
-/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin/R
+/mnt/storage/apps/eb/software/Python/3.7.0-foss-2018b/bin/python3
 ```
 
 So, what just happened?
 
-To understand the output, first we need to understand the nature of the
-`$PATH` environment variable. `$PATH` is a special environment variable
-that controls where a UNIX system looks for software. Specifically,
-`$PATH` is a list of directories (separated by `:`) that the OS searches
-through for a command before giving up and telling us it can't find it.
-As with all environment variables we can print it out using `echo`.
+To understand the output, first we need to understand the nature of the `$PATH`
+environment variable. `$PATH` is a special environment variable that controls
+where a UNIX system looks for software. Specifically `$PATH` is a list of
+directories (separated by `:`) that the OS searches through for a command
+before giving up and telling us it can't find it. As with all environment
+variables we can print it out using `echo`.
 
 ```bash
-[userid@login01 userid]$  echo $PATH
+[userid@login01 ~]$ echo $PATH
 ```
 ```output
-/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin:/mnt/storage/apps/eb/software/libgit2/1.5.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/GDAL/3.6.2-foss-2022b/bin:/mnt/storage/apps/eb/software/Qhull/2020.2-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Brunsli/0.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/OpenEXR/3.1.5-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Xerces-C++/3.2.4-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/giflib/5.2.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/CFITSIO/4.2.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/HDF/4.2.15-GCCcore-12.2.0/bin
-...
+/mnt/storage/apps/eb/software/Python/3.7.0-foss-2018b/bin:/mnt/storage/apps/eb/software/OpenSSL/1.1.0h-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/SQLite/3.24.0-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/Tcl/8.6.8-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/libreadline/7.0-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/ncurses/6.1-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/bzip2/1.0.6-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/FFTW/3.3.8-gompi-2018b/bin:/mnt/storage/apps/eb/software/OpenMPI/3.1.1-GCC-7.3.0-2.30/bin:/mnt/storage/apps/eb/software/hwloc/1.11.10-GCCcore-7.3.0/sbin:/mnt/storage/apps/eb/software/hwloc/1.11.10-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/libxml2/2.9.8-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/XZ/5.2.4-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/numactl/2.0.11-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/binutils/2.30-GCCcore-7.3.0/bin:/mnt/storage/apps/eb/software/GCCcore/7.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/userid/bin:/opt/ibutils/bin:/mnt/nfs/home/userid/.local/bin
 ```
+
 
 You'll notice a similarity to the output of the `which` command. In this case,
 there's only one difference: the different directory at the beginning. When we
@@ -162,42 +185,92 @@ ran the `module load` command, it added a directory to the beginning of our
 `$PATH`. Let's examine what's there:
 
 ```bash
-[userid@login01 userid]$  ls /mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin
+[userid@login01 ~]$ ls /mnt/storage/apps/eb/software/Python/3.7.0-foss-2018b/bin
 ```
 ```output
-R  Rscript
+2to3        cython            f2py     nosetests      pip3      python            python3.7m         pyvenv-3.7
+2to3-3.7    cythonize         idle3    nosetests-3.7  pip3.7    python3           python3.7m-config  runxlrd.py
+chardetect  easy_install      idle3.7  pbr            pydoc3    python3.7         python3-config     tabulate
+cygdb       easy_install-3.7  netaddr  pip            pydoc3.7  python3.7-config  pyvenv             virtualenv
 ```
 
-In summary, `module load` will add software to your `$PATH`.
-`module load` may also load additional modules with software dependencies.
+Taking this to its conclusion, `module load` will add software to your `$PATH`.
+It "loads" software. A special note on this - depending on which version of the
+`module` program that is installed at your site, `module load` will also load
+required software dependencies.
 
-To unload a module, use `module unload` with the relevant module name.
+To demonstrate, let’s use `module list`. `module list` shows all loaded software modules.
 
-::: challenge
-## Unload!
-Confirm you can unload the `R` module and check what happens to the `PATH` environment variable.
-
-::: solution
 ```bash
-module unload R
-echo $PATH
+[userid@login01 ~]$ module list
 ```
 ```output
-/mnt/storage/apps/eb/software/libgit2/1.5.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/GDAL/3.6.2-foss-2022b/bin:/mnt/storage/apps/eb/software/Qhull/2020.2-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Brunsli/0.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/OpenEXR/3.1.5-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Xerces-C++/3.2.4-GCCcore-12.2.0/bin:
-...
+Currently Loaded Modules:
+  1) GCCcore/7.3.0                     9) hwloc/1.11.10-GCCcore-7.3.0                 17) ncurses/6.1-GCCcore-7.3.0
+  2) zlib/1.2.11-GCCcore-7.3.0        10) OpenMPI/3.1.1-GCC-7.3.0-2.30                18) libreadline/7.0-GCCcore-7.3.0
+  3) binutils/2.30-GCCcore-7.3.0      11) OpenBLAS/0.3.1-GCC-7.3.0-2.30               19) Tcl/8.6.8-GCCcore-7.3.0
+  4) GCC/7.3.0-2.30                   12) gompi/2018b                                 20) SQLite/3.24.0-GCCcore-7.3.0
+  5) numactl/2.0.11-GCCcore-7.3.0     13) FFTW/3.3.8-gompi-2018b                      21) GMP/6.1.2-GCCcore-7.3.0
+  6) XZ/5.2.4-GCCcore-7.3.0           14) ScaLAPACK/2.0.2-gompi-2018b-OpenBLAS-0.3.1  22) libffi/3.2.1-GCCcore-7.3.0
+  7) libxml2/2.9.8-GCCcore-7.3.0      15) foss/2018b                                  23) OpenSSL/1.1.0h-GCCcore-7.3.0
+  8) libpciaccess/0.14-GCCcore-7.3.0  16) bzip2/1.0.6-GCCcore-7.3.0                   24) Python/3.7.0-foss-2018b
 ```
-What happened?
 
-$PATH still contains a lot of software which wasn't there before!  Looking carefully, we can see that `/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin` (the path to `R`) is no longer at the start of the list. We unloaded R, but not all its software dependencies. To unload R and all its dependencies, use `module purge`.
+Let's try unloading the Python module:
+
 ```bash
-module purge R
-echo $PATH
+[userid@login01 ~]$ module unload Python
 ```
 ```output
-/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/ncb176/bin:/opt/ibutils/bin:/mnt/nfs/home/ncb176/.local/bin
+[userid@login01 ~]$ module list
+
+Currently Loaded Modules:
+  1) GCCcore/7.3.0                     9) hwloc/1.11.10-GCCcore-7.3.0                 17) ncurses/6.1-GCCcore-7.3.0
+  2) zlib/1.2.11-GCCcore-7.3.0        10) OpenMPI/3.1.1-GCC-7.3.0-2.30                18) libreadline/7.0-GCCcore-7.3.0
+  3) binutils/2.30-GCCcore-7.3.0      11) OpenBLAS/0.3.1-GCC-7.3.0-2.30               19) Tcl/8.6.8-GCCcore-7.3.0
+  4) GCC/7.3.0-2.30                   12) gompi/2018b                                 20) SQLite/3.24.0-GCCcore-7.3.0
+  5) numactl/2.0.11-GCCcore-7.3.0     13) FFTW/3.3.8-gompi-2018b                      21) GMP/6.1.2-GCCcore-7.3.0
+  6) XZ/5.2.4-GCCcore-7.3.0           14) ScaLAPACK/2.0.2-gompi-2018b-OpenBLAS-0.3.1  22) libffi/3.2.1-GCCcore-7.3.0
+  7) libxml2/2.9.8-GCCcore-7.3.0      15) foss/2018b                                  23) OpenSSL/1.1.0h-GCCcore-7.3.0
+  8) libpciaccess/0.14-GCCcore-7.3.0  16) bzip2/1.0.6-GCCcore-7.3.0
 ```
+
+So using `module unload` “un-loads” a module, and depending on how a site is configured it may also unload all of the dependencies (in our case it does not). If we wanted to unload everything at once, we could run `module purge` (unloads everything).
+
+```bash
+[userid@login01 ~]$ module purge
+[userid@login01 ~]$ module list
+```
+```output
+No modules loaded
+```
+
+:::callout
+
+Note that `module purge` is informative. It will also let us know if a default set of “sticky” packages cannot be unloaded (and how to actually unload these if we truly so desired).
+
+Note that this module loading process happens principally through the manipulation of environment variables like `$PATH`. There is usually **little or no data transfer** involved.
+
+The module loading process manipulates other special environment variables as well, including variables that influence where the system looks for **software libraries**, and sometimes variables which tell commercial software packages where to find **license servers**.
+
+The module command also restores these shell environment variables to their previous state when a module is unloaded.
 :::
-:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Software versioning
 
