@@ -64,29 +64,36 @@ Talk to your neighbour, office mate or [rubber duck](https://rubberduckdebugging
 
 ### Your Personal Computer
 
-We are probably all familiar with a laptop or a desktop computer (some call it a PC for Personal Computer). These computers are aimed at individual users. Each one of us in the classroom has our own computer in front of us and we can work independantly of one another. It is good for performaing local and personal tasks but it has limited resources.
+We are probably all familiar with a laptop or a desktop computer (some call it a PC for Personal Computer). These computers are aimed at individual users and people coding or analysing. Typically each one of us, in the classroom, has our own laptop or a university computer in front of us and we can work independantly of one another. It is good for performaing local and personal tasks but it has limited resources.
 
+![A standard laptop](fig/200px-laptop-openclipartorg-aoguerrero.svg){alt="A standard laptop"}
 
 ### Shared Computing Resources
 
-What happens when we want to share resources, like printers or files? In the late 1950s the US military built a network of computers that used modems and normal telephone lines connect to one another. Things have progressed quite a bit since then. Today our computers can talk to one another in several ways. At most universities you might notice that the desktop computers have a wire (called an Ethernet cable) that connects it to the university's network. Laptops and other devices such as phones and tablets can also connect to networks using WiFi which is a wireless technology using radio waves. However what happens if we want a computer to perform a task which requires much more hardware than what our desktop of laptop can provide us with.
+What happens when we want to share resources, like printers or files? In the late 1950s the US military built a network of computers that used modems and normal telephone lines connect to one another. Things have progressed quite a bit since then. Today our computers can talk to one another in several ways. At most universities you might notice that the desktop computers have a wire (called an Ethernet cable) that connects it to the university's network. Laptops and other devices such as phones and tablets can also connect to networks using WiFi which is a wireless technology using radio waves. However what happens if we want a computer to perform a task which requires much more hardware than what our desktop or laptop can provide us with?
 
-### A Large Computer
+### A Larger Computer
 
+One alternative is to build up a computer with very powerful components. The main components of a computer would be its input devices, processor, memory and output devices such a hard drive. Each of these components can be upgraded to more powerful versions. This is somewhat analogous to buying a car. You might decide to buy a car that can take more people so instead of a two seater sports car you would look at a bigger car that can take four, six or eight people. However, a car that can carry eight people will also need a bigger engine because the engine of the smaller car won't be strong enough to move eight people. Computers can also be specced to accomplish certain tasks, so for some tasks you might need very fast processing power but not so much memory, other jobs might need lots of memory while others might need really big hard drives to store data too.
 
+A big disadvantage of a computer with bigger and better hardware is that its application becomes limited or in some cases using it for other tasks might mean that its use becomes very expensive or it might just not be as suitable anymore. Using the car analogy; you wouldn't use a bus to take your two children to school on a regular basis. So you might find that quite often a very expensive computer was purchased for a specific project and after completion of the project the computer becomes an extremely expensive ornament standing in a corner gather dust. What is the alternative?
 
 ### Cloud Systems
 
+How about buying a car suitable to take your children to school on a regular basis and then **renting** a bus for the odd occasion that you have to take 30 kids to the museum? We now have cloud computing available to be able to fulfil a similar role when the need arises to use a bigger or faster computer. But first, what exactly is cloud computing? Actually it is nothing other than computer networks, as described in the section about **Shared Computing Resources**, that belong to external organisations and are connected to the Internet so that, in turn, we can also connect to them. And for the privilege of being able to access those computers we will pay a fee - like renting a car. We can specify exactly what we need in terms of the amount of memory, the speed of the processors, the amount of RAM and so forth. So this might be a good solution but, as always, there are loads of ifs and buts ... so what if we, as an organisation, make so much use of these computers that we want our very own? Cloud computers will also have certain limitations so that we can't always get the specifications we want so we might, even if we can't afford our own, want an alternative to cloud computing.
+
+The cloud is a generic term commonly used to refer to computing resources that are a) provisioned to users on demand or as needed and b) represent real or virtual resources that may be located anywhere on Earth. For example, a large company with computing resources in Brazil, Zimbabwe and Japan may manage those resources as its own internal cloud and that same company may also utilize commercial cloud resources provided by Amazon or Google. Cloud resources may refer to machines performing relatively simple tasks such as serving websites, providing shared storage, providing web services (such as e-mail or social media platforms), as well as more traditional compute intensive tasks such as running a simulation.
+
+
 ### A Cluster or Supercomputer
 
+The term HPC system, on the other hand, describes a stand-alone resource for computationally intensive workloads. They are typically comprised of a multitude of integrated processing and storage elements, designed to handle high volumes of data and/or large numbers of floating-point operations (FLOPS) with the highest possible performance. For example, all of the machines on the Top-500 list are HPC systems. To support these constraints, an HPC resource must exist in a specific, fixed location: networking cables can only stretch so far, and electrical and optical signals can travel only so fast.
+
+The word “cluster” is often used for small to moderate scale HPC resources less impressive than the Top-500. Clusters are often maintained in computing centers that support several such systems, all sharing common networking and storage to support common compute intensive tasks.
 
 
 
-## A Standard Laptop for Standard Tasks
 
-Today, people coding or analysing data typically work with laptops.
-
-![A standard laptop](fig/200px-laptop-openclipartorg-aoguerrero.svg){alt="A standard laptop"}
 
 
 Let's dissect what resources programs running on a laptop require:

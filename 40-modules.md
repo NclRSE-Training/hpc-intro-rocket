@@ -123,21 +123,20 @@ command. `which` looks for programs the same way that Bash does,
 so we can use it to tell us where a particular piece of software is stored.
 
 ```bash
-[userid@login01 ~]$ which ncdump
+[userid@login01 ~]$ which R
 ```
 ```output
-which: no ncdump in (/usr/local/maven/bin:/lus/cls01095/work/y07/shared/bolt/0.7/bin:/work/y07/shared/utils/bin:/opt/cray/pe/perftools/20.10.0/bin:/opt/cray/pe/papi/6.0.0.4/bin:/opt/cray/libfabric/1.11.0.0.233/bin:/opt/cray/pe/craype/2.7.2/bin:/opt/cray/pe/cce/10.0.4/cce-clang/x86_64/bin:/opt/cray/pe/cce/10.0.4/binutils/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/10.0.4/binutils/cross/x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/10.0.4/utils/x86_64/bin:/usr/local/Modules/bin:/usr/local/bin:/usr/bin:/bin:/opt/cray/pe/bin:/usr/lib/mit/bin)
+/usr/bin/which: no R in (/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/ncb176/bin/:/opt/ibutils/bin:/mnt/nfs/home/ncb176/bin/:/mnt/nfs/home/ncb176/.local/bin:/mnt/nfs/home/userid/bin)
 ```
 
-We can find the `ncdump` command by using `module load`:
+We can find `R` by using `module load`:
 
 ```bash
-[userid@login01 userid]$  module load cray-hdf5
-[userid@login01 userid]$  module load cray-netcdf
-which ncdump
+[userid@login01 userid]$  module load R
+[userid@login01 userid]$  which R
 ```
 ```output
-/opt/cray/pe/netcdf/4.7.4.2/bin/ncdump
+/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin/R
 ```
 
 So, what just happened?
@@ -153,7 +152,8 @@ As with all environment variables we can print it out using `echo`.
 [userid@login01 userid]$  echo $PATH
 ```
 ```output
-/opt/cray/pe/netcdf/4.7.4.2/bin:/opt/cray/pe/python/3.8.5.0/bin:/lus/cls01095/work/z19/z19/aturner/.local/bin:/lus/cls01095/work/y07/shared/bolt/0.7/bin:/work/y07/shared/utils/bin:/usr/local/maven/bin:/opt/cray/pe/perftools/20.10.0/bin:/opt/cray/pe/papi/6.0.0.4/bin:/opt/cray/libfabric/1.11.0.0.233/bin:/opt/cray/pe/craype/2.7.2/bin:/opt/cray/pe/cce/10.0.4/cce-clang/x86_64/bin:/opt/cray/pe/cce/10.0.4/binutils/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/10.0.4/binutils/cross/x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/10.0.4/utils/x86_64/bin:/usr/local/Modules/bin:/home/z19/z19/aturner/bin:/usr/local/bin:/usr/bin:/bin:/opt/cray/pe/bin:/usr/lib/mit/bin
+/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin:/mnt/storage/apps/eb/software/libgit2/1.5.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/GDAL/3.6.2-foss-2022b/bin:/mnt/storage/apps/eb/software/Qhull/2020.2-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Brunsli/0.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/OpenEXR/3.1.5-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Xerces-C++/3.2.4-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/giflib/5.2.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/CFITSIO/4.2.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/HDF/4.2.15-GCCcore-12.2.0/bin
+...
 ```
 
 You'll notice a similarity to the output of the `which` command. In this case,
@@ -162,10 +162,10 @@ ran the `module load` command, it added a directory to the beginning of our
 `$PATH`. Let's examine what's there:
 
 ```bash
-[userid@login01 userid]$  ls /opt/cray/pe/netcdf/4.7.4.2/bin
+[userid@login01 userid]$  ls /mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin
 ```
 ```output
-nc-config  nccopy  ncdump  ncgen  ncgen3  ncxx4-config  nf-config
+R  Rscript
 ```
 
 In summary, `module load` will add software to your `$PATH`.
@@ -175,7 +175,28 @@ To unload a module, use `module unload` with the relevant module name.
 
 ::: challenge
 ## Unload!
-Confirm you can unload the `cray-netcdf` module and check what happens to the `PATH` environment variable.
+Confirm you can unload the `R` module and check what happens to the `PATH` environment variable.
+
+::: solution
+```bash
+module unload R
+echo $PATH
+```
+```output
+/mnt/storage/apps/eb/software/libgit2/1.5.0-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/GDAL/3.6.2-foss-2022b/bin:/mnt/storage/apps/eb/software/Qhull/2020.2-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Brunsli/0.1-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/OpenEXR/3.1.5-GCCcore-12.2.0/bin:/mnt/storage/apps/eb/software/Xerces-C++/3.2.4-GCCcore-12.2.0/bin:
+...
+```
+What happened?
+
+$PATH still contains a lot of software which wasn't there before!  Looking carefully, we can see that `/mnt/storage/apps/eb/software/R/4.3.1-foss-2022b/bin` (the path to `R`) is no longer at the start of the list. We unloaded R, but not all its software dependencies. To unload R and all its dependencies, use `module purge`.
+```bash
+module purge R
+echo $PATH
+```
+```output
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/mnt/nfs/home/ncb176/bin:/opt/ibutils/bin:/mnt/nfs/home/ncb176/.local/bin
+```
+:::
 :::
 
 ## Software versioning
@@ -189,26 +210,57 @@ either of these example cases, it helps to be very specific about what software 
 Let's examine the output of `module avail` more closely.
 
 ```bash
-[userid@login01 userid]$  module avail cray-netcdf
+[userid@login01 userid]$  module avail Python/3
 ```
 ```output
---------------------------- /opt/cray/pe/modulefiles ---------------------------
-cray-netcdf-hdf5parallel/4.7.4.0           cray-netcdf/4.7.4.0           
-cray-netcdf-hdf5parallel/4.7.4.2(default)  cray-netcdf/4.7.4.2(default)  
+----------------------- /mnt/storage/apps/eb/modules/all -----------------------
+   GitPython/3.1.24-GCCcore-11.2.0
+   Python/3.6.1-goolf-2017a
+   Python/3.6.1-intel-2017.03-GCC-6.3
+   Python/3.6.3-foss-2017b
+   Python/3.6.6-foss-2018b
+   Python/3.6.6-intel-2018b
+   Python/3.7.0-foss-2018b                                   (D)
+   Python/3.7.0-intel-2018b
+   Python/3.7.2-GCCcore-8.2.0
+   Python/3.7.4-GCCcore-8.3.0
+   Python/3.7.5-GCCcore-8.3.0
+   Python/3.8.2-GCCcore-9.3.0
+   Python/3.8.6-GCCcore-10.2.0
+   Python/3.9.5-GCCcore-10.3.0-bare
+   Python/3.9.5-GCCcore-10.3.0
+   Python/3.9.6-GCCcore-11.2.0-bare
+   Python/3.9.6-GCCcore-11.2.0
+   Python/3.10.4-GCCcore-11.3.0-bare
+   Python/3.10.4-GCCcore-11.3.0
+   Python/3.10.8-GCCcore-12.2.0-bare
+   Python/3.10.8-GCCcore-12.2.0
+   Python/3.11.3-GCCcore-12.3.0
+   protobuf-python/3.3.0-intel-2017.03-GCC-6.3-Python-2.7.13
+   protobuf-python/3.3.0-intel-2017.03-GCC-6.3-Python-3.6.1
+   protobuf-python/3.13.0-foss-2020a-Python-3.8.2
+   protobuf-python/3.14.0-GCCcore-10.2.0
+   protobuf-python/3.17.3-GCCcore-10.3.0                     (D)
+
+  Where:
+   D:  Default Module
+
+Use "module spider" to find all possible modules and extensions.
+Use "module keyword key1 key2 ..." to search for all possible modules matching
+any of the "keys".
+
+
 ```
 
-Note that we have two different versions of `cray-netcdf` (and also two
-versions of something else `cray-netcdf-hdf5parallel` which match our
-search).
+Note that we have several different versions of `Python3` plus .
 
 ::: challenge
 ## Using `module swap`
-Load module `cray-netcdf` as before. Note that if we do not specifify
+Load module `ANSYS` as before. Note that if we do not specifify
 a particular version, we load a default version.
 If we wish to change versions, we can use
 `module swap <old-module> <new-module>`. Try this to obtain
-`cray-netcdf/4.7.4.0`. Check what has happened to the location of
-the `ncdump` utility.
+`ANSYS/2022-R1`. Check what has happened to the location of the `ANSYS` software.
 :::
 
 ::: challenge
@@ -241,7 +293,7 @@ ncdump --version
 
 ::: keypoints
  - "Load software with `module load softwareName`."
- - "Unload software with `module purge`"
+ - "Unload software with `module unload` or `module purge`"
  - "The module system handles software versioning and package conflicts for you
   automatically."
 :::
