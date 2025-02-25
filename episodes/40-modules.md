@@ -321,24 +321,14 @@ Let's examine the output of `module avail` more closely.
 Use "module spider" to find all possible modules and extensions.
 Use "module keyword key1 key2 ..." to search for all possible modules matching
 any of the "keys".
-
-
 ```
 
 Note that we have several different versions of `Python3` plus .
 
-::: challenge
-## Using `module swap`
-Load module `ANSYS` as before. Note that if we do not specifify
-a particular version, we load a default version.
-If we wish to change versions, we can use
-`module swap <old-module> <new-module>`. Try this to obtain
-`ANSYS/2022-R1`. Check what has happened to the location of the `ANSYS` software.
-:::
 
 ::: challenge
 ## Using Software Modules in Scripts
-Create a job that is able to run `ncdump --version`. Running a job
+Create a job that is able to run `python3 --version`. Running a job
 is just like logging on to the system
 (you should not assume a module loaded on the login node is loaded on a
 compute node).
@@ -346,23 +336,29 @@ compute node).
 ::: solution
 
 ```bash
-[userid@login01 userid]$  nano ncdump-module.sh
-[userid@login01 userid]$  cat ncdump-module.sh
+[userid@login01 userid]$  nano python-module.sh
+[userid@login01 userid]$  cat python-module.sh
 ```
 ```output
 #!/bin/bash
-#SBATCH --partition=short
-#SBATCH --qos=short
-module load epcc-job-env
-module load cray-netcdf
-ncdump --version
+
+#SBATCH --partition=defq
+#SBATCH --time=00:00:30
+
+module load Python
+
+python3 --version
 ```
 
 ```bash
-[userid@login01 userid]$  srun python-module.sh
+[userid@login01 userid]$  sbatch python-module.sh
 ```
 :::
 :::
+
+## Default Versions and Module Swap
+
+gcc example here similar to https://nclrse-training.github.io/hpc-intro-cirrus/14-modules/index.html#software-versioning
 
 ::: keypoints
  - "Load software with `module load softwareName`."
