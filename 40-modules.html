@@ -347,7 +347,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Accessing software via Modules</h1>
-        <p>Last updated on 2025-02-25 |
+        <p>Last updated on 2025-02-26 |
 
         <a href="https://carolbooth2.github.io/hpc-intro-draft4/edit/main/episodes/40-modules.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -517,35 +517,13 @@ searched the following directories for python3, without success:</p>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="ex">/mnt/nfs/home/userid/.local/bin</span></span>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="ex">/mnt/nfs/home/userid/bin</span></span></code></pre>
 </div>
-<div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
-<div class="callout-content">
-<p>Watch out for system provided python, it may not be the version you
-need. On Rocket, <code>which python</code> returns
-<code>/usr/bin/python</code>, but this turns out to be a link to
-Python2:</p>
+<p>We can load the <code>python3</code> command with
+<code>module load</code>:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which python</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">/usr/bin/python</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls <span class="at">-l</span> /usr/bin/python</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="ex">lrwxrwxrwx.</span> 1 root root 7 Nov  6 10:01 /usr/bin/python <span class="at">-</span><span class="op">&gt;</span> python2</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<p>We can load the <code>python3</code> command with
-<code>module load</code>:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module load Python</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which python3</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module load Python</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which python3</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -560,10 +538,10 @@ software. Specifically <code>$PATH</code> is a list of directories
 (separated by <code>:</code>) that the OS searches through for a command
 before giving up and telling us it can’t find it. As with all
 environment variables we can print it out using <code>echo</code>.</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ echo <span class="va">$PATH</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ echo <span class="va">$PATH</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -575,10 +553,10 @@ command. In this case, there’s only one difference: the different
 directory at the beginning. When we ran the <code>module load</code>
 command, it added a directory to the beginning of our
 <code>$PATH</code>. Let’s examine what’s there:</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls /mnt/storage/apps/eb/software/Python/3.7.0-foss-2018b/bin</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls /mnt/storage/apps/eb/software/Python/3.7.0-foss-2018b/bin</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -595,10 +573,10 @@ that is installed at your site, <code>module load</code> will also load
 required software dependencies.</p>
 <p>To demonstrate, let’s use <code>module list</code>.
 <code>module list</code> shows all loaded software modules.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module list</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module list</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -614,10 +592,10 @@ required software dependencies.</p>
   8) libpciaccess/0.14-GCCcore-7.3.0  16) bzip2/1.0.6-GCCcore-7.3.0                   24) Python/3.7.0-foss-2018b</code></pre>
 </div>
 <p>Let’s try unloading the Python module:</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module unload Python</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module unload Python</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -639,23 +617,23 @@ depending on how a site is configured it may also unload all of the
 dependencies (in our case it does not). If we wanted to unload
 everything at once, we could run <code>module purge</code> (unloads
 everything).</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module purge</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module list</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module purge</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module list</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>No modules loaded</code></pre>
 </div>
-<div id="callout2" class="callout">
+<div id="more-on-modules" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
+<div id="more-on-modules" class="callout-inner">
+<h3 class="callout-title">More on modules</h3>
 <div class="callout-content">
 <p>Note that <code>module purge</code> is informative. It will also let
 us know if a default set of “sticky” packages cannot be unloaded (and
@@ -681,12 +659,13 @@ one particular version of some software will be suitable. Perhaps a key
 bugfix only happened in a certain version, or version X broke
 compatibility with a file format you use. In either of these example
 cases, it helps to be very specific about what software is loaded.</p>
-<p>Let’s examine the output of <code>module avail</code> more
-closely.</p>
-<div class="codewrapper sourceCode" id="cb21">
+<p>Let’s look specifically for Python in <code>module avail</code>:
+Because so many modules match <code>Python</code> we’ve cheated a little
+and added <code>/3</code> focus down on Python 3 modules</p>
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module avail Python/3</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  module avail Python/3</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -727,8 +706,11 @@ Use "module spider" to find all possible modules and extensions.
 Use "module keyword key1 key2 ..." to search for all possible modules matching
 any of the "keys".</code></pre>
 </div>
-<p>Note that we have several different versions of <code>Python3</code>
-plus .</p>
+<p>Note that we have several different versions of <code>Python3</code>.
+In this case, <code>Python/3.7.0-foss-2018b</code> has a
+<code>(D)</code> next to it. This indicates that it is the default - if
+we type <code>module load Python</code>, this is the copy that will be
+loaded.</p>
 <div id="using-software-modules-in-scripts" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -750,11 +732,11 @@ node).</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  nano python-module.sh</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat python-module.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  nano python-module.sh</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat python-module.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -768,17 +750,167 @@ module load Python
 
 python3 --version</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch python-module.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch python-module.sh</span></code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="default-versions-and-module-swap">Default Versions and Module Swap<a class="anchor" aria-label="anchor" href="#default-versions-and-module-swap"></a></h2>
-<hr class="half-width"><p>gcc example here similar to <a href="https://nclrse-training.github.io/hpc-intro-cirrus/14-modules/index.html#software-versioning" class="external-link uri">https://nclrse-training.github.io/hpc-intro-cirrus/14-modules/index.html#software-versioning</a></p>
+<hr class="half-width"><p>Let’s take a closer look at the <code>gcc</code> module. GCC is an
+extremely widely used C/C++/Fortran compiler. Lots of software is
+dependent on the GCC version, and might not compile or run if the wrong
+version is loaded. In this case, there are 18 different versions, named
+like <code>GCC/12.2.0</code>. How do we load each copy and which copy is
+the default?</p>
+<div class="codewrapper sourceCode" id="cb25">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module avail gcc/</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>---------------------------------------------------------------------------- /mnt/storage/apps/eb/modules/all -----------------------------------------------------------------------------
+   GCC/4.8.2                  GCC/4.9.3-2.25    GCC/5.4.0-2.26    GCC/6.3.0-2.27    GCC/7.3.0-2.30      GCC/8.3.0    GCC/10.2.0    GCC/11.2.0    GCC/12.2.0
+   GCC/4.9.3-binutils-2.25    GCC/5.2.0         GCC/6.1.0-2.27    GCC/6.4.0-2.28    GCC/8.2.0-2.31.1    GCC/9.3.0    GCC/10.3.0    GCC/11.3.0    GCC/12.3.0 (D)
+
+  Where:
+   D:  Default Module
+
+Use "module spider" to find all possible modules and extensions.
+Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".</code></pre>
+</div>
+<p>In this case, <code>GCC/12.3.0</code> has a <code>(D)</code> next to
+it. This indicates that it is the default - if we type
+<code>module load GCC</code>, this is the copy that will be loaded.
+Let’s check this:</p>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module purge</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module load GCC</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module list</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Currently Loaded Modules:
+  1) GCCcore/12.3.0   2) zlib/1.2.13-GCCcore-12.3.0   3) binutils/2.40-GCCcore-12.3.0   4) GCC/12.3.0</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ gcc <span class="at">--version</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>gcc (GCC) 12.3.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
+</div>
+<p>So how do we load the non-default copy of a software package? In this
+case, the only change we need to make is be more specific about the
+module we are loading. To load a non-default module, we need to make add
+the version number after the / in our module load command:</p>
+<div class="codewrapper sourceCode" id="cb31">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module load GCC/11.2</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>The following have been reloaded with a version change:
+  1) GCC/12.3.0 =&gt; GCC/11.2.0             3) binutils/2.40-GCCcore-12.3.0 =&gt; binutils/2.37-GCCcore-11.2.0
+  2) GCCcore/12.3.0 =&gt; GCCcore/11.2.0     4) zlib/1.2.13-GCCcore-12.3.0 =&gt; zlib/1.2.11-GCCcore-11.2.0</code></pre>
+</div>
+<p>What happened? The module command is teling us that it swapped out
+<code>GCC/12.3.0</code> and replaced it with <code>GCC/11.2.0</code></p>
+<div class="codewrapper sourceCode" id="cb33">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ gcc <span class="at">--version</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>gcc (GCC) 11.2.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
+</div>
+<div id="cant-load-a-new-module-version" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="cant-load-a-new-module-version" class="callout-inner">
+<h3 class="callout-title">can’t load a new module version?</h3>
+<div class="callout-content">
+<p>Sometimes the module command gives a warning requiring you to unload
+the current version of a module before loading the new version. As
+switching between different versions of the same module is often used
+you can use <code>module swap</code> rather than unloading one version
+before loading another. The equivalent of the steps above would be:</p>
+<div class="codewrapper sourceCode" id="cb35">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module purge</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module load GCC</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module swap GCC GCC/11.2.0</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>The following have been reloaded with a version change:
+  1) GCC/12.3.0 =&gt; GCC/11.2.0             3) binutils/2.40-GCCcore-12.3.0 =&gt; binutils/2.37-GCCcore-11.2.0
+  2) GCCcore/12.3.0 =&gt; GCCcore/11.2.0     4) zlib/1.2.13-GCCcore-12.3.0 =&gt; zlib/1.2.11-GCCcore-11.2.0</code></pre>
+</div>
+<p>And what happens when we load python again?</p>
+<div class="codewrapper sourceCode" id="cb37">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ module load Python</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>The following have been reloaded with a version change:
+  1) GCC/11.2.0 =&gt; GCC/7.3.0-2.30        3) binutils/2.37-GCCcore-11.2.0 =&gt; binutils/2.30-GCCcore-7.3.0
+  2) GCCcore/11.2.0 =&gt; GCCcore/7.3.0     4) zlib/1.2.11-GCCcore-11.2.0 =&gt; zlib/1.2.11-GCCcore-7.3.0</code></pre>
+</div>
+<p>Because the version of python isn’t compatible with the currently
+loaded version of gcc, module has done a swap for us.</p>
+</div>
+</div>
+</div>
+<div id="system-python" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="system-python" class="callout-inner">
+<h3 class="callout-title">system python</h3>
+<div class="callout-content">
+<p>Watch out for system provided python, it may not be the version you
+need. <em>(It’s best to always specify your python version ??)</em> On
+Rocket, <code>which python</code> returns <code>/usr/bin/python</code>,
+but this turns out to be a link to Python2:</p>
+<div class="codewrapper sourceCode" id="cb39">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which python</span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="ex">/usr/bin/python</span></span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls <span class="at">-l</span> /usr/bin/python</span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a><span class="ex">lrwxrwxrwx.</span> 1 root root 7 Nov  6 10:01 /usr/bin/python <span class="at">-</span><span class="op">&gt;</span> python2</span></code></pre>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -856,8 +988,8 @@ any links that you are not going to use.
   "url": "https://hpc-intro-draft4.github.io/NA/40-modules.html",
   "identifier": "https://hpc-intro-draft4.github.io/NA/40-modules.html",
   "dateCreated": "2025-02-12",
-  "dateModified": "2025-02-25",
-  "datePublished": "2025-02-25"
+  "dateModified": "2025-02-26",
+  "datePublished": "2025-02-26"
 }
 
   </script><script>
