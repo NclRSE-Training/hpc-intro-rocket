@@ -341,7 +341,7 @@ python3 --version
 Let’s take a closer look at the `gcc` module. GCC is an extremely widely used C/C++/Fortran compiler. Lots of software is dependent on the GCC version, and might not compile or run if the wrong version is loaded. In this case, there are 18 different versions, named like `GCC/12.2.0`. How do we load each copy and which copy is the default?
 
 ```bash
-[ncb176@login02 ~]$ module avail gcc/
+[userid@login01 ~]$ module avail gcc/
 ```
 ```output
 ---------------------------------------------------------------------------- /mnt/storage/apps/eb/modules/all -----------------------------------------------------------------------------
@@ -358,9 +358,9 @@ Use "module keyword key1 key2 ..." to search for all possible modules matching a
 In this case, `GCC/12.3.0` has a `(D)` next to it. This indicates that it is the default - if we type `module load GCC`, this is the copy that will be loaded.  Let's check this:
 
 ```bash
-[ncb176@login02 ~]$ module purge
-[ncb176@login02 ~]$ module load GCC
-[ncb176@login02 ~]$ module list
+[userid@login01 ~]$ module purge
+[userid@login01 ~]$ module load GCC
+[userid@login01 ~]$ module list
 ```
 ```output
 Currently Loaded Modules:
@@ -368,7 +368,7 @@ Currently Loaded Modules:
 ```
 
 ```bash
-[ncb176@login02 ~]$ gcc --version
+[userid@login01 ~]$ gcc --version
 ```
 ```output
 gcc (GCC) 12.3.0
@@ -380,7 +380,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 So how do we load the non-default copy of a software package? In this case, the only change we need to make is be more specific about the module we are loading. To load a non-default module, we need to make add the version number after the / in our module load command:
 
 ```bash
-[ncb176@login02 ~]$ module load GCC/11.2
+[userid@login01 ~]$ module load GCC/11.2
 ```
 ```output
 The following have been reloaded with a version change:
@@ -392,7 +392,7 @@ What happened?  The module command is teling us that it swapped out `GCC/12.3.0`
 
 
 ```bash
-[ncb176@login02 ~]$ gcc --version
+[userid@login01 ~]$ gcc --version
 ```
 ```output
 gcc (GCC) 11.2.0
@@ -407,9 +407,9 @@ Sometimes the module command gives a warning requiring you to unload the current
 As switching between different versions of the same module is often used you can use `module swap` rather than unloading one version before loading another. The equivalent of the steps above would be:
 
 ```bash
-[ncb176@login02 ~]$ module purge
-[ncb176@login02 ~]$ module load GCC
-[ncb176@login02 ~]$ module swap GCC GCC/11.2.0
+[userid@login01 ~]$ module purge
+[userid@login01 ~]$ module load GCC
+[userid@login01 ~]$ module swap GCC GCC/11.2.0
 ```
 ```output
 The following have been reloaded with a version change:
@@ -418,7 +418,7 @@ The following have been reloaded with a version change:
 ```
 And what happens when we load python again?
 ```bash
-[ncb176@login02 ~]$ module load Python
+[userid@login01 ~]$ module load Python
 ```
 ```output
 The following have been reloaded with a version change:
