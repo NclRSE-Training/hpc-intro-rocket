@@ -140,16 +140,7 @@ usr/local/bin
 /mnt/nfs/home/userid/bin
 ```
 
-:::callout
-Watch out for system provided python, it may not be the version you need.
-On Rocket, `which python` returns `/usr/bin/python`, but this turns out to be a link to Python2:
-```bash
-[userid@login01 ~]$ which python
-/usr/bin/python
-[userid@login01 ~]$ ls -l /usr/bin/python
-lrwxrwxrwx. 1 root root 7 Nov  6 10:01 /usr/bin/python -> python2
-```
-:::
+
 
 We can load the `python3` command with `module load`:
 
@@ -246,7 +237,7 @@ No modules loaded
 ```
 
 :::callout
-
+## More on modules
 Note that `module purge` is informative. It will also let us know if a default set of “sticky” packages cannot be unloaded (and how to actually unload these if we truly so desired).
 
 Note that this module loading process happens principally through the manipulation of environment variables like `$PATH`. There is usually **little or no data transfer** involved.
@@ -259,19 +250,6 @@ The module command also restores these shell environment variables to their prev
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Software versioning
 
 So far, we've learned how to load and unload software packages. This is very useful. However, we
@@ -280,7 +258,8 @@ issues where only one particular version of some software will be suitable. Perh
 only happened in a certain version, or version X broke compatibility with a file format you use. In
 either of these example cases, it helps to be very specific about what software is loaded.
 
-Let's examine the output of `module avail` more closely.
+Let's look specifically for Python in `module avail`:
+Because so many modules match `Python` we've cheated a little and added `/3` focus down on Python 3 modules
 
 ```bash
 [userid@login01 userid]$  module avail Python/3
@@ -323,7 +302,8 @@ Use "module keyword key1 key2 ..." to search for all possible modules matching
 any of the "keys".
 ```
 
-Note that we have several different versions of `Python3` plus .
+Note that we have several different versions of `Python3`.
+In this case, `Python/3.7.0-foss-2018b` has a `(D)` next to it. This indicates that it is the default - if we type `module load Python`, this is the copy that will be loaded.
 
 
 ::: challenge
@@ -358,7 +338,108 @@ python3 --version
 
 ## Default Versions and Module Swap
 
-gcc example here similar to https://nclrse-training.github.io/hpc-intro-cirrus/14-modules/index.html#software-versioning
+Let’s take a closer look at the `gcc` module. GCC is an extremely widely used C/C++/Fortran compiler. Lots of software is dependent on the GCC version, and might not compile or run if the wrong version is loaded. In this case, there are 18 different versions, named like `GCC/12.2.0`. How do we load each copy and which copy is the default?
+
+```bash
+[ncb176@login02 ~]$ module avail gcc/
+```
+```output
+---------------------------------------------------------------------------- /mnt/storage/apps/eb/modules/all -----------------------------------------------------------------------------
+   GCC/4.8.2                  GCC/4.9.3-2.25    GCC/5.4.0-2.26    GCC/6.3.0-2.27    GCC/7.3.0-2.30      GCC/8.3.0    GCC/10.2.0    GCC/11.2.0    GCC/12.2.0
+   GCC/4.9.3-binutils-2.25    GCC/5.2.0         GCC/6.1.0-2.27    GCC/6.4.0-2.28    GCC/8.2.0-2.31.1    GCC/9.3.0    GCC/10.3.0    GCC/11.3.0    GCC/12.3.0 (D)
+
+  Where:
+   D:  Default Module
+
+Use "module spider" to find all possible modules and extensions.
+Use "module keyword key1 key2 ..." to search for all possible modules matching any of the "keys".
+```
+
+In this case, `GCC/12.3.0` has a `(D)` next to it. This indicates that it is the default - if we type `module load GCC`, this is the copy that will be loaded.  Let's check this:
+
+```bash
+[ncb176@login02 ~]$ module purge
+[ncb176@login02 ~]$ module load GCC
+[ncb176@login02 ~]$ module list
+```
+```output
+Currently Loaded Modules:
+  1) GCCcore/12.3.0   2) zlib/1.2.13-GCCcore-12.3.0   3) binutils/2.40-GCCcore-12.3.0   4) GCC/12.3.0
+```
+
+```bash
+[ncb176@login02 ~]$ gcc --version
+```
+```output
+gcc (GCC) 12.3.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+So how do we load the non-default copy of a software package? In this case, the only change we need to make is be more specific about the module we are loading. To load a non-default module, we need to make add the version number after the / in our module load command:
+
+```bash
+[ncb176@login02 ~]$ module load GCC/11.2
+```
+```output
+The following have been reloaded with a version change:
+  1) GCC/12.3.0 => GCC/11.2.0             3) binutils/2.40-GCCcore-12.3.0 => binutils/2.37-GCCcore-11.2.0
+  2) GCCcore/12.3.0 => GCCcore/11.2.0     4) zlib/1.2.13-GCCcore-12.3.0 => zlib/1.2.11-GCCcore-11.2.0
+```
+What happened?  The module command is teling us that it swapped out `GCC/12.3.0` and replaced it with `GCC/11.2.0`
+
+
+
+```bash
+[ncb176@login02 ~]$ gcc --version
+```
+```output
+gcc (GCC) 11.2.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+:::discussion
+## can't load a new module version?
+Sometimes the module command gives a warning requiring you to unload the current version of a module before loading the new version.
+As switching between different versions of the same module is often used you can use `module swap` rather than unloading one version before loading another. The equivalent of the steps above would be:
+
+```bash
+[ncb176@login02 ~]$ module purge
+[ncb176@login02 ~]$ module load GCC
+[ncb176@login02 ~]$ module swap GCC GCC/11.2.0
+```
+```output
+The following have been reloaded with a version change:
+  1) GCC/12.3.0 => GCC/11.2.0             3) binutils/2.40-GCCcore-12.3.0 => binutils/2.37-GCCcore-11.2.0
+  2) GCCcore/12.3.0 => GCCcore/11.2.0     4) zlib/1.2.13-GCCcore-12.3.0 => zlib/1.2.11-GCCcore-11.2.0
+```
+And what happens when we load python again?
+```bash
+[ncb176@login02 ~]$ module load Python
+```
+```output
+The following have been reloaded with a version change:
+  1) GCC/11.2.0 => GCC/7.3.0-2.30        3) binutils/2.37-GCCcore-11.2.0 => binutils/2.30-GCCcore-7.3.0
+  2) GCCcore/11.2.0 => GCCcore/7.3.0     4) zlib/1.2.11-GCCcore-11.2.0 => zlib/1.2.11-GCCcore-7.3.0
+```
+Because the version of python isn't compatible with the currently loaded version of gcc, module has done a swap for us.
+:::
+
+
+:::callout
+## system python
+Watch out for system provided python, it may not be the version you need.  _(It's best to always specify your python version ??)_
+On Rocket, `which python` returns `/usr/bin/python`, but this turns out to be a link to Python2:
+```bash
+[userid@login01 ~]$ which python
+/usr/bin/python
+[userid@login01 ~]$ ls -l /usr/bin/python
+lrwxrwxrwx. 1 root root 7 Nov  6 10:01 /usr/bin/python -> python2
+```
+:::
 
 ::: keypoints
  - "Load software with `module load softwareName`."
