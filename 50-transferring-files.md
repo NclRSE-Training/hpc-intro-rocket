@@ -175,17 +175,20 @@ A trailing slash on the target directory is optional, and has no effect for
 ## Transferring files to and from Campus Storage for Research Data (RDW)
 RDW is mounted on Rocket at `/rdw`.  You can use scp and rsync to transfer data to RDW in the same way as copying to any other directory on Rocket.  
 
+### Using cp to copy to RDW
+Because `/rdw` is a mounted filesystem, we an use `cp` instead of `scp`:
 
-Try out a dry run:
 ```bash
-rsync  --dry-run -av dir1/ dir2
+[userid@login01 ~]$ cp file.txt /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
+[userid@login01 rse-hpc]$ cd /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
+[userid@login01 userid]$ pwd
+/rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+[userid@login01 userid]$ ls
 ```
-Run ‘for real’:
-```bash
-rsync -av dir1/ dir2
+```ouptput
+file.txt
 ```
 
-======== end of section to be edited ================
 
 
 ::: discussion
@@ -196,7 +199,102 @@ command limiting. The [rsync](https://rsync.samba.org/) utility provides
 advanced features for file transfer and is typically faster compared to both
 `scp` and `sftp` (see below). It is especially useful for transferring large
 and/or many files and creating synced backup folders.
-The syntax is similar to `scp`. To transfer *to* another computer with
+The syntax is similar to `cp` and `scp`. 
+
+To transfer *to* RDW from your work area on Rocket
+
+Try out a dry run:
+```bash
+[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid --dry-run
+```
+```output
+sending incremental file list
+./
+file.txt
+file2.txt
+
+sent 119 bytes  received 25 bytes  288.00 bytes/sec
+total size is 39  speedup is 0.27 (DRY RUN)
+```
+Run ‘for real’:
+```bash
+[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+```
+```output
+
+sending incremental file list
+rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/." failed: Invalid argument (22)
+./
+file.txt
+file2.txt
+rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/.file.txt.SS0gps" failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/.file2.txt.XAYkoB" failed: Invalid argument (22)
+
+sent 234 bytes  received 376 bytes  1,220.00 bytes/sec
+total size is 39  speedup is 0.06
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1179) [sender=3.1.2]
+```
+What happened?  `rsync` returned an error. `files/attrs were not transferred `  This is because RDW doesn't 'know' about rocket's groups.  The transfer was successful though! Only the 'group' attribute of the file couldn't be transferred.  RDW has 'trumped' our local permissions and imposed its own standard permissions.  This isn't important, the correct user keeps ownership of the files.
+
+```bash
+[userid@login01 ~]$ ls -l testDir/
+```
+```output
+total 4
+-rw------- 1 userid rocketloginaccess  0 Feb 26 15:31 file2.txt
+-rw------- 1 userid rocketloginaccess 39 Feb 26 15:31 file.txt
+```
+```bash
+[userid@login01 ~]$ ls -l /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
+```
+```output
+total 57
+-rwxrwx--- 1 userid domainusers  0 Feb 26 15:52 file2.txt
+-rwxrwx--- 1 userid domainusers 39 Feb 26 15:52 file.txt
+```
+
+It's easier to read output without errors that we have to ignore, so let's remove that error by allowing the destination to set its default group using `--no-group`.  It's also possible to add `--no-owner`, allowing the destination to set file ownership to match the directory we're copying into.
+
+```bash
+[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid --no-group
+```
+```output
+sending incremental file list
+./
+file.txt
+file2.txt
+
+sent 203 bytes  received 57 bytes  
+```
+:::
+
+
+## Windows Users - Transferring Files interactively with MobaXterm
+MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can even be used from home.
+
+
+:::callout
+## Large data copies
+When copying large amounts of data, rsync really comes into its own.  If a copy is interrupted, the same command can pick up where it left off.
+
+### special case:  rsync on the same filesytem / very fast connection
+RDW has a super-fast connection to Rocket, which means that it takes more resource to compress and un-compress the data than it does to do the transfer
+
+[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+
+The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-avzP` with `-rltv`
+`-r` = recurse through subdirectories
+`-l` = copy symlinks
+`-t` = preserve timestamps
+--inplace --whole-file --size-only to speed up transfer and prevent rsync filling up space with a large temp directory
+--itemize-changes --progress --stats for more informative output
+
+For big transfers, rerun the rsync command to check it completed.
+:::
+
+:::callout
+## To transfer *to* Rocket from a campus laptop
+Because the transfer has to pass through the slower campus network, or even the internet, it's a good idea to use rsync's built-in compression `-z`
 commonly used options:
 
 ```bash
