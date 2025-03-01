@@ -117,12 +117,8 @@ intersections in your map. Instead of doing this yourself, you use a website,
 which in turn runs on a server, that is almost definitely not in the same room
 as you are.
 
-```{asis}
-<figure style="max-width: 30%; text-align: center">
-  <img src="fig/servers-openclipartorg-ericlemerdy.svg" alt="A rack half full with servers" class="figure">
-  <div class="figcaption">A rack half full with servers</div>
-</figure>
-```
+
+![A rack half full with servers](fig/servers-openclipartorg-ericlemerdy.svg){alt="A rack half full with servers"}
 
 Note here, that a server is mostly a noisy computer mounted into a rack cabinet
 which in turn resides in a data center. The Internet made it possible that
@@ -145,12 +141,7 @@ If the computational task or analysis to complete is daunting for a single
 server, larger agglomerations of servers are used. These go by the name of
 "clusters" or "super computers".
 
-```{asis}
-<figure style="max-width: 30%; text-align: center; display: block">
-  <img src="fig/serverrack-openclipartorg-psteinb-basedon-ericlemerdy.svg" alt="A rack with servers" class="figure">
-  <div class="figcaption">A rack with servers</div>
-</figure>
-```
+![A rack with servers](fig/serverrack-openclipartorg-psteinb-basedon-ericlemerdy.svg){alt="A rack with servers"}
 
 The methodology of providing the input data, configuring the program options,
 and retrieving the results is quite different to using a plain laptop.
