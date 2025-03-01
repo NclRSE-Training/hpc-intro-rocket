@@ -34,7 +34,7 @@ life_cycle: 'pre-alpha' # FIXME
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://carolbooth2.github.io/hpc-intro-draft4/' # FIXME
+source: 'https://github.com/NclRSE-Training/hpc-intro-rocket' # FIXME
 
 # Default branch of your lesson
 branch: 'main'
