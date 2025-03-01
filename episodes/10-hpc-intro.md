@@ -92,10 +92,6 @@ The term HPC system, on the other hand, describes a stand-alone resource for com
 The word “cluster” is often used for small to moderate scale HPC resources less impressive than the Top-500. Clusters are often maintained in computing centers that support several such systems, all sharing common networking and storage to support common compute intensive tasks.
 
 
-
-
-
-
 Let's dissect what resources programs running on a laptop require:
 
 * the keyboard and/or touchpad is used to tell the computer what to do
