@@ -118,7 +118,7 @@ which in turn runs on a server, that is almost definitely not in the same room
 as you are.
 
 
-![A rack half full with servers](fig/servers-openclipartorg-ericlemerdy.svg){alt="A rack half full with servers}
+![A rack half full with servers](fig/servers-openclipartorg-ericlemerdy.svg){alt="A rack half full with servers"}
 
 Note here, that a server is mostly a noisy computer mounted into a rack cabinet
 which in turn resides in a data center. The Internet made it possible that
