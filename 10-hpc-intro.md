@@ -6,6 +6,8 @@ exercises: 5
 
 
 ::: questions
+ - What is an HPC system?
+ - How does an HPC system work?
  - Why would I be interested in High Performance Computing (HPC)?
  - What can I expect to learn from this course?
 :::
@@ -15,50 +17,9 @@ exercises: 5
  - Identify how an HPC system could benefit you.
 :::
 
-## HPC research examples
+## What Is an HPC System?
 
-Frequently, research problems that use computing can outgrow the capabilities
-of the desktop or laptop computer where they started:
-
-* A statistics student wants to cross-validate a model. This involves running
-  the model 1000 times &mdash; but each run takes an hour. Running the model on
-  a laptop will take over a month! In this research problem, final results are
-  calculated after all 1000 models have run, but typically only one model is
-  run at a time (in **serial**) on the laptop. Since each of the 1000 runs is
-  independent of all others, and given enough computers, it's theoretically
-  possible to run them all at once (in **parallel**).
-* A genomics researcher has been using small datasets of sequence data, but
-  soon will be receiving a new type of sequencing data that is 10 times as
-  large. It's already challenging to open the datasets on a computer &mdash;
-  analyzing these larger datasets will probably crash it. In this research
-  problem, the calculations required might be impossible to parallelize, but a
-  computer with **more memory** would be required to analyze the much larger
-  future data set.
-* An engineer is using a fluid dynamics package that has an option to run in
-  parallel. So far, this option was not utilized on a desktop. In going from 2D
-  to 3D simulations, the simulation time has more than tripled. It might be
-  useful to take advantage of that option or feature. In this research problem,
-  the calculations in each region of the simulation are largely independent of
-  calculations in other regions of the simulation. It's possible to run each
-  region's calculations simultaneously (in **parallel**), communicate selected
-  results to adjacent regions as needed, and repeat the calculations to
-  converge on a final set of results. In moving from a 2D to a 3D model, **both
-  the amount of data and the amount of calculations increases greatly**, and
-  it's theoretically possible to distribute the calculations across multiple
-  computers communicating over a shared network.
-
-In all these cases, access to more (and larger) computers is needed. Those
-computers should be usable at the same time, **solving many researchers'
-problems in parallel**.
-
-::: discussion
-
-## Break the Ice
-Talk to your neighbour, office mate or [rubber duck](https://rubberduckdebugging.com/) about your research.
-
- * How does computing help you do your research?
- * How could more computing help you do more or better research?
-:::
+The words “cloud”, “cluster”, and the phrase “high-performance computing” or “HPC” are used a lot in different contexts and with various related meanings. So what do they mean? And more importantly, how do we use them in our work?
 
 ## Jargon Busting
 
@@ -191,6 +152,83 @@ are served in parallel by a large, ["hyperscale"](https://en.wikipedia.org/wiki/
 collection of servers working together.
 :::
 :::
+
+
+## HPC research examples
+
+Frequently, research problems that use computing can outgrow the capabilities
+of the desktop or laptop computer where they started:
+
+* A statistics student wants to cross-validate a model. This involves running
+  the model 1000 times &mdash; but each run takes an hour. Running the model on
+  a laptop will take over a month! In this research problem, final results are
+  calculated after all 1000 models have run, but typically only one model is
+  run at a time (in **serial**) on the laptop. Since each of the 1000 runs is
+  independent of all others, and given enough computers, it's theoretically
+  possible to run them all at once (in **parallel**).
+* A genomics researcher has been using small datasets of sequence data, but
+  soon will be receiving a new type of sequencing data that is 10 times as
+  large. It's already challenging to open the datasets on a computer &mdash;
+  analyzing these larger datasets will probably crash it. In this research
+  problem, the calculations required might be impossible to parallelize, but a
+  computer with **more memory** would be required to analyze the much larger
+  future data set.
+* An engineer is using a fluid dynamics package that has an option to run in
+  parallel. So far, this option was not utilized on a desktop. In going from 2D
+  to 3D simulations, the simulation time has more than tripled. It might be
+  useful to take advantage of that option or feature. In this research problem,
+  the calculations in each region of the simulation are largely independent of
+  calculations in other regions of the simulation. It's possible to run each
+  region's calculations simultaneously (in **parallel**), communicate selected
+  results to adjacent regions as needed, and repeat the calculations to
+  converge on a final set of results. In moving from a 2D to a 3D model, **both
+  the amount of data and the amount of calculations increases greatly**, and
+  it's theoretically possible to distribute the calculations across multiple
+  computers communicating over a shared network.
+
+In all these cases, access to more (and larger) computers is needed. Those
+computers should be usable at the same time, **solving many researchers'
+problems in parallel**.
+
+::: discussion
+
+## Break the Ice
+Talk to your neighbour, office mate or [rubber duck](https://rubberduckdebugging.com/) about your research.
+
+ * How does computing help you do your research?
+ * How could more computing help you do more or better research?
+:::
+
+## Summary
+
+The *cloud* is a generic term commonly used to refer to computing resources
+that are a) *provisioned* to users on demand or as needed and b) represent real
+or *virtual* resources that may be located anywhere on Earth. For example, a
+large company with computing resources in Brazil, Zimbabwe and Japan may manage
+those resources as its own *internal* cloud and that same company may also
+utilize commercial cloud resources provided by Amazon or Google. Cloud
+resources may refer to machines performing relatively simple tasks such as
+serving websites, providing shared storage, providing web services (such as
+e-mail or social media platforms), as well as more traditional compute
+intensive tasks such as running a simulation.
+
+The term *HPC system*, on the other hand, describes a stand-alone resource for
+computationally intensive workloads. They are typically comprised of a
+multitude of integrated processing and storage elements, designed to handle
+high volumes of data and/or large numbers of floating-point operations
+([FLOPS](https://en.wikipedia.org/wiki/FLOPS)) with the highest possible
+performance. For example, all of the machines on the
+[Top-500](https://www.top500.org) list are HPC systems. To support these
+constraints, an HPC resource must exist in a specific, fixed location:
+networking cables can only stretch so far, and electrical and optical signals
+can travel only so fast.
+
+The word "cluster" is often used for small to moderate scale HPC resources less
+impressive than the [Top-500](https://www.top500.org). Clusters are often
+maintained in computing centers that support several such systems, all sharing
+common networking and storage to support common compute intensive tasks.
+
+
 
 ::: keypoints
  - "High Performance Computing (HPC) typically involves connecting to very large
