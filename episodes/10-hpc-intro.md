@@ -82,7 +82,7 @@ A big disadvantage of a computer with bigger and better hardware is that its app
 
 How about buying a car suitable to take your children to school on a regular basis and then **renting** a bus for the odd occasion that you have to take 30 kids to the museum? We now have cloud computing available to be able to fulfil a similar role when the need arises to use a bigger or faster computer. But first, what exactly is cloud computing? Actually it is nothing other than computer networks, as described in the section about **Shared Computing Resources**, that belong to external organisations and are connected to the Internet so that, in turn, we can also connect to them. And for the privilege of being able to access those computers we will pay a fee - like renting a car. We can specify exactly what we need in terms of the amount of memory, the speed of the processors, the amount of RAM and so forth. So this might be a good solution but, as always, there are loads of ifs and buts ... so what if we, as an organisation, make so much use of these computers that we want our very own? Cloud computers will also have certain limitations so that we can't always get the specifications we want so we might, even if we can't afford our own, want an alternative to cloud computing.
 
-The cloud is a generic term commonly used to refer to computing resources that are a) provisioned to users on demand or as needed and b) represent real or virtual resources that may be located anywhere on Earth. For example, a large company with computing resources in Brazil, Zimbabwe and Japan may manage those resources as its own internal cloud and that same company may also utilize commercial cloud resources provided by Amazon or Google. Cloud resources may refer to machines performing relatively simple tasks such as serving websites, providing shared storage, providing web services (such as e-mail or social media platforms), as well as more traditional compute intensive tasks such as running a simulation.
+The Cloud is a generic term commonly used to refer to computing resources that are a) provisioned to users on demand or as needed and b) represent real or virtual resources that may be located anywhere on Earth. For example, a large company with computing resources in Brazil, Zimbabwe and Japan may manage those resources as its own internal cloud and that same company may also utilize commercial cloud resources provided by Amazon or Google. Cloud resources may refer to machines performing relatively simple tasks such as serving websites, providing shared storage, providing web services (such as e-mail or social media platforms), as well as more traditional compute intensive tasks such as running a simulation.
 
 
 ### A Cluster or Supercomputer
@@ -131,7 +131,7 @@ as you are.
 Note here, that a server is mostly a noisy computer mounted into a rack cabinet
 which in turn resides in a data center. The Internet made it possible that
 these data centers do not require to be nearby your laptop. What people call
-**the cloud** is mostly a web-service where you can rent such servers by
+**The Cloud** is mostly a web-service where you can rent such servers by
 providing your credit card details and requesting remote resources that satisfy
 your requirements. This is often handled through an online, browser-based
 interface listing the various machines available and their capacities in terms
