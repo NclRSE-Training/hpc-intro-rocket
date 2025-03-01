@@ -1,165 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/01-introduction.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/10-hpc-intro.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/10-hpc-intro.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/11-hpc-intro.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/11-hpc-intro.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/12-cluster.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/12-cluster.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/13-scheduler.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/13-scheduler.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/14-modules.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/14-modules.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/15-transferring-files.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/15-transferring-files.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/17-resources.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/17-resources.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/18-responsibility.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/18-responsibility.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/20-cluster.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/20-cluster.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/30-scheduler.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/30-scheduler.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/40-modules.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/40-modules.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/404.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/404.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/50-transferring-files.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/50-transferring-files.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/70-resources.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/70-resources.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/80-responsibility.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/80-responsibility.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/CODE_OF_CONDUCT.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/LICENSE.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/aio.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/aio.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/images.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/images.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/index.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/index.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/01-introduction.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/10-hpc-intro.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/10-hpc-intro.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/11-hpc-intro.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/11-hpc-intro.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/12-cluster.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/12-cluster.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/13-scheduler.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/13-scheduler.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/14-modules.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/14-modules.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/15-transferring-files.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/15-transferring-files.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/17-resources.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/17-resources.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/18-responsibility.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/18-responsibility.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/20-cluster.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/20-cluster.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/30-scheduler.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/30-scheduler.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/40-modules.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/40-modules.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/404.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/50-transferring-files.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/50-transferring-files.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/70-resources.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/70-resources.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/80-responsibility.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/80-responsibility.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/LICENSE.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/aio.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/aio.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/images.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/images.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/index.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/index.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/instructor-notes.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/instructor-notes.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/introduction.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/introduction.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/key-points.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/key-points.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/profiles.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/profiles.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/reference.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/reference.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor/test.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/test.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/instructor-notes.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor-notes.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/introduction.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/introduction.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/key-points.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/key-points.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/profiles.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/profiles.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/reference.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/reference.html</loc>
   </url>
   <url>
-    <loc>https://hpc-intro-draft4.github.io/NA/test.html</loc>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/test.html</loc>
   </url>
 </urlset>
