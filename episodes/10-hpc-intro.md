@@ -141,7 +141,7 @@ If the computational task or analysis to complete is daunting for a single
 server, larger agglomerations of servers are used. These go by the name of
 "clusters" or "super computers".
 
-![A rack with servers](fig/serverrack-openclipartorg-psteinb-basedon-ericlemerdy.svg){"A rack with servers"}
+![A rack with servers](fig/serverrack-openclipartorg-psteinb-basedon-ericlemerdy.svg){alt="A rack with servers"}
 
 The methodology of providing the input data, configuring the program options,
 and retrieving the results is quite different to using a plain laptop.
