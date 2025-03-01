@@ -129,7 +129,7 @@ as you are.
 ```
 
 Note here, that a server is mostly a noisy computer mounted into a rack cabinet
-which in turn resides in a data center. The internet made it possible that
+which in turn resides in a data center. The Internet made it possible that
 these data centers do not require to be nearby your laptop. What people call
 **the cloud** is mostly a web-service where you can rent such servers by
 providing your credit card details and requesting remote resources that satisfy
