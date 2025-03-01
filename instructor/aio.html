@@ -409,6 +409,8 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
+<li>What is an HPC system?</li>
+<li>How does an HPC system work?</li>
 <li>Why would I be interested in High Performance Computing (HPC)?</li>
 <li>What can I expect to learn from this course?</li>
 </ul>
@@ -428,61 +430,13 @@
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="hpc-research-examples">HPC research examples<a class="anchor" aria-label="anchor" href="#hpc-research-examples"></a>
+<section><h2 class="section-heading" id="what-is-an-hpc-system">What Is an HPC System?<a class="anchor" aria-label="anchor" href="#what-is-an-hpc-system"></a>
 </h2>
 <hr class="half-width">
-<p>Frequently, research problems that use computing can outgrow the
-capabilities of the desktop or laptop computer where they started:</p>
-<ul>
-<li>A statistics student wants to cross-validate a model. This involves
-running the model 1000 times — but each run takes an hour. Running the
-model on a laptop will take over a month! In this research problem,
-final results are calculated after all 1000 models have run, but
-typically only one model is run at a time (in <strong>serial</strong>)
-on the laptop. Since each of the 1000 runs is independent of all others,
-and given enough computers, it’s theoretically possible to run them all
-at once (in <strong>parallel</strong>).</li>
-<li>A genomics researcher has been using small datasets of sequence
-data, but soon will be receiving a new type of sequencing data that is
-10 times as large. It’s already challenging to open the datasets on a
-computer — analyzing these larger datasets will probably crash it. In
-this research problem, the calculations required might be impossible to
-parallelize, but a computer with <strong>more memory</strong> would be
-required to analyze the much larger future data set.</li>
-<li>An engineer is using a fluid dynamics package that has an option to
-run in parallel. So far, this option was not utilized on a desktop. In
-going from 2D to 3D simulations, the simulation time has more than
-tripled. It might be useful to take advantage of that option or feature.
-In this research problem, the calculations in each region of the
-simulation are largely independent of calculations in other regions of
-the simulation. It’s possible to run each region’s calculations
-simultaneously (in <strong>parallel</strong>), communicate selected
-results to adjacent regions as needed, and repeat the calculations to
-converge on a final set of results. In moving from a 2D to a 3D model,
-<strong>both the amount of data and the amount of calculations increases
-greatly</strong>, and it’s theoretically possible to distribute the
-calculations across multiple computers communicating over a shared
-network.</li>
-</ul>
-<p>In all these cases, access to more (and larger) computers is needed.
-Those computers should be usable at the same time, <strong>solving many
-researchers’ problems in parallel</strong>.</p>
-<div id="break-the-ice" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="break-the-ice" class="callout-inner">
-<h3 class="callout-title">Break the Ice</h3>
-<div class="callout-content">
-<p>Talk to your neighbour, office mate or <a href="https://rubberduckdebugging.com/" class="external-link">rubber duck</a> about your
-research.</p>
-<ul>
-<li>How does computing help you do your research?</li>
-<li>How could more computing help you do more or better research?</li>
-</ul>
-</div>
-</div>
-</div>
+<p>The words “cloud”, “cluster”, and the phrase “high-performance
+computing” or “HPC” are used a lot in different contexts and with
+various related meanings. So what do they mean? And more importantly,
+how do we use them in our work?</p>
 </section><section><h2 class="section-heading" id="jargon-busting">Jargon Busting<a class="anchor" aria-label="anchor" href="#jargon-busting"></a>
 </h2>
 <hr class="half-width">
@@ -704,72 +658,64 @@ collection of servers working together.</p>
 </div>
 </div>
 </div>
-<div id="keypoints1" class="callout keypoints">
-<div class="callout-square">
-<i class="callout-icon" data-feather="key"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
-<div class="callout-content">
-<ul>
-<li>“High Performance Computing (HPC) typically involves connecting to
-very large computing systems elsewhere in the world.”</li>
-<li>“These other systems can be used to do work that would either be
-impossible or much slower on smaller systems.”</li>
-<li>“The standard method of interacting with such systems is via a
-command line interface called Bash.”</li>
-</ul>
-</div>
-</div>
-</div>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
-</section></section><section id="aio-20-cluster"><p>Content from <a href="20-cluster.html">Working on an HPC system</a></p>
-<hr>
-<p>Last updated on 2025-02-25 |
-
-        <a href="https://github.com/NclRSE-Training/hpc-intro-rocket/edit/main/episodes/20-cluster.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 35 minutes</p>
-<div class="text-end">
-          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
-        </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
-<ul>
-<li>What is an HPC system?</li>
-<li>How does an HPC system work?</li>
-<li>How do I log on to an HPC system?</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>Connect to an HPC system.</li>
-<li>Understand the general HPC system architecture.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section><h2 class="section-heading" id="what-is-an-hpc-system">What Is an HPC System?<a class="anchor" aria-label="anchor" href="#what-is-an-hpc-system"></a>
+</section><section><h2 class="section-heading" id="hpc-research-examples">HPC research examples<a class="anchor" aria-label="anchor" href="#hpc-research-examples"></a>
 </h2>
 <hr class="half-width">
-<p>The words “cloud”, “cluster”, and the phrase “high-performance
-computing” or “HPC” are used a lot in different contexts and with
-various related meanings. So what do they mean? And more importantly,
-how do we use them in our work?</p>
+<p>Frequently, research problems that use computing can outgrow the
+capabilities of the desktop or laptop computer where they started:</p>
+<ul>
+<li>A statistics student wants to cross-validate a model. This involves
+running the model 1000 times — but each run takes an hour. Running the
+model on a laptop will take over a month! In this research problem,
+final results are calculated after all 1000 models have run, but
+typically only one model is run at a time (in <strong>serial</strong>)
+on the laptop. Since each of the 1000 runs is independent of all others,
+and given enough computers, it’s theoretically possible to run them all
+at once (in <strong>parallel</strong>).</li>
+<li>A genomics researcher has been using small datasets of sequence
+data, but soon will be receiving a new type of sequencing data that is
+10 times as large. It’s already challenging to open the datasets on a
+computer — analyzing these larger datasets will probably crash it. In
+this research problem, the calculations required might be impossible to
+parallelize, but a computer with <strong>more memory</strong> would be
+required to analyze the much larger future data set.</li>
+<li>An engineer is using a fluid dynamics package that has an option to
+run in parallel. So far, this option was not utilized on a desktop. In
+going from 2D to 3D simulations, the simulation time has more than
+tripled. It might be useful to take advantage of that option or feature.
+In this research problem, the calculations in each region of the
+simulation are largely independent of calculations in other regions of
+the simulation. It’s possible to run each region’s calculations
+simultaneously (in <strong>parallel</strong>), communicate selected
+results to adjacent regions as needed, and repeat the calculations to
+converge on a final set of results. In moving from a 2D to a 3D model,
+<strong>both the amount of data and the amount of calculations increases
+greatly</strong>, and it’s theoretically possible to distribute the
+calculations across multiple computers communicating over a shared
+network.</li>
+</ul>
+<p>In all these cases, access to more (and larger) computers is needed.
+Those computers should be usable at the same time, <strong>solving many
+researchers’ problems in parallel</strong>.</p>
+<div id="break-the-ice" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="break-the-ice" class="callout-inner">
+<h3 class="callout-title">Break the Ice</h3>
+<div class="callout-content">
+<p>Talk to your neighbour, office mate or <a href="https://rubberduckdebugging.com/" class="external-link">rubber duck</a> about your
+research.</p>
+<ul>
+<li>How does computing help you do your research?</li>
+<li>How could more computing help you do more or better research?</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
+</h2>
+<hr class="half-width">
 <p>The <em>cloud</em> is a generic term commonly used to refer to
 computing resources that are a) <em>provisioned</em> to users on demand
 or as needed and b) represent real or <em>virtual</em> resources that
@@ -795,7 +741,64 @@ resources less impressive than the <a href="https://www.top500.org" class="exter
 in computing centers that support several such systems, all sharing
 common networking and storage to support common compute intensive
 tasks.</p>
-</section><section><h2 class="section-heading" id="logging-in">Logging In<a class="anchor" aria-label="anchor" href="#logging-in"></a>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points</h3>
+<div class="callout-content">
+<ul>
+<li>“High Performance Computing (HPC) typically involves connecting to
+very large computing systems elsewhere in the world.”</li>
+<li>“These other systems can be used to do work that would either be
+impossible or much slower on smaller systems.”</li>
+<li>“The standard method of interacting with such systems is via a
+command line interface called Bash.”</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section><section id="aio-20-cluster"><p>Content from <a href="20-cluster.html">Working on an HPC system</a></p>
+<hr>
+<p>Last updated on 2025-03-01 |
+
+        <a href="https://github.com/NclRSE-Training/hpc-intro-rocket/edit/main/episodes/20-cluster.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 35 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I log on to an HPC system?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Connect to an HPC system.</li>
+<li>Understand the general HPC system architecture.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="logging-in">Logging In<a class="anchor" aria-label="anchor" href="#logging-in"></a>
 </h2>
 <hr class="half-width">
 <p>The first step in using a cluster is to establish a connection from
@@ -2172,7 +2175,7 @@ node).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3331,7 +3334,7 @@ worked or not.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Creating a file called <code>submit-pi-mpi.slurm</code>:</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -3516,7 +3519,7 @@ figure for the Calculation core seconds. Is this what you observe?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The table below shows example timings for runs on ARCHER2 (HPC at
 Edinburgh)</p>
@@ -3729,7 +3732,7 @@ choose this option?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>The table below gives example results for ARCHER2 (HPC at Edinburgh)
 based on the example runtimes given in the solution above.</p>
@@ -4006,7 +4009,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Building software, creating directories, and unpacking software are
 common and acceptable tasks for the login node: options #2
@@ -4233,7 +4236,7 @@ the following would be the best way to transfer them to Rocket?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Lets go through each option</p>
 <ol style="list-style-type: decimal">

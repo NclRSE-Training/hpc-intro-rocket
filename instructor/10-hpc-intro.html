@@ -216,10 +216,12 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#hpc-research-examples">HPC research examples</a></li>
+        <ul><li><a href="#what-is-an-hpc-system">What Is an HPC System?</a></li>
 <li><a href="#jargon-busting">Jargon Busting</a></li>
 <li><a href="#when-tasks-take-too-long">When Tasks Take Too Long</a></li>
 <li><a href="#when-one-server-is-not-enough">When One Server Is Not Enough</a></li>
+<li><a href="#hpc-research-examples">HPC research examples</a></li>
+<li><a href="#summary">Summary</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -368,7 +370,9 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>Why would I be interested in High Performance Computing (HPC)?</li>
+<ul><li>What is an HPC system?</li>
+<li>How does an HPC system work?</li>
+<li>Why would I be interested in High Performance Computing (HPC)?</li>
 <li>What can I expect to learn from this course?</li>
 </ul></div>
 </div>
@@ -384,55 +388,11 @@
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="hpc-research-examples">HPC research examples<a class="anchor" aria-label="anchor" href="#hpc-research-examples"></a></h2>
-<hr class="half-width"><p>Frequently, research problems that use computing can outgrow the
-capabilities of the desktop or laptop computer where they started:</p>
-<ul><li>A statistics student wants to cross-validate a model. This involves
-running the model 1000 times — but each run takes an hour. Running the
-model on a laptop will take over a month! In this research problem,
-final results are calculated after all 1000 models have run, but
-typically only one model is run at a time (in <strong>serial</strong>)
-on the laptop. Since each of the 1000 runs is independent of all others,
-and given enough computers, it’s theoretically possible to run them all
-at once (in <strong>parallel</strong>).</li>
-<li>A genomics researcher has been using small datasets of sequence
-data, but soon will be receiving a new type of sequencing data that is
-10 times as large. It’s already challenging to open the datasets on a
-computer — analyzing these larger datasets will probably crash it. In
-this research problem, the calculations required might be impossible to
-parallelize, but a computer with <strong>more memory</strong> would be
-required to analyze the much larger future data set.</li>
-<li>An engineer is using a fluid dynamics package that has an option to
-run in parallel. So far, this option was not utilized on a desktop. In
-going from 2D to 3D simulations, the simulation time has more than
-tripled. It might be useful to take advantage of that option or feature.
-In this research problem, the calculations in each region of the
-simulation are largely independent of calculations in other regions of
-the simulation. It’s possible to run each region’s calculations
-simultaneously (in <strong>parallel</strong>), communicate selected
-results to adjacent regions as needed, and repeat the calculations to
-converge on a final set of results. In moving from a 2D to a 3D model,
-<strong>both the amount of data and the amount of calculations increases
-greatly</strong>, and it’s theoretically possible to distribute the
-calculations across multiple computers communicating over a shared
-network.</li>
-</ul><p>In all these cases, access to more (and larger) computers is needed.
-Those computers should be usable at the same time, <strong>solving many
-researchers’ problems in parallel</strong>.</p>
-<div id="break-the-ice" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="break-the-ice" class="callout-inner">
-<h3 class="callout-title">Break the Ice</h3>
-<div class="callout-content">
-<p>Talk to your neighbour, office mate or <a href="https://rubberduckdebugging.com/" class="external-link">rubber duck</a> about your
-research.</p>
-<ul><li>How does computing help you do your research?</li>
-<li>How could more computing help you do more or better research?</li>
-</ul></div>
-</div>
-</div>
+<section><h2 class="section-heading" id="what-is-an-hpc-system">What Is an HPC System?<a class="anchor" aria-label="anchor" href="#what-is-an-hpc-system"></a></h2>
+<hr class="half-width"><p>The words “cloud”, “cluster”, and the phrase “high-performance
+computing” or “HPC” are used a lot in different contexts and with
+various related meanings. So what do they mean? And more importantly,
+how do we use them in our work?</p>
 </section><section><h2 class="section-heading" id="jargon-busting">Jargon Busting<a class="anchor" aria-label="anchor" href="#jargon-busting"></a></h2>
 <hr class="half-width"><div class="section level3">
 <h3 id="your-personal-computer">Your Personal Computer<a class="anchor" aria-label="anchor" href="#your-personal-computer"></a></h3>
@@ -633,6 +593,81 @@ collection of servers working together.</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="hpc-research-examples">HPC research examples<a class="anchor" aria-label="anchor" href="#hpc-research-examples"></a></h2>
+<hr class="half-width"><p>Frequently, research problems that use computing can outgrow the
+capabilities of the desktop or laptop computer where they started:</p>
+<ul><li>A statistics student wants to cross-validate a model. This involves
+running the model 1000 times — but each run takes an hour. Running the
+model on a laptop will take over a month! In this research problem,
+final results are calculated after all 1000 models have run, but
+typically only one model is run at a time (in <strong>serial</strong>)
+on the laptop. Since each of the 1000 runs is independent of all others,
+and given enough computers, it’s theoretically possible to run them all
+at once (in <strong>parallel</strong>).</li>
+<li>A genomics researcher has been using small datasets of sequence
+data, but soon will be receiving a new type of sequencing data that is
+10 times as large. It’s already challenging to open the datasets on a
+computer — analyzing these larger datasets will probably crash it. In
+this research problem, the calculations required might be impossible to
+parallelize, but a computer with <strong>more memory</strong> would be
+required to analyze the much larger future data set.</li>
+<li>An engineer is using a fluid dynamics package that has an option to
+run in parallel. So far, this option was not utilized on a desktop. In
+going from 2D to 3D simulations, the simulation time has more than
+tripled. It might be useful to take advantage of that option or feature.
+In this research problem, the calculations in each region of the
+simulation are largely independent of calculations in other regions of
+the simulation. It’s possible to run each region’s calculations
+simultaneously (in <strong>parallel</strong>), communicate selected
+results to adjacent regions as needed, and repeat the calculations to
+converge on a final set of results. In moving from a 2D to a 3D model,
+<strong>both the amount of data and the amount of calculations increases
+greatly</strong>, and it’s theoretically possible to distribute the
+calculations across multiple computers communicating over a shared
+network.</li>
+</ul><p>In all these cases, access to more (and larger) computers is needed.
+Those computers should be usable at the same time, <strong>solving many
+researchers’ problems in parallel</strong>.</p>
+<div id="break-the-ice" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="break-the-ice" class="callout-inner">
+<h3 class="callout-title">Break the Ice</h3>
+<div class="callout-content">
+<p>Talk to your neighbour, office mate or <a href="https://rubberduckdebugging.com/" class="external-link">rubber duck</a> about your
+research.</p>
+<ul><li>How does computing help you do your research?</li>
+<li>How could more computing help you do more or better research?</li>
+</ul></div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a></h2>
+<hr class="half-width"><p>The <em>cloud</em> is a generic term commonly used to refer to
+computing resources that are a) <em>provisioned</em> to users on demand
+or as needed and b) represent real or <em>virtual</em> resources that
+may be located anywhere on Earth. For example, a large company with
+computing resources in Brazil, Zimbabwe and Japan may manage those
+resources as its own <em>internal</em> cloud and that same company may
+also utilize commercial cloud resources provided by Amazon or Google.
+Cloud resources may refer to machines performing relatively simple tasks
+such as serving websites, providing shared storage, providing web
+services (such as e-mail or social media platforms), as well as more
+traditional compute intensive tasks such as running a simulation.</p>
+<p>The term <em>HPC system</em>, on the other hand, describes a
+stand-alone resource for computationally intensive workloads. They are
+typically comprised of a multitude of integrated processing and storage
+elements, designed to handle high volumes of data and/or large numbers
+of floating-point operations (<a href="https://en.wikipedia.org/wiki/FLOPS" class="external-link">FLOPS</a>) with the highest
+possible performance. For example, all of the machines on the <a href="https://www.top500.org" class="external-link">Top-500</a> list are HPC systems. To
+support these constraints, an HPC resource must exist in a specific,
+fixed location: networking cables can only stretch so far, and
+electrical and optical signals can travel only so fast.</p>
+<p>The word “cluster” is often used for small to moderate scale HPC
+resources less impressive than the <a href="https://www.top500.org" class="external-link">Top-500</a>. Clusters are often maintained
+in computing centers that support several such systems, all sharing
+common networking and storage to support common compute intensive
+tasks.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
