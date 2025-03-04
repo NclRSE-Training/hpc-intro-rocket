@@ -12,9 +12,10 @@ exercises: 5
 :::
 
 ::: objectives
+ - Describe how the actions of a single user can affect the experience of others on a shared system.
  - Learn how to be a considerate shared system citizen.
- - Understand how to protect your critical data.
- - Appreciate the challenges with transferring large amounts of data off HPC
+ - Explain the importance of backing up critical data.
+ - Describe the challenges with transferring large amounts of data off HPC
   systems.
  - Understand how to convert many files to a single archive file using tar.
 :::
@@ -57,7 +58,7 @@ Unsure? Ask your friendly systems administrator ("sysadmin") or service
 desk if the thing you're contemplating is suitable for the login node,
 or if there's another mechanism to get it done safely.
 
-You can contact the ARCHER2 Service Desk at [support@archer2.ac.uk](mailto:support@archer2.ac.uk)
+You can contact the rse team at rseteam@newcastle.ac.uk and the it service desk at nuservice.ncl.ac.uk or email it.servicedesk@newcastle.ac.uk
 
 :::
 
@@ -109,8 +110,9 @@ blocked from accessing the idle compute nodes).
 
 On very busy resources you may wait many days in a queue for your job to fail
 within 10 seconds of starting due to a trivial typo in the job script. This is
-extremely frustrating! Most systems provide dedicated resources for testing
-that have short wait times to help you avoid this issue.
+extremely frustrating! 
+
+Most systems provide dedicated resources for testing that have short wait times to help you avoid this issue.
 
 ::: callout
 ## Test Job Submission Scripts That Use Large Amounts of Resources
@@ -140,6 +142,8 @@ job scripts, analysis scripts and small input files.
 For larger amounts of data, you should make sure you have a robust system in
 place for taking copies of critical data off the HPC system wherever possible
 to backed-up storage. Tools such as `rsync` can be very useful for this.
+
+Newcastle University provides campus file storage with roll-back capability, mounted on Rocket under \rdw.  Every project can register for 5TB for free, additional space is charged per TB per year.
 
 Your access to the shared HPC system will generally be time-limited so you
 should ensure you have a plan for transferring your data off the system before
@@ -254,6 +258,11 @@ best way to transfer them to Rocket?
 [user@laptop ~]$ rsync -raz data userid@rocket.hpc:~/
 ```
 
+3.a. Using `rsync` with compression to transfer to a mounted filesystem?
+```bash
+[[userid@login01 ~]$ rsync -raz --inplace data /rdw/02/myproject/
+```
+
  4. Creating a `tar` archive first for `rsync`?
 ```bash
 [user@laptop ~]$ tar -cvf data.tar data
@@ -272,11 +281,19 @@ Lets go through each option
 
  1. `scp` will recursively copy the directory. This works, but without compression.
  2. `rsync -ra` works like `scp -r`, but preserves file information like creation times. This is marginally better.
- 3. `rsync -raz` adds compression, which will save some bandwidth. If you have a strong CPU at both ends of the line, and you're on a slow network, this is a good choice.
+ 3. `rsync -raz` adds compression, which will save some bandwidth. If you have a strong CPU at both ends of the line, and you're on a slow network, this is a good choice.  
+ 3.a) **However** on a fast network (for example transferring from Rocket to RDW, both within the data centre) it is faster to transfer without compression.  `--inplace` tells rsync not to create a temporary file prior to sending but send the data straight away.  The temporary file helps rsync resume when the connection is interrupted but at the cost of disk space and time to write this file.
  4. This command first uses `tar` to merge everything into a single file, then `rsync -z` to transfer it with compression. With this large *number* of files, metadata overhead can hamper your transfer, so this is a good idea.
- 5. This command uses `tar -z` to compress the archive, then `rsync` to transfer it. This may perform similarly to #4, but in most cases (for large datasets), it's the best combination of high throughput and low latency (making the most of your time and network connection).
+ 5. This command uses `tar -z` to compress the archive, then `rsync` to transfer it. This may perform similarly to #4, but in most cases (for large datasets), it's the best combination of high throughput and low latency (making the most of your time and network connection).  **However** on a fast network (for example transferring from Rocket to RDW, both within the data centre) it is faster to transfer without compression.
 
 :::
+:::
+
+:::callout
+## Rsync Tips
+`--dry-run` will show you what files would be changed, without copying any data.  Useful if you're not sure you have the correct path, or you are adding to / over-writing existing data.
+
+Immediately re-running the same rsync command is a good way to check that the first run completed fully.  No files will be copied if the first run was successful.
 :::
 
 ::: keypoints
