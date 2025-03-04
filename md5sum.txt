@@ -9,6 +9,7 @@
 "episodes/30-scheduler.md" "9b3775602b01f3eee3984859378fe8d5" "site/built/30-scheduler.md" "2025-02-25"
 "episodes/40-modules.md" "b7317d97cb5d533a3c83640d78a5a00d" "site/built/40-modules.md" "2025-02-26"
 "episodes/50-transferring-files.md" "b21810d40324b5a40f0797b54a4023f9" "site/built/50-transferring-files.md" "2025-02-26"
+"episodes/60-parallel-job.md" "4ecb89be84d7292267423f195c70d45f" "site/built/60-parallel-job.md" "2025-03-04"
 "episodes/70-resources.md" "b6eb18884f844c05656c2c8fcbf8bebd" "site/built/70-resources.md" "2025-02-14"
 "episodes/80-responsibility.md" "07fd3cea589122668e7256bde0c929d0" "site/built/80-responsibility.md" "2025-02-14"
 "instructors/instructor-notes.md" "cae72b6712578d74a49fea7513099f8c" "site/built/instructor-notes.md" "2023-03-16"

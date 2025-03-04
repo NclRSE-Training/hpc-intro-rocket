@@ -43,6 +43,9 @@
     <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/50-transferring-files.html</loc>
   </url>
   <url>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/60-parallel-job.html</loc>
+  </url>
+  <url>
     <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/70-resources.html</loc>
   </url>
   <url>
@@ -104,6 +107,9 @@
   </url>
   <url>
     <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/50-transferring-files.html</loc>
+  </url>
+  <url>
+    <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/60-parallel-job.html</loc>
   </url>
   <url>
     <loc>https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/70-resources.html</loc>
