@@ -41,35 +41,35 @@ in parallel.
 
 The Python code you will use in this episode has been pre-written and you can obtain a copy in three ways:
 - Under the **Extras** tab at the top of this page there is a link to the code. Create two new files in your working directory on Cirrus and copy the contents into them.
-- Use the commands `curl` or `wget` from the previous episode to download the files directly into your working directory on Cirrus and extract the archive. Remember you will need to specify the path to these Python files in your job submission scripts. It may be useful to `cd` into this directory or `mv` the contents directly to the path `/work/tc036/tc036/yourUsername`.
+- Use the commands `curl` or `wget` from the previous episode to download the files directly into your working directory on Cirrus and extract the archive. Remember you will need to specify the path to these Python files in your job submission scripts. It may be useful to `cd` into this directory or `mv` the contents directly to the path `/nobackup/proj/training/userid`.
 
 
+```bash
+[user@laptop ~]$ curl -O https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
+[user@laptop ~]$ tar -xvzf python-pi-code.tar.gz
 ```
-{{ site.local.prompt }} curl -O {{ site.url }}{{ site.baseurl }}/files/python-pi-code.tar.gz
-{{ site.local.prompt }} tar -xvzf python-pi-code.tar.gz
-```
-{: .language-bash}
+
 or
+```bash
+[user@laptop ~]$ wget https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
+[user@laptop ~]$ tar -xvzf python-pi-code.tar.gz
 ```
-{{ site.local.prompt }} wget {{ site.url }}{{ site.baseurl }}/files/python-pi-code.tar.gz
-{{ site.local.prompt }} tar -xvzf python-pi-code.tar.gz
-```
-{: .language-bash}
+
 
 
 - You can also create a local copy of the files on your machine and then use `scp` or `rsync` to copy the file onto Cirrus.
 
+```bash
+[user@laptop ~]$ scp pi.py userid@rocket.hpc:/nobackup/proj/training/userid
+[user@laptop ~]$ scp pi-mpi-cirrus.py userid@rocket.hpc:/nobackup/proj/training/userid
 ```
-{{ site.local.prompt }} scp pi.py yourUsername@login.cirrus.ac.uk:/work/tc036/tc036/yourUsername
-{{ site.local.prompt }} scp pi-mpi-cirrus.py yourUsername@login.cirrus.ac.uk:/work/tc036/tc036/yourUsername
-```
-{: .language-bash}
+
 
 
 ## A Serial Solution to the Problem
 
 We start from a Python script using concepts taught in Software Carpentry's
-[Programming with Python][inflammation] workshops.
+[Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/) workshops.
 We want to allow the user to specify how many random points should be used
 to calculate π through a command-line parameter.
 This script will only use a single CPU for its entire run, so it's classified
@@ -79,15 +79,15 @@ Let's write a Python program, `pi.py`, to estimate π for us.
 Start by importing the `numpy` module for calculating the results,
 and the `sys` module to process command-line parameters:
 
-```
+```python
 import numpy as np
 import sys
 ```
-{: .language-python}
+
 
 We define a Python function `inside_circle` that accepts a single parameter
 for the number of random points used to calculate π.
-See [Programming with Python: Creating Functions][python-func]
+See [Programming with Python: Creating Functions](https://swcarpentry.github.io/python-novice-inflammation/08-func/index.html)
 for a review of Python functions.
 It randomly samples points with both _x_ and _y_ on the half-open interval
 [0, 1).
@@ -96,7 +96,7 @@ how many of those distances were less than or equal to 1.0.
 All of this is done using _vectors_ of double-precision (64-bit)
 floating-point values.
 
-```
+```python
 def inside_circle(total_count):
     x = np.random.uniform(size=total_count)
     y = np.random.uniform(size=total_count)
@@ -104,14 +104,14 @@ def inside_circle(total_count):
     count = len(radii[np.where(radii<=1.0)])
     return count
 ```
-{: .language-python}
+
 
 Next, we create a main function to call the `inside_circle` function and
 calculate π from its returned result.
-See [Programming with Python: Command-Line Programs][cmd-line]
+See [Programming with Python: Command-Line Programs](https://swcarpentry.github.io/python-novice-inflammation/12-cmdline/index.html)
 for a review of `main` functions and parsing command-line parameters.
 
-```
+```python
 def main():
     n_samples = int(sys.argv[1])
     counts = inside_circle(n_samples)
@@ -121,42 +121,44 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-{: .language-python}
+
 
 If we run the Python script locally with a command-line parameter, as in
 `python pi.py 1024`, we should see the script print its estimate of
 π:
 
-```
-{{ site.local.prompt }} python pi.py 1024
+```bash
+[user@laptop ~]$ python pi.py 1024
 3.04296875
 ```
-{: .language-bash}
 
-> ## Random Number Generation
->
-> In the preceding code, random numbers are conveniently generated using the
-> built-in capabilities of NumPy. In general, random-number generation is
-> difficult to do well, it's easy to accidentally introduce correlations into
-> the generated sequence.
->
-> * Discuss why generating high quality random numbers might be difficult.
-> * Is the quality of random numbers generated sufficient for estimating π
->   in this implementation?
->
-> > ## Solution
-> >
-> > * Computers are deterministic and produce pseudo random numbers using
-> >   an algorithm.  The choice of algorithm and its parameters determines
-> >   how random the generated numbers are.  Pseudo random number generation
-> >   algorithms usually produce a sequence numbers taking the previous output
-> >   as an input for generating the next number. At some point the sequence of
-> >   pseudo random numbers will repeat, so care is required to make sure the
-> >   repetition period is long and that the generated numbers have statistical
-> >   properties similar to those of true random numbers.
-> > * Yes.
-> {: .solution }
-{: .discussion }
+
+## Random Number Generation
+
+:::challenge
+In the preceding code, random numbers are conveniently generated using the
+built-in capabilities of NumPy. In general, random-number generation is
+difficult to do well, it's easy to accidentally introduce correlations into
+the generated sequence.
+
+* Discuss why generating high quality random numbers might be difficult.
+* Is the quality of random numbers generated sufficient for estimating π
+  in this implementation?
+
+:::solution
+
+
+* Computers are deterministic and produce pseudo random numbers using
+  an algorithm.  The choice of algorithm and its parameters determines
+  how random the generated numbers are.  Pseudo random number generation
+  algorithms usually produce a sequence numbers taking the previous output
+  as an input for generating the next number. At some point the sequence of
+  pseudo random numbers will repeat, so care is required to make sure the
+  repetition period is long and that the generated numbers have statistical
+  properties similar to those of true random numbers.
+* Yes.
+:::
+:::
 
 ## Measuring Performance of the Serial Solution
 
@@ -177,28 +179,28 @@ Since the largest variables in the script are `x`, `y`, and `radii`, each
 containing `n_samples` points, we'll modify the script to report their
 total memory required.
 Each point in `x`, `y`, or `radii` is stored as a NumPy `float64`, we can
-use NumPy's [`dtype`][np-dtype] function to calculate the size of a `float64`.
+use NumPy's [`dtype`](https://numpy.org/doc/stable/reference/generated/numpy.dtype.html) function to calculate the size of a `float64`.
 
 Replace the `print(my_pi)` line with the following:
 
-```
+```python
 size_of_float = np.dtype(np.float64).itemsize
 memory_required = 3 * n_samples * size_of_float / (1024**3)
 print(f"Pi: {my_pi}, memory: {memory_required} GiB")
 ```
-{: .language-python}
+
 
 The first line calculates the bytes of memory required for a single
 64-bit floating point number using the `dtype` function.
 The second line estimates the total amount of memory required to store three
 variables containing `n_samples` `float64` values, converting the value into
-units of [gibibytes][units].
+units of [gibibytes](https://en.wikipedia.org/wiki/Byte#Multiple-byte_units).
 The third line prints both the estimate of π and the estimated amount of
 memory used by the script.
 
 The updated Python script is:
 
-```
+```python
 import numpy as np
 import sys
 
@@ -220,22 +222,22 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-{: .language-python}
+
 
 Run the script again with a few different values for the number of samples,
 and see how the memory required changes:
 
-```
-{{ site.local.prompt }} python pi.py 1000
+```bash
+[user@laptop ~]$ python pi.py 1000
 Pi: 3.144, memory: 2.2351741790771484e-05 GiB
-{{ site.local.prompt }} python pi.py 2000
+[user@laptop ~]$ python pi.py 2000
 Pi: 3.18, memory: 4.470348358154297e-05 GiB
-{{ site.local.prompt }} python pi.py 1000000
+[user@laptop ~]$ python pi.py 1000000
 Pi: 3.140944, memory: 0.022351741790771484 GiB
-{{ site.local.prompt }} python pi.py 100000000
+[user@laptop ~]$ python pi.py 100000000
 Pi: 3.14182724, memory: 2.2351741790771484 GiB
 ```
-{: .language-bash }
+
 
 Here we can see that the estimated amount of memory required scales linearly
 with the number of samples used.
@@ -263,36 +265,36 @@ calculations, and calculate the difference between those times.
 To add the time measurement to the script, add the following line below the
 `import sys` line:
 
-```
+```python
 import datetime
 ```
-{: .language-python}
+
 
 Then, add the following line immediately above the line calculating `counts`:
 
-```
+```python
 start_time = datetime.datetime.now()
 ```
-{: .language-python}
+
 
 Add the following two lines immediately below the line calculating `counts`:
 
-```
+```python
 end_time = datetime.datetime.now()
 elapsed_time = (end_time - start_time).total_seconds()
 ```
-{: .language-python}
+
 
 And finally, modify the `print` statement with the following:
 
-```
+```python
 print(f"Pi: {my_pi}, memory: {memory_required} GiB, time: {elapsed_time} s")
 ```
-{: .language-python}
+
 
 The final Python script for the serial solution is:
 
-```
+```python
 import numpy as np
 import sys
 import datetime
@@ -318,20 +320,20 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-{: .language-python}
+
 
 Run the script again with a few different values for the number of samples,
 and see how the solution time changes:
 
-```
-{{ site.local.prompt }} python pi.py 1000000
+```python
+[user@laptop ~]$ python pi.py 1000000
 Pi: 3.139612, memory: 0.022351741790771484 GiB, time: 0.034872 s
-{{ site.local.prompt }} python pi.py 10000000
+[user@laptop ~]$ python pi.py 10000000
 Pi: 3.1425492, memory: 0.22351741790771484 GiB, time: 0.351212 s
-{{ site.local.prompt }} python pi.py 100000000
+[user@laptop ~]$ python pi.py 100000000
 Pi: 3.14146608, memory: 2.2351741790771484 GiB, time: 3.735195 s
 ```
-{: .language-bash }
+
 
 Here we can see that the amount of time required scales approximately linearly
 with the number of samples used.
@@ -365,39 +367,52 @@ If you have 16 GiB installed, you won't quite make it to 750,000,000 points.
 
 ## Running the Serial Job on a Compute Node
 
-Replicate the `pi.py` script in the `/work/tc036/tc036/yourUsername` space on Cirrus. Guidance on how to do this can be found at the beginning of this episode. 
+Replicate the `pi.py` script in the `/nobackup/proj/training/userid` space on Cirrus. Guidance on how to do this can be found at the beginning of this episode. 
 
 Create a submission file, requesting one task on a single node. If we do not specify a maximum walltime for the job using `--time=<hh:mm:ss>` then (on Cirrus) the job will be submitted with the `short` default maximum time of 20 minutes. To avoid a warning message we will allocate a very generous 1 minute.
 
+```bash
+[userid@login01 ~]$  nano serial-pi.sh
+[userid@login01 ~]$  cat serial-pi.sh
 ```
-{{ site.remote.prompt }} nano serial-pi.sh
-{{ site.remote.prompt }} cat serial-pi.sh
+
+```output
+#!/bin/bash
+#SBATCH --partition=standard
+#SBATCH --qos=standard
+#SBATCH --job-name serial-pi
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --time=00:01
+
+
+# Load the correct Python module
+module load python/3.9.13
+
+# Execute the task
+python3 pi.py 100000000
 ```
-{: .language-bash}
 
-{% include {{ site.snippets }}/parallel/one-task-with-memory-jobscript.snip %}
+:::callout
+## Memory Requirements
 
-
-> ## Memory Requirements
->
-> On some HPC systems you may need to specify the memory requirements of the job
-> using the `--mem`, `--mem-per-cpu`, `--mem-per-gpu` options. However, on Cirrus
-> you cannot specify the memory for a job. The amount of memory you are assigned 
-> is calculated from the amount of primary resource you request.
-> The primary resource you request on standard compute nodes are CPU cores. The maximum amount of memory you 
-> are allocated is computed as the number of CPU cores you requested multiplied by 1/36th of the total memory 
-> available (as there are 36 CPU cores per node). So, if you request the full node (36 cores), then you will 
-> be allocated a maximum of all of the memory (256 GB) available on the node; however, if you request 1 core, 
-> then you will be assigned a maximum of 256/36 = 7.1 GB of the memory available on the node.
->
-{: .callout}
+On some HPC systems you may need to specify the memory requirements of the job
+using the `--mem`, `--mem-per-cpu`, `--mem-per-gpu` options. However, on Cirrus
+you cannot specify the memory for a job. The amount of memory you are assigned 
+is calculated from the amount of primary resource you request.
+The primary resource you request on standard compute nodes are CPU cores. The maximum amount of memory you 
+are allocated is computed as the number of CPU cores you requested multiplied by 1/36th of the total memory 
+available (as there are 36 CPU cores per node). So, if you request the full node (36 cores), then you will 
+be allocated a maximum of all of the memory (256 GB) available on the node; however, if you request 1 core, 
+then you will be assigned a maximum of 256/36 = 7.1 GB of the memory available on the node.
+:::
 
 Then submit your job.
 
+```bash
+[userid@login01 ~]$  srun serial-pi.sh
 ```
-{{ site.remote.prompt }} {{ site.sched.submit.name }} serial-pi.sh
-```
-{: .language-bash}
+
 
 As before, use the status commands to check when your job runs.
 Use `ls` to locate the output file, and examine it. Is it what you expected?
@@ -426,17 +441,19 @@ calculate the solution.
 We will run an example that uses the Message Passing Interface (MPI) for
 parallelism -- this is a common tool on HPC systems.
 
-> ## What is MPI?
->
-> The Message Passing Interface is a set of tools which allow multiple parallel
-> jobs to communicate with each other.
-> Typically, a single executable is run multiple times, possibly on different
-> machines, and the MPI tools are used to inform each instance of the
-> executable about how many instances there are, which instance it is.
-> MPI also provides tools to allow communication and coordination between
-> instances.
-> An MPI instance typically has its own copy of all the local variables.
-{: .callout}
+
+:::callout
+## What is MPI?
+
+The Message Passing Interface is a set of tools which allow multiple parallel
+jobs to communicate with each other.
+Typically, a single executable is run multiple times, possibly on different
+machines, and the MPI tools are used to inform each instance of the
+executable about how many instances there are, which instance it is.
+MPI also provides tools to allow communication and coordination between
+instances.
+An MPI instance typically has its own copy of all the local variables.
+:::
 
 While MPI jobs can generally be run as stand-alone executables, in order for
 them to run in parallel they must use an MPI _run-time system_, which is a
@@ -446,70 +463,72 @@ To do this, they should be started via a command such as `mpiexec` (or
 which will ensure that the appropriate run-time support for parallelism is
 included.
 
-> ## MPI Runtime Arguments
->
-> On their own, commands such as `mpiexec` can take many arguments specifying
-> how many machines will participate in the execution,
-> and you might need these if you would like to run an MPI program on your
-> laptop (for example).
-> In the context of a queuing system, however, it is frequently the case that
-> we do not need to specify this information as the MPI run-time will have been
-> configured to obtain it from the queuing system,
-> by examining the environment variables set when the job is launched.
-{: .callout}
+:::callout
+## MPI Runtime Arguments
 
-> ## What Changes Are Needed for an MPI Version of the π Calculator?
->
-> On Cirrus we need to first import `mpi4py.rc` and set `mpi4py.rc.initialize = False`
-> before we can import the standard `mpi4py` Python module. This may not be necessary
-> on other HPC systems and you should consult the documentation if you experience
-> problems setting up MPI.
->
-> Next, we need to import the `MPI` object from the Python module `mpi4py` by
-> adding an `from mpi4py import MPI` line immediately below the `import
-> datetime` line.
->
-> Second, we need to modify the "main" function to perform the overhead and
-> accounting work required to:
->
-> * subdivide the total number of points to be sampled,
-> * _partition_ the total workload among the various parallel processors
->   available,
-> * have each parallel process report the results of its workload back
->   to the "rank 0" process,
->   which does the final calculations and prints out the result.
->
-> The modifications to the serial script demonstrate four important concepts:
->
-> * COMM_WORLD: the default MPI Communicator, providing a channel for all the
->   processes involved in this `mpiexec` to exchange information with one
->   another.
-> * Scatter: A collective operation in which an array of data on one MPI rank
->   is divided up, with separate portions being sent out to the partner ranks.
->   Each partner rank receives data from the matching index of the host array.
-> * Gather: The inverse of scatter. One rank populates a local array,
->   with the array element at each index assigned the value provided by the
->   corresponding partner rank -- including the host's own value.
-> * Conditional Output: since every rank is running the _same code_, the
->   partitioning, the final calculations, and the `print` statement are
->   wrapped in a conditional so that only one rank performs these operations.
-{: .discussion}
+On their own, commands such as `mpiexec` can take many arguments specifying
+how many machines will participate in the execution,
+and you might need these if you would like to run an MPI program on your
+laptop (for example).
+In the context of a queuing system, however, it is frequently the case that
+we do not need to specify this information as the MPI run-time will have been
+configured to obtain it from the queuing system,
+by examining the environment variables set when the job is launched.
+:::
+
+:::callout
+## What Changes Are Needed for an MPI Version of the π Calculator?
+
+On Cirrus we need to first import `mpi4py.rc` and set `mpi4py.rc.initialize = False`
+before we can import the standard `mpi4py` Python module. This may not be necessary
+on other HPC systems and you should consult the documentation if you experience
+problems setting up MPI.
+
+Next, we need to import the `MPI` object from the Python module `mpi4py` by
+adding an `from mpi4py import MPI` line immediately below the `import
+datetime` line.
+
+Second, we need to modify the "main" function to perform the overhead and
+accounting work required to:
+
+* subdivide the total number of points to be sampled,
+* _partition_ the total workload among the various parallel processors
+  available,
+* have each parallel process report the results of its workload back
+  to the "rank 0" process,
+  which does the final calculations and prints out the result.
+
+The modifications to the serial script demonstrate four important concepts:
+
+* COMM_WORLD: the default MPI Communicator, providing a channel for all the
+  processes involved in this `mpiexec` to exchange information with one
+  another.
+* Scatter: A collective operation in which an array of data on one MPI rank
+  is divided up, with separate portions being sent out to the partner ranks.
+  Each partner rank receives data from the matching index of the host array.
+* Gather: The inverse of scatter. One rank populates a local array,
+  with the array element at each index assigned the value provided by the
+  corresponding partner rank -- including the host's own value.
+* Conditional Output: since every rank is running the _same code_, the
+  partitioning, the final calculations, and the `print` statement are
+  wrapped in a conditional so that only one rank performs these operations.
+:::
 
 We add the lines:
 
-```
+```python
 comm = MPI.COMM_WORLD
 cpus = comm.Get_size()
 rank = comm.Get_rank()
 ```
-{: .language-python}
+
 
 immediately before the `n_samples` line to set up the MPI environment for
 each process.
 
 We replace the `start_time` and `counts` lines with the lines:
 
-```
+```python
 if rank == 0:
   start_time = datetime.datetime.now()
   partitions = [ int(n_samples / cpus) ] * cpus
@@ -518,7 +537,7 @@ else:
   partitions = None
   counts = None
 ```
-{: .language-python}
+
 
 This ensures that only the rank 0 process measures times and coordinates
 the work to be distributed to all the ranks, while the other ranks
@@ -534,12 +553,12 @@ Immediately below these lines, let's
 
 by adding the following three lines:
 
-```
+```python
 partition_item = comm.scatter(partitions, root=0)
 count_item = inside_circle(partition_item)
 counts = comm.gather(count_item, root=0)
 ```
-{: .language-python}
+
 
 Illustrations of these steps are shown below.
 
@@ -594,10 +613,10 @@ if rank == 0:
    accuracy = 100*(1-my_pi/pi_specific)
    print(f"Pi: {my_pi:6f}, memory: {memory_required:6f} GiB, time: {elapsed_time:6f} s, error: {accuracy:6f}%")
 ```
-{: .language-python}
+
 
 A fully commented version of the final MPI parallel python code is available:
-[pi-mpi-cirrus.py]({{ site.url }}{{ site.baseurl }}/files/pi-mpi-cirrus.py).
+[pi-mpi-cirrus.py](https://nclrse-training.github.io/hpc-intro-cirrus/files/pi-mpi-cirrus.py).
 
 Our purpose here is to exercise the parallel workflow of the cluster, not to
 optimize the program to minimize its memory footprint.
@@ -606,20 +625,32 @@ node), let's give it to a cluster node with more resources.
 
 Create a submission file, requesting more than one task on a single node:
 
+```bash
+[userid@login01 ~]$  nano parallel-pi.sh
+[userid@login01 ~]$  cat parallel-pi.sh
 ```
-{{ site.remote.prompt }} nano parallel-pi.sh
-{{ site.remote.prompt }} cat parallel-pi.sh
-```
-{: .language-bash}
+```output
+#!/bin/bash
+#SBATCH --partition=standard
+#SBATCH --qos=standard
+#SBATCH --job-name parallel-pi
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=4
+#SBATCH --time=00:01
 
-{% include {{ site.snippets }}/parallel/four-tasks-jobscript.snip %}
+# Load the correct Python module
+module load python/3.9.13
+
+# Execute the task
+srun python pi-mpi-cirrus.py 100000000
+```
 
 Then submit your job.
 
+```bash
+[userid@login01 ~]$  srun parallel-pi.sh
 ```
-{{ site.remote.prompt }} {{ site.sched.submit.name }} parallel-pi.sh
-```
-{: .language-bash}
+
 
 As before, use the status commands to check when your job runs.
 Use `ls` to locate the output file, and examine it.
@@ -651,7 +682,7 @@ in the computer, or across multiple compute nodes, additional time is
 required for communication compared to all processes operating on a
 single CPU.
 
-[Amdahl's Law][amdahl] is one way of predicting improvements in execution time
+[Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl's_law) is one way of predicting improvements in execution time
 for a __fixed__ parallel workload.  If a workload needs 20 hours to complete on
 a single core, and one hour of that time is spent on tasks that cannot be
 parallelized, only the remaining 19 hours could be parallelized.  Even if an
@@ -670,9 +701,8 @@ For a laptop with 8 cores, the graph of speedup factor versus number of cores
 used shows relatively consistent improvement when using 2, 4, or 8 cores, but
 using additional cores shows a diminishing return.
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/laptop-mpi_Speedup_factor.png"
-   alt="MPI speedup factors on an 8-core laptop" %}
+
+![MPI speedup factors on an 8-core lapto](/fig/laptop-mpi_Speedup_factor.png){alt="MPI speedup factors on an 8-core laptop"}
 
 For a set of HPC nodes containing 28 cores each, the graph of speedup factor
 versus number of cores shows consistent improvements up through three nodes
@@ -683,9 +713,8 @@ the MPI processes requiring more time than is gained by reducing the amount
 of work each MPI process has to complete. This communication overhead is not
 included in Amdahl's Law.
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/hpc-mpi_Speedup_factor.png"
-   alt="MPI speedup factors on an 8-core laptop" %}
+
+![MPI speedup factors on HPC](/fig/hpc-mpi_Speedup_factor.png){alt="MPI speedup factors on HPC"}
 
 In practice, MPI speedup factors are influenced by:
 
@@ -697,17 +726,7 @@ In practice, MPI speedup factors are influenced by:
 In an HPC environment, we try to reduce the execution time for all types of
 jobs, and MPI is an extremely common way to combine dozens, hundreds, or
 thousands of CPUs into solving a single problem. To learn more about
-parallelization, see the [parallel novice lesson][parallel-novice] lesson.
-
-{% include links.md %}
-
-[amdahl]: https://en.wikipedia.org/wiki/Amdahl's_law
-[cmd-line]: https://swcarpentry.github.io/python-novice-inflammation/12-cmdline/index.html
-[inflammation]: https://swcarpentry.github.io/python-novice-inflammation/
-[np-dtype]: https://numpy.org/doc/stable/reference/generated/numpy.dtype.html
-[parallel-novice]: http://www.hpc-carpentry.org/hpc-parallel-novice/
-[python-func]: https://swcarpentry.github.io/python-novice-inflammation/08-func/index.html
-[units]: https://en.wikipedia.org/wiki/Byte#Multiple-byte_units
+parallelization, see the [parallel novice lesson](http://www.hpc-carpentry.org/hpc-parallel-novice/) lesson.
 
 
 ::: keypoints
