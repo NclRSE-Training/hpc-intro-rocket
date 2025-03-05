@@ -236,6 +236,7 @@
       <div class="accordion-body">
         <ul><li><a href="#job-scheduler">Job Scheduler</a></li>
 <li><a href="#running-a-batch-job">Running a Batch Job</a></li>
+<li><a href="#submit-a-job-to-the-scheduler">Submit a job to the scheduler</a></li>
 <li><a href="#customising-a-job">Customising a Job</a></li>
 <li><a href="#cancelling-a-job">Cancelling a Job</a></li>
 <li><a href="#other-types-of-jobs">Other Types of Jobs</a></li>
@@ -413,11 +414,12 @@ scheduler to run the job is called <em>batch job submission</em>.</p>
 <p>In this case, the job we want to run is a shell script – essentially
 a text file containing a list of UNIX commands to be executed in a
 sequential manner. Our shell script will have three parts:</p>
-<ul><li>On the very first line, add <code>#!/bin/bash. The</code>#!`
-(pronounced “hash-bang” or “shebang”) tells the computer what program is
-meant to process the contents of this file. In this case, we are telling
-it that the commands that follow are written for the command-line shell
-(what we’ve been doing everything in so far).</li>
+<ul><li>On the very first line, add <code>#!/bin/bash</code>. The
+<code>#!</code> (pronounced “hash-bang” or “shebang”) tells the computer
+what program is meant to process the contents of this file. In this
+case, we are telling it that the commands that follow are written for
+the command-line shell (what we’ve been doing everything in so
+far).</li>
 <li>Anywhere below the first line, we’ll add an <code>echo</code>
 command with a friendly greeting. When run, the shell script will print
 whatever comes after <code>echo</code> in the terminal.
@@ -468,7 +470,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -482,14 +484,51 @@ like this one.</p>
 </div>
 </div>
 </div>
-<p>If you completed the previous challenge successfully, you probably
+</section><section><h2 class="section-heading" id="submit-a-job-to-the-scheduler">Submit a job to the scheduler<a class="anchor" aria-label="anchor" href="#submit-a-job-to-the-scheduler"></a></h2>
+<hr class="half-width"><p>If you completed the previous challenge successfully, you probably
 realise that there is a distinction between running the job through the
 scheduler and just “running it”. To submit this job to the scheduler, we
-use the <code>sbatch</code> command.</p>
-<div class="codewrapper sourceCode" id="cb5">
+use the <code>sbatch</code> with the option
+<code>--partition=short</code>.</p>
+<div id="partitions" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="partitions" class="callout-inner">
+<h3 class="callout-title">Partitions</h3>
+<div class="callout-content">
+<p>The eagle eyed will have noticed a PARTITION column in the output of
+<code>sinfo</code> in the previous episode. HPC systems divide resources
+into partitions (or queues), for efficient scheduling.<br>
+The ‘short’ partition only allows very short jobs (default 1 minute time
+limit), which the scheduler can easily fit in the gaps between longer
+jobs. Using ‘short’ is best for small test jobs as they don’t have to
+wait in the queue behind bigger jobs.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Partitions on Rocket </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<pre><code>Partition (queue)	Nodes		Max concurrent 	Time limit (wallclock)	Default time limit (wallclock)	Default memory per core
+defq			standard	528 cores	2 days			2 days				2.5 GB
+bigmem			medium,large,XL	2 nodes		2 days(*)		2 days				11 GB
+short			all		2 nodes		10 minutes		1 minute			2.5 GB
+long			standard	2 nodes		30 days			5 days				2.5 GB
+power(**)		power		1 node		2 days			2 days				2.5 GB
+interactive		all		1 node		1 day or 2 hours idle time 2 hours			2.5 GB</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -500,10 +539,10 @@ use the <code>sbatch</code> command.</p>
 job for us. While the job is waiting to run, it goes into a list of jobs
 called the <em>queue</em>. To check on our job’s status, we check the
 queue using the command <code>squeue -u userid</code>.</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -556,27 +595,27 @@ comment is interpreted as an instruction to the scheduler.</p>
 <p>Let’s illustrate this by example. By default, a job’s name is the
 name of the script, but the <code>--job-name</code> option can be used
 to change the name of a job. Add an option to the script:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>#!/bin/bash
-#SBATCH--job-name new_name
+#SBATCH --job-name new_name
 
 echo -n "This script is running on "
 hostname
 echo "This script has finished successfully."</code></pre>
 </div>
 <p>Submit the job and monitor its status:</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch <span class="at">--partition</span><span class="op">=</span>short example-job.sh</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -660,33 +699,33 @@ options we have been specifying on the command line
 </div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>#!/bin/bash
-#SBATCH--time 00:01:15
-#SBATCH--partition=short
+#SBATCH --time 00:01:15
+#SBATCH --partition=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
 hostname
 echo "This script has finished successfully."</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sbatch example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sbatch example-job.sh</span></code></pre>
 </div>
 <p>Why are the Slurm runtime and <code>sleep</code> time not
 identical?</p>
@@ -710,18 +749,18 @@ that it prints out the location from which the job was submitted.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  nano example-job.sh</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  nano example-job.sh</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -743,18 +782,18 @@ echo ${SLURM_SUBMIT_DIR}</code></pre>
 <p>Resource requests are typically binding. If you exceed them, your job
 will be killed. Let’s use walltime as an example. We will request 30
 seconds of walltime, and attempt to run a job for two minutes.</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat example-job.sh</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>#!/bin/bash
-#SBATCH--job-name long_job
-#SBATCH--time 00:00:30
-#SBATCH--partition=short
+#SBATCH --job-name long_job
+#SBATCH --time 00:00:30
+#SBATCH --partition=short
 
 echo "This script is running on ... "
 sleep 120 # time in seconds
@@ -763,16 +802,16 @@ echo "This script has finished successfully."</code></pre>
 </div>
 <p>Submit the job and wait for it to finish. Once it is has finished,
 check the log file.</p>
-<div class="codewrapper sourceCode" id="cb20">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch example-job.sh</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
-</div>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat slurm-17866475.out</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch example-job.sh</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb22">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  cat slurm-17866475.out</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -817,11 +856,11 @@ run earlier in the gaps between other users’ jobs.</p>
 done with the <code>scancel</code> command. Let’s submit a job and then
 cancel it using its job number (remember to change the walltime so that
 it runs long enough for you to cancel it before it is killed!).</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch example-job.sh</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  sbatch example-job.sh</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -834,12 +873,12 @@ JOBID PARTITION     NAME     USER      ST    TIME  NODES NODELIST(REASON)
 <p>Now cancel the job with its job number (printed in your terminal).
 Absence of any job info indicates that the job has been successfully
 cancelled.</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  scancel 38759</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># It might take a minute for the job to disappear from the queue...</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  scancel 38759</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="co"># It might take a minute for the job to disappear from the queue...</span></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  squeue <span class="at">-u</span> userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -875,10 +914,10 @@ Fortunately, we can run these types of tasks as a one-off with
 exits. Let’s demonstrate this by running the <code>hostname</code>
 command with <code>srun</code>. (We can cancel an <code>srun</code> job
 with <code>Ctrl-c</code>.)</p>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short <span class="at">--time</span><span class="op">=</span>00:01:00 hostname</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short <span class="at">--time</span><span class="op">=</span>00:01:00 hostname</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -898,10 +937,10 @@ for <code>sbatch</code>.</p>
 Perhaps it’s our first time running an analysis or we are attempting to
 debug something that went wrong with a previous job. Fortunately, SLURM
 makes it easy to start an interactive job with <code>srun</code>:</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short <span class="at">--pty</span> /bin/bash</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$  srun <span class="at">--partition</span><span class="op">=</span>short <span class="at">--pty</span> /bin/bash</span></code></pre>
 </div>
 <p>You should be presented with a bash prompt. Note that the prompt may
 change to reflect your new location, in this case the compute node we
