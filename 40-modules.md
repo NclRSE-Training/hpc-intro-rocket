@@ -431,8 +431,8 @@ Because the version of python isn't compatible with the currently loaded version
 
 :::callout
 ## system python
-Watch out for system provided python, it may not be the version you need.  _(It's best to always specify your python version ??)_
-On Rocket, `which python` returns `/usr/bin/python`, but this turns out to be a link to Python2:
+Watch out for system provided python, it may not be the version you need. It's best to always specify your python version.
+On Rocket, the default version of Python is Python2.  python --version `which python` returns `/usr/bin/python`, but this turns out to be a link to Python2:
 ```bash
 [userid@login01 ~]$ which python
 /usr/bin/python
