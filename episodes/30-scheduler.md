@@ -63,6 +63,7 @@ manner. Our shell script will have three parts:
     the line by printing the new-line character.
 * On the last line, we'll invoke the `hostname` command, which will print the
   name of the machine the script is run on.
+* After our script is saved, we must make it executable, or linux system security will not allow it to run.  Use `chmod +x` to do this.
 
 ```bash
 [userid@login01 ~]$  nano example-job.sh
