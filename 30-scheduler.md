@@ -91,7 +91,7 @@ Run the script. Does it execute on the cluster or just our login node?
 ```output
 This script is running on login01
 ```
-This job runs on the login node.
+This job runs on the login node. **!! Remember !!** we don't run jobs on the login node unless they are very small test jobs like this one.
 :::
 :::
 
