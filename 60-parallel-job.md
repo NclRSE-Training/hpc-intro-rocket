@@ -398,8 +398,7 @@ Create a submission file, requesting one task on a single node. If we do not spe
 
 ```output
 #!/bin/bash
-#SBATCH --partition=standard
-#SBATCH --qos=standard
+#SBATCH --partition=short
 #SBATCH --job-name serial-pi
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -496,7 +495,7 @@ configured to obtain it from the queuing system,
 by examining the environment variables set when the job is launched.
 :::
 
-:::callout
+:::discussion
 ## What Changes Are Needed for an MPI Version of the π Calculator?
 
 On Cirrus we need to first import `mpi4py.rc` and set `mpi4py.rc.initialize = False`
@@ -582,39 +581,30 @@ counts = comm.gather(count_item, root=0)
 
 Illustrations of these steps are shown below.
 
----
+### The Parallel Message Passing Interface (MPI) Process
 
-Setup the MPI environment and initialize local variables -- including the
+Step 1: Setup the MPI environment and initialize local variables -- including the
 vector containing the number of points to generate on each parallel processor:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/initialize.png"
-   alt="MPI initialize" %}
 
-Distribute the number of points from the originating vector to all the parallel
+![Step1: Initialise the MPI environment](/fig/initialize.png){alt="MPI initialize"}
+
+Step 2: Distribute the number of points from the originating vector to all the parallel
 processors:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/scatter.png"
-   alt="MPI scatter" %}
+![Step 2: Distribute tasks](/fig/scatter.png){alt="MPI scatter"}
 
-Perform the computation in parallel:
+Step 3: Perform the computation in parallel:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/compute.png"
-   alt="MPI compute" %}
+![Step 3: Parallel computation](/fig/compute.png){alt="MPI compute"}
 
-Retrieve counts from all the parallel processes:
+Step 4: Retrieve counts from all the parallel processes:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/gather.png"
-   alt="MPI gather" %}
+![Step 4: Gather the resulting counts](/fig/gather.png){alt="MPI gather"}
 
-Print out the report:
+Step 5: Print out the report:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/finalize.png"
-   alt="MPI finalize" %}
+![Step 5: Finalise the result](/fig/finalize.png){alt="MPI finalize"}
 
 ---
 
@@ -651,8 +641,7 @@ Create a submission file, requesting more than one task on a single node:
 ```
 ```output
 #!/bin/bash
-#SBATCH --partition=standard
-#SBATCH --qos=standard
+#SBATCH --partition=short
 #SBATCH --job-name parallel-pi
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=4
@@ -668,7 +657,7 @@ srun python pi-mpi-cirrus.py 100000000
 Then submit your job.
 
 ```bash
-[userid@login01 ~]$  srun parallel-pi.sh
+[userid@login01 ~]$  sbatch parallel-pi.sh
 ```
 
 
@@ -721,8 +710,8 @@ For a laptop with 8 cores, the graph of speedup factor versus number of cores
 used shows relatively consistent improvement when using 2, 4, or 8 cores, but
 using additional cores shows a diminishing return.
 
-
-![MPI speedup factors on an 8-core lapto](/fig/laptop-mpi_Speedup_factor.png){alt="MPI speedup factors on an 8-core laptop"}
+### Laptop performance
+![MPI speedup factors on an 8-core laptop](/fig/laptop-mpi_Speedup_factor.png){alt="MPI speedup factors on an 8-core laptop"}
 
 For a set of HPC nodes containing 28 cores each, the graph of speedup factor
 versus number of cores shows consistent improvements up through three nodes
@@ -733,7 +722,7 @@ the MPI processes requiring more time than is gained by reducing the amount
 of work each MPI process has to complete. This communication overhead is not
 included in Amdahl's Law.
 
-
+### HPC performance
 ![MPI speedup factors on HPC](/fig/hpc-mpi_Speedup_factor.png){alt="MPI speedup factors on HPC"}
 
 In practice, MPI speedup factors are influenced by:
