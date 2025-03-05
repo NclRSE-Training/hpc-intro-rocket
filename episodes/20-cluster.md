@@ -52,7 +52,7 @@ Go ahead and open your terminal or graphical SSH client, then log in to the
 cluster using your username.
 
 ```bash
-[user@laptop ~]$ ssh userid@rocket.hpc
+[user@laptop ~]$ ssh userid@rocket.hpc.ncl.ac.uk
 ```
 
 Remember to replace **userid** with your username or the one
