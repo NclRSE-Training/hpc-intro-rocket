@@ -123,6 +123,11 @@ if __name__ == '__main__':
 ```
 
 
+:::callout
+## Run the code on your development machine (e.g. your laptop)
+
+A normal workflow would be to develop and run scripts on your own machine, then move the working code up to HPC if more resource is needed to run it. 
+If you have Python installed on your lapotop, feel free to try this out:
 If we run the Python script locally with a command-line parameter, as in
 `python pi.py 1024`, we should see the script print its estimate of
 π:
@@ -134,7 +139,8 @@ If we run the Python script locally with a command-line parameter, as in
 
 
 :::challenge
-did this work on Rocket?
+## Try out code on the login node?
+We only run small test jobs on the login node.  Rather than have the whole class attempt this and block up the login node, your instructor will run the code as a demonstration:
 :::solution
 on Rocket, software is only available via modules, so we need to load Python3 before we start:
 
