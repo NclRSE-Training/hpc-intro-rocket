@@ -719,8 +719,8 @@ For a laptop with 8 cores, the graph of speedup factor versus number of cores
 used shows relatively consistent improvement when using 2, 4, or 8 cores, but
 using additional cores shows a diminishing return.
 
-
-![MPI speedup factors on an 8-core lapto](/fig/laptop-mpi_Speedup_factor.png){alt="MPI speedup factors on an 8-core laptop"}
+### Laptop performance
+![MPI speedup factors on an 8-core laptop](/fig/laptop-mpi_Speedup_factor.png){alt="MPI speedup factors on an 8-core laptop"}
 
 For a set of HPC nodes containing 28 cores each, the graph of speedup factor
 versus number of cores shows consistent improvements up through three nodes
@@ -731,7 +731,7 @@ the MPI processes requiring more time than is gained by reducing the amount
 of work each MPI process has to complete. This communication overhead is not
 included in Amdahl's Law.
 
-
+### HPC performance
 ![MPI speedup factors on HPC](/fig/hpc-mpi_Speedup_factor.png){alt="MPI speedup factors on HPC"}
 
 In practice, MPI speedup factors are influenced by:
