@@ -51,8 +51,8 @@ In this case, the job we want to run is a shell script -- essentially a
 text file containing a list of UNIX commands to be executed in a sequential
 manner. Our shell script will have three parts:
 
-* On the very first line, add `#!/bin/bash. The `#!`
-  (pronounced "hash-bang" or "shebang") tells the computer what program is
+* On the very first line, add `#!/bin/bash`.
+  The `#!` (pronounced "hash-bang" or "shebang") tells the computer what program is
   meant to process the contents of this file. In this case, we are telling it
   that the commands that follow are written for the command-line shell (what
   we've been doing everything in so far).
@@ -96,10 +96,33 @@ This job runs on the login node. **!! Remember !!** we don't run jobs on the log
 :::
 :::
 
+## Submit a job to the scheduler
 If you completed the previous challenge successfully, you probably realise that
 there is a distinction between running the job through the scheduler and just
 "running it". To submit this job to the scheduler, we use the
-`sbatch` command.
+`sbatch` with the option `--partition=short`.
+
+:::challenge
+## Partitions
+The eagle eyed will have noticed a PARTITION column in the output of `sinfo` in the previous episode.
+HPC systems divide resources into partitions (or queues), for efficient scheduling.  
+The 'short' partition only allows very short jobs (default 1 minute time limit), which the scheduler can easily fit in the gaps between longer jobs.
+Using 'short' is best for small test jobs as they don't have to wait in the queue behind bigger jobs.
+
+:::solution
+## Partitions on Rocket
+```
+Partition (queue)	Nodes		Max concurrent 	Time limit (wallclock)	Default time limit (wallclock)	Default memory per core
+defq			standard	528 cores	2 days			2 days				2.5 GB
+bigmem			medium,large,XL	2 nodes		2 days(*)		2 days				11 GB
+short			all		2 nodes		10 minutes		1 minute			2.5 GB
+long			standard	2 nodes		30 days			5 days				2.5 GB
+power(**)		power		1 node		2 days			2 days				2.5 GB
+interactive		all		1 node		1 day or 2 hours idle time 2 hours			2.5 GB
+```
+:::
+:::
+
 
 ```bash
 [userid@login01 ~]$  sbatch --partition=short example-job.sh
@@ -167,7 +190,7 @@ name of a job. Add an option to the script:
 
 ```output
 #!/bin/bash
-#SBATCH--job-name new_name
+#SBATCH --job-name new_name
 
 echo -n "This script is running on "
 hostname
@@ -254,8 +277,8 @@ on the command line (e.g. `--partition`) into the script at this point.
 
 ```output
 #!/bin/bash
-#SBATCH--time 00:01:15
-#SBATCH--partition=short
+#SBATCH --time 00:01:15
+#SBATCH --partition=short
 echo -n "This script is running on "
 sleep 60 # time in seconds
 hostname
@@ -308,9 +331,9 @@ walltime, and attempt to run a job for two minutes.
 
 ```output
 #!/bin/bash
-#SBATCH--job-name long_job
-#SBATCH--time 00:00:30
-#SBATCH--partition=short
+#SBATCH --job-name long_job
+#SBATCH --time 00:00:30
+#SBATCH --partition=short
 
 echo "This script is running on ... "
 sleep 120 # time in seconds
