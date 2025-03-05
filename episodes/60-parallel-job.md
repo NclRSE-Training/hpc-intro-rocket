@@ -583,28 +583,28 @@ Illustrations of these steps are shown below.
 
 ### The Parallel Message Passing Interface (MPI) Process
 
-Setup the MPI environment and initialize local variables -- including the
+Step 1: Setup the MPI environment and initialize local variables -- including the
 vector containing the number of points to generate on each parallel processor:
 
 
-![Initialise MPI environment](/fig/initialize.png){alt="MPI initialize"}
+![Step1: Initialise the MPI environment](/fig/initialize.png){alt="MPI initialize"}
 
-Distribute the number of points from the originating vector to all the parallel
+Step 2: Distribute the number of points from the originating vector to all the parallel
 processors:
 
-![Distribute tasks](/fig/scatter.png){alt="MPI scatter"}
+![Step 2: Distribute tasks](/fig/scatter.png){alt="MPI scatter"}
 
-Perform the computation in parallel:
+Step 3: Perform the computation in parallel:
 
-![Parallel computation](/fig/compute.png){alt="MPI compute"}
+![Step 3: Parallel computation](/fig/compute.png){alt="MPI compute"}
 
-Retrieve counts from all the parallel processes:
+Step 4: Retrieve counts from all the parallel processes:
 
-![Gather resulting counts](/fig/gather.png){alt="MPI gather"}
+![Step 4: Gather the resulting counts](/fig/gather.png){alt="MPI gather"}
 
-Print out the report:
+Step 5: Print out the report:
 
-![Finalise the result](/fig/finalize.png){alt="MPI finalize"}
+![Step 5: Finalise the result](/fig/finalize.png){alt="MPI finalize"}
 
 ---
 
