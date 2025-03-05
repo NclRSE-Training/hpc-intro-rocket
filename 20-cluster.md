@@ -272,6 +272,7 @@ https://en.wikipedia.org/wiki/Mount_(computing)).
 
 This is an important point to remember: files saved on one node
 (computer) are often available everywhere on the cluster!
+:::
 
 ::: challenge
 ## Explore a Worker Node
@@ -282,7 +283,6 @@ run. Try running this command to see the name, CPUs and memory available on one 
 ```bash
 [userid@login01 ~]$  sinfo -n -o "%n %c %m" -o "%n %c %m"
 ```
-:::
 :::
 
 ::: discussion
