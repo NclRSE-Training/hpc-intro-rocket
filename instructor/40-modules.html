@@ -732,7 +732,7 @@ login node is loaded on a compute node).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -900,17 +900,9 @@ loaded version of gcc, module has done a swap for us.</p>
 <div class="callout-content">
 <p>Watch out for system provided python, it may not be the version you
 need. It’s best to always specify your python version. On Rocket, the
-default version of Python is Python2. python –version
-<code>which python</code> returns <code>/usr/bin/python</code>, but this
-turns out to be a link to Python2:</p>
-<div class="codewrapper sourceCode" id="cb39">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ which python</span>
-<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="ex">/usr/bin/python</span></span>
-<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls <span class="at">-l</span> /usr/bin/python</span>
-<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a><span class="ex">lrwxrwxrwx.</span> 1 root root 7 Nov  6 10:01 /usr/bin/python <span class="at">-</span><span class="op">&gt;</span> python2</span></code></pre>
-</div>
+default version of Python is Python2. To confirm the version type
+<code>python --version</code> which, on Rocket, will return
+<code>Python 2.7.5</code>.</p>
 </div>
 </div>
 </div>
