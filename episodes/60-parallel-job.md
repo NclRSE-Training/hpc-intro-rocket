@@ -495,7 +495,7 @@ configured to obtain it from the queuing system,
 by examining the environment variables set when the job is launched.
 :::
 
-:::callout
+:::discussion
 ## What Changes Are Needed for an MPI Version of the π Calculator?
 
 On Cirrus we need to first import `mpi4py.rc` and set `mpi4py.rc.initialize = False`
@@ -581,39 +581,30 @@ counts = comm.gather(count_item, root=0)
 
 Illustrations of these steps are shown below.
 
----
+### The Parallel Message Passing Interface (MPI) Process
 
 Setup the MPI environment and initialize local variables -- including the
 vector containing the number of points to generate on each parallel processor:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/initialize.png"
-   alt="MPI initialize" %}
+
+![Initialise MPI environment](/fig/initialize.png){alt="MPI initialize"}
 
 Distribute the number of points from the originating vector to all the parallel
 processors:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/scatter.png"
-   alt="MPI scatter" %}
+![Distribute tasks](/fig/scatter.png){alt="MPI scatter"}
 
 Perform the computation in parallel:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/compute.png"
-   alt="MPI compute" %}
+![Parallel computation](/fig/compute.png){alt="MPI compute"}
 
 Retrieve counts from all the parallel processes:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/gather.png"
-   alt="MPI gather" %}
+![Gather resulting counts](/fig/gather.png){alt="MPI gather"}
 
 Print out the report:
 
-{% include figure.html url="" caption="" max-width="50%"
-   file="/fig/finalize.png"
-   alt="MPI finalize" %}
+![Finalise the result](/fig/finalize.png){alt="MPI finalize"}
 
 ---
 
