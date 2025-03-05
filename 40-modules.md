@@ -308,7 +308,7 @@ In this case, `Python/3.7.0-foss-2018b` has a `(D)` next to it. This indicates t
 
 ::: challenge
 ## Using Software Modules in Scripts
-Create a job that is able to run `python3 --version`. Running a job
+Create a job to report what version of python is running, uisng the command `python3 --version`. Running a job
 is just like logging on to the system
 (you should not assume a module loaded on the login node is loaded on a
 compute node).
