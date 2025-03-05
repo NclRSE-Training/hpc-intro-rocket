@@ -131,6 +131,7 @@ If you have Python installed on your lapotop, feel free to try this out:
 If we run the Python script locally with a command-line parameter, as in
 `python pi.py 1024`, we should see the script print its estimate of
 π:
+:::
 
 ```bash
 [user@laptop ~]$ python pi.py 1024

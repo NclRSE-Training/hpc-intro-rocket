@@ -389,8 +389,6 @@ The following have been reloaded with a version change:
 ```
 What happened?  The module command is teling us that it swapped out `GCC/12.3.0` and replaced it with `GCC/11.2.0`
 
-
-
 ```bash
 [userid@login01 ~]$ gcc --version
 ```
@@ -434,7 +432,6 @@ Because the version of python isn't compatible with the currently loaded version
 Watch out for system provided python, it may not be the version you need. It's best to always specify your python version.
 On Rocket, the default version of Python is Python2. To confirm the version type `python --version` which, on Rocket, will
 return `Python 2.7.5`.
-```
 :::
 
 ::: keypoints
