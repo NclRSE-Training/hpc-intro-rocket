@@ -668,7 +668,7 @@ srun python pi-mpi-cirrus.py 100000000
 Then submit your job.
 
 ```bash
-[userid@login01 ~]$  srun parallel-pi.sh
+[userid@login01 ~]$  sbatch parallel-pi.sh
 ```
 
 
