@@ -398,8 +398,7 @@ Create a submission file, requesting one task on a single node. If we do not spe
 
 ```output
 #!/bin/bash
-#SBATCH --partition=standard
-#SBATCH --qos=standard
+#SBATCH --partition=short
 #SBATCH --job-name serial-pi
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
@@ -651,8 +650,7 @@ Create a submission file, requesting more than one task on a single node:
 ```
 ```output
 #!/bin/bash
-#SBATCH --partition=standard
-#SBATCH --qos=standard
+#SBATCH --partition=short
 #SBATCH --job-name parallel-pi
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=4
