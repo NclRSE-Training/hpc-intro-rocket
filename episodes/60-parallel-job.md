@@ -133,6 +133,19 @@ If we run the Python script locally with a command-line parameter, as in
 ```
 
 
+:::challenge
+did this work on Rocket?
+:::solution
+on Rocket, software is only available via modules, so we need to load Python3 before we start:
+
+```bash
+[userid@rocket.hpc]$ module load Python
+[userid@rocket.hpc]$ python pi.py 1024
+3.04296875
+```
+:::
+:::
+
 ## Random Number Generation
 
 :::challenge
