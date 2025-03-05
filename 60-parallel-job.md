@@ -429,7 +429,7 @@ then you will be assigned a maximum of 256/36 = 7.1 GB of the memory available o
 Then submit your job.
 
 ```bash
-[userid@login01 ~]$  srun serial-pi.sh
+[userid@login01 ~]$  sbatch serial-pi.sh
 ```
 
 
