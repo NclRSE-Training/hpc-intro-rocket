@@ -23,8 +23,8 @@ We now have the tools we need to run a multi-processor job. This is a very
 important aspect of HPC systems, as parallelism is one of the primary tools
 we have to improve the performance of computational tasks.
 
-Our example implements a stochastic algorithm for estimating the value of
-π, the ratio of the circumference to the diameter of a circle.
+Our example implements a method for estimating the value of
+π, the ratio of the circumference to the diameter of a circle.   
 The program generates a large number of random points on a 1×1 square
 centered on (½,½), and checks how many of these points fall
 inside the unit circle.
@@ -45,14 +45,14 @@ The Python code you will use in this episode has been pre-written and you can ob
 
 
 ```bash
-[user@laptop ~]$ curl -O https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
-[user@laptop ~]$ tar -xvzf python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ curl -O https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ tar -xvzf python-pi-code.tar.gz
 ```
 
 or
 ```bash
-[user@laptop ~]$ wget https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
-[user@laptop ~]$ tar -xvzf python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ wget https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ tar -xvzf python-pi-code.tar.gz
 ```
 
 
@@ -123,15 +123,35 @@ if __name__ == '__main__':
 ```
 
 
+:::callout
+## Run the code on your development machine (e.g. your laptop)
+
+A normal workflow would be to develop and run scripts on your own machine, then move the working code up to HPC if more resource is needed to run it. 
+If you have Python installed on your lapotop, feel free to try this out:
 If we run the Python script locally with a command-line parameter, as in
 `python pi.py 1024`, we should see the script print its estimate of
 π:
+:::
 
 ```bash
 [user@laptop ~]$ python pi.py 1024
 3.04296875
 ```
 
+
+:::challenge
+## Try out code on the login node?
+We only run small test jobs on the login node.  Rather than have the whole class attempt this and block up the login node, your instructor will run the code as a demonstration:
+:::solution
+on Rocket, software is only available via modules, so we need to load Python3 before we start:
+
+```bash
+[userid@rocket.hpc]$ module load Python
+[userid@rocket.hpc]$ python pi.py 1024
+3.04296875
+```
+:::
+:::
 
 ## Random Number Generation
 
