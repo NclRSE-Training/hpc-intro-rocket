@@ -65,6 +65,13 @@ manner. Our shell script will have three parts:
   name of the machine the script is run on.
 * After our script is saved, we must make it executable, or linux system security will not allow it to run.  Use `chmod +x` to do this.
 
+:::callout
+## Substitute your username for `userid`
+
+In all our examples, you will see `userid` in the place of your own username. 
+:::
+
+
 ```bash
 [userid@login01 ~]$  nano example-job.sh
 [userid@login01 ~]$  chmod +x example-job.sh
@@ -142,14 +149,24 @@ status, we check the queue using the command
 [userid@login01 userid]$  squeue -u userid
 ```
 
+:::callout
+## Did it work?
+If you get an error, check that you have substituted your own username for `userid` in the command above
+:::
+
 ```output
 JOBID PARTITION     NAME     USER   ST    TIME  NODES NODELIST(REASON)
 36855 short         example- userid PD    0:00  1     (None)
 ```
 
 We can see all the details of our job, most importantly that it is in the `R`
-or `RUNNING` state. Sometimes our jobs might need to wait in a queue
+or `RUNNING` state. 
+
+Sometimes our jobs might need to wait in a queue
 (`PD` or `PENDING`) or become terminated, for example due to `OUT_OF_MEMORY` (`OOM`) error, `TIMEOUT` (`TO`) or some other `FAILED` (`F`) condition.
+
+
+Other states you may see are: `CA` (cancelled), `CF`(configuring), `CG` (completing), `CD` (completed), `NF` (node failure), `RV` (revoked) and `SE` (special exit state).
 
 
 ::: discussion
