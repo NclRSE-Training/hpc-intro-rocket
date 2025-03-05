@@ -45,14 +45,14 @@ The Python code you will use in this episode has been pre-written and you can ob
 
 
 ```bash
-[user@laptop ~]$ curl -O https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
-[user@laptop ~]$ tar -xvzf python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ curl -O https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ tar -xvzf python-pi-code.tar.gz
 ```
 
 or
 ```bash
-[user@laptop ~]$ wget https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
-[user@laptop ~]$ tar -xvzf python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ wget https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz
+[userid@rocket.hpc ~]$ tar -xvzf python-pi-code.tar.gz
 ```
 
 
