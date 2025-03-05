@@ -307,11 +307,13 @@ With all of this in mind, we will now cover how to talk to the cluster's
 scheduler, and use it to start running our scripts and programs!
 
 ::: keypoints
- - "An HPC system is a set of networked machines."
- - "HPC systems typically provide login nodes and a set of worker nodes."
- - "The resources found on independent (worker) nodes can vary in volume and
+ - An HPC system is a set of networked machines.
+ - HPC systems typically provide login nodes and a set of worker nodes.
+ - The standard method of interacting with such systems is via a command line
+  interface called Bash.
+ - The resources found on independent (worker) nodes can vary in volume and
    type (amount of RAM, processor architecture, availability of network mounted
-   filesystems, etc.)."
- - "Files saved on one node are available on all nodes."
- - "Avoid running jobs on the login node"
+   filesystems, etc.).
+ - Files saved on one node are available on all nodes.
+ - Avoid running jobs on the login node
 :::
