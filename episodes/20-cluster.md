@@ -256,12 +256,13 @@ each resource is.
 ```bash
 [userid@login01 ~]$  df -Th
 ```
-:::
-:::
 
-::: discussion
-The local filesystems (ext, tmp, xfs, zfs) will depend on whether you're
-on the same login node (or compute node, later on). Networked filesystems
+
+::: callout
+## Different results from `df`
+- The local filesystems (ext, tmp, xfs, zfs) will depend on whether you're
+on the same login node (or compute node, later on).
+- Networked filesystems
 (beegfs, cifs, gpfs, nfs, pvfs) will be similar --- but may include
 userid, depending on how it is [mounted](
 https://en.wikipedia.org/wiki/Mount_(computing)).
@@ -273,6 +274,10 @@ https://en.wikipedia.org/wiki/Mount_(computing)).
 This is an important point to remember: files saved on one node
 (computer) are often available everywhere on the cluster!
 :::
+
+:::
+:::
+
 
 ::: challenge
 ## Explore a Worker Node
