@@ -23,8 +23,8 @@ We now have the tools we need to run a multi-processor job. This is a very
 important aspect of HPC systems, as parallelism is one of the primary tools
 we have to improve the performance of computational tasks.
 
-Our example implements a stochastic algorithm for estimating the value of
-π, the ratio of the circumference to the diameter of a circle.
+Our example implements a method for estimating the value of
+π, the ratio of the circumference to the diameter of a circle.   
 The program generates a large number of random points on a 1×1 square
 centered on (½,½), and checks how many of these points fall
 inside the unit circle.
