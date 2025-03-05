@@ -661,22 +661,19 @@ what kind of filesystem each resource is.</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  df <span class="at">-Th</span></span></code></pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div id="discussion1" class="callout discussion">
+<div id="different-results-from-df" class="callout">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Discussion</h3>
+<div id="different-results-from-df" class="callout-inner">
+<h3 class="callout-title">Different results from <code>df</code>
+</h3>
 <div class="callout-content">
-<p>The local filesystems (ext, tmp, xfs, zfs) will depend on whether
-you’re on the same login node (or compute node, later on). Networked
-filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be similar — but may
-include userid, depending on how it is <a href="https://en.wikipedia.org/wiki/Mount_(computing)" class="external-link">mounted</a>.</p>
-</div>
+<ul><li>The local filesystems (ext, tmp, xfs, zfs) will depend on whether
+you’re on the same login node (or compute node, later on).</li>
+<li>Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be
+similar — but may include userid, depending on how it is <a href="https://en.wikipedia.org/wiki/Mount_(computing)" class="external-link">mounted</a>.</li>
+</ul></div>
 </div>
 </div>
 <div id="shared-filesystems" class="callout">
@@ -688,6 +685,10 @@ include userid, depending on how it is <a href="https://en.wikipedia.org/wiki/Mo
 <div class="callout-content">
 <p>This is an important point to remember: files saved on one node
 (computer) are often available everywhere on the cluster!</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
