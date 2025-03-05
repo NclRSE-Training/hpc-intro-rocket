@@ -236,7 +236,7 @@ Now compare the resources of your computer with those of the login node.
 ::: solution
 
 ```bash
-[user@laptop ~]$  ssh userid@rocket.hpc
+[user@laptop ~]$  ssh userid@rocket.hpc.ncl.ac.uk
 [userid@login01 ~]$  nproc --all
 [userid@login01 ~]$  free -m
 ```
