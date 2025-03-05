@@ -231,10 +231,9 @@ common networking and storage to support common compute intensive tasks.
 
 
 ::: keypoints
- - "High Performance Computing (HPC) typically involves connecting to very large
-  computing systems elsewhere in the world."
- - "These other systems can be used to do work that would either be impossible
-  or much slower on smaller systems."
- - "The standard method of interacting with such systems is via a command line
-  interface called Bash."
+ - High Performance Computing (HPC) typically involves connecting to very large
+  computing systems elsewhere in the world.
+ - These other systems can be used to do work that would either be impossible
+  or much slower on smaller systems.
+
 :::
