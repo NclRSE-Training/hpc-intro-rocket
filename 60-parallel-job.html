@@ -406,15 +406,12 @@ parallel.</p>
 <figure><img src="fig/pi.png" alt="Algorithm for computing pi through random sampling" class="figure mx-auto d-block"><div class="figcaption">estimating pi from random points</div>
 </figure><section><h2 class="section-heading" id="get-code-for-this-episode">Get code for this episode<a class="anchor" aria-label="anchor" href="#get-code-for-this-episode"></a></h2>
 <hr class="half-width"><p>The Python code you will use in this episode has been pre-written and
-you can obtain a copy in three ways: - Under the <strong>Extras</strong>
-tab at the top of this page there is a link to the code. Create two new
-files in your working directory on Cirrus and copy the contents into
-them. - Use the commands <code>curl</code> or <code>wget</code> from the
-previous episode to download the files directly into your working
-directory on Cirrus and extract the archive. Remember you will need to
-specify the path to these Python files in your job submission scripts.
-It may be useful to <code>cd</code> into this directory or
-<code>mv</code> the contents directly to the path
+you can obtain a copy by: Method 1: Use the commands <code>curl</code>
+or <code>wget</code> from the previous episode to download the files
+directly into your working directory on Rocket and extract the archive.
+Remember you will need to specify the path to these Python files in your
+job submission scripts. It may be useful to <code>cd</code> into this
+directory or <code>mv</code> the contents directly to the path
 <code>/nobackup/proj/training/userid</code>.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -429,10 +426,10 @@ It may be useful to <code>cd</code> into this directory or
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">[userid@rocket.hpc</span> ~]$ wget https://nclrse-training.github.io/hpc-intro-cirrus/files/python-pi-code.tar.gz</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">[userid@rocket.hpc</span> ~]$ tar <span class="at">-xvzf</span> python-pi-code.tar.gz</span></code></pre>
 </div>
-<ul><li>You can also create a local copy of the files on your machine and
-then use <code>scp</code> or <code>rsync</code> to copy the file onto
-Cirrus.</li>
-</ul><div class="codewrapper sourceCode" id="cb3">
+<p>Method 2: You can download a local copy of the files on your machine
+and then use <code>scp</code> or <code>rsync</code> to copy the file
+onto Rocket.</p>
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$ scp pi.py userid@rocket.hpc:/nobackup/proj/training/userid</span>
@@ -518,7 +515,7 @@ script print its estimate of π:</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="try-out-code-on-the-login-node" class="callout-inner">
-<h3 class="callout-title">Try out code on the login node?</h3>
+<h3 class="callout-title">Try out code on the login node ?</h3>
 <div class="callout-content">
 <p>We only run small test jobs on the login node. Rather than have the
 whole class attempt this and block up the login node, your instructor
@@ -560,7 +557,7 @@ difficult.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li>Computers are deterministic and produce pseudo random numbers using
 an algorithm. The choice of algorithm and its parameters determines how
@@ -767,14 +764,13 @@ points.</p>
 </div>
 </section><section><h2 class="section-heading" id="running-the-serial-job-on-a-compute-node">Running the Serial Job on a Compute Node<a class="anchor" aria-label="anchor" href="#running-the-serial-job-on-a-compute-node"></a></h2>
 <hr class="half-width"><p>Replicate the <code>pi.py</code> script in the
-<code>/nobackup/proj/training/userid</code> space on Cirrus. Guidance on
+<code>/nobackup/proj/training/userid</code> space on Rocket. Guidance on
 how to do this can be found at the beginning of this episode.</p>
 <p>Create a submission file, requesting one task on a single node. If we
 do not specify a maximum walltime for the job using
-<code>--time=&lt;hh:mm:ss&gt;</code> then (on Cirrus) the job will be
-submitted with the <code>short</code> default maximum time of 20
-minutes. To avoid a warning message we will allocate a very generous 1
-minute.</p>
+<code>--time=&lt;hh:mm:ss&gt;</code> then the job will be submitted with
+the <code>short</code> default maximum time of 1 minute (NB partition
+names and default time limits will vary between HPC systems).</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -789,7 +785,6 @@ minute.</p>
 #SBATCH --job-name serial-pi
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
-#SBATCH --time=00:01
 
 
 # Load the correct Python module
