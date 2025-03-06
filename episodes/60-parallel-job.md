@@ -39,9 +39,8 @@ in parallel.
 
 ## Get code for this episode
 
-The Python code you will use in this episode has been pre-written and you can obtain a copy in three ways:
-- Under the **Extras** tab at the top of this page there is a link to the code. Create two new files in your working directory on Cirrus and copy the contents into them.
-- Use the commands `curl` or `wget` from the previous episode to download the files directly into your working directory on Cirrus and extract the archive. Remember you will need to specify the path to these Python files in your job submission scripts. It may be useful to `cd` into this directory or `mv` the contents directly to the path `/nobackup/proj/training/userid`.
+The Python code you will use in this episode has been pre-written and you can obtain a copy by:
+Method 1: Use the commands `curl` or `wget` from the previous episode to download the files directly into your working directory on Rocket and extract the archive. Remember you will need to specify the path to these Python files in your job submission scripts. It may be useful to `cd` into this directory or `mv` the contents directly to the path `/nobackup/proj/training/userid`.
 
 
 ```bash
@@ -57,7 +56,7 @@ or
 
 
 
-- You can also create a local copy of the files on your machine and then use `scp` or `rsync` to copy the file onto Cirrus.
+Method 2: You can download a local copy of the files on your machine and then use `scp` or `rsync` to copy the file onto Rocket.
 
 ```bash
 [user@laptop ~]$ scp pi.py userid@rocket.hpc:/nobackup/proj/training/userid
@@ -140,7 +139,7 @@ If we run the Python script locally with a command-line parameter, as in
 
 
 :::challenge
-## Try out code on the login node?
+## Try out code on the login node ?
 We only run small test jobs on the login node.  Rather than have the whole class attempt this and block up the login node, your instructor will run the code as a demonstration:
 :::solution
 on Rocket, software is only available via modules, so we need to load Python3 before we start:
@@ -387,9 +386,9 @@ If you have 16 GiB installed, you won't quite make it to 750,000,000 points.
 
 ## Running the Serial Job on a Compute Node
 
-Replicate the `pi.py` script in the `/nobackup/proj/training/userid` space on Cirrus. Guidance on how to do this can be found at the beginning of this episode. 
+Replicate the `pi.py` script in the `/nobackup/proj/training/userid` space on Rocket. Guidance on how to do this can be found at the beginning of this episode. 
 
-Create a submission file, requesting one task on a single node. If we do not specify a maximum walltime for the job using `--time=<hh:mm:ss>` then (on Cirrus) the job will be submitted with the `short` default maximum time of 20 minutes. To avoid a warning message we will allocate a very generous 1 minute.
+Create a submission file, requesting one task on a single node. If we do not specify a maximum walltime for the job using `--time=<hh:mm:ss>` then the job will be submitted with the `short` default maximum time of 1 minute (NB partition names and default time limits will vary between HPC systems). 
 
 ```bash
 [userid@login01 ~]$  nano serial-pi.sh
@@ -402,7 +401,6 @@ Create a submission file, requesting one task on a single node. If we do not spe
 #SBATCH --job-name serial-pi
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=1
-#SBATCH --time=00:01
 
 
 # Load the correct Python module
