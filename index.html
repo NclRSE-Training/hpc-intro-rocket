@@ -343,7 +343,8 @@ any links that you are not going to use.
 <p>There are several pieces of software you will wish to install before
 the workshop. Though installation help will be provided at the workshop,
 we recommend that these tools are installed (or at least downloaded)
-beforehand.</p>
+beforehand. 1. <a href="#where-to-type-commands-how-to-open-a-new-shell">A terminal
+application or command-line interface</a> 2. <a href="#ssh-for-secure-connections">A Secure Shell application</a></p>
 <div id="bash-and-ssh" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
@@ -385,15 +386,8 @@ e.g. online setup) in the solutions blocks.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1">
-  Windows
-  </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
+<div class="section level3">
+<h3 id="unix-shells-on-windows">Unix Shells on Windows<a class="anchor" aria-label="anchor" href="#unix-shells-on-windows"></a></h3>
 <p>Computers with Windows operating systems do not automatically have a
 Unix Shell program installed. In this lesson, we encourage you to use an
 emulator included in MobaXterm for Windows, which gives you access to
@@ -401,7 +395,7 @@ both Bash shell commands and SSH.</p>
 <p>Once installed, you can open a terminal by running the program
 MobaXterm from the Windows start menu.</p>
 <div class="section level4">
-<h4 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h4>
+<h4 id="shell-programs-for-windows">Shell Programs for Windows<a class="anchor" aria-label="anchor" href="#shell-programs-for-windows"></a></h4>
 <ul><li>
 <a href="https://mobaxterm.mobatek.net/download-home-edition.html" class="external-link">MobaXterm</a>
 — <em>Recommended</em>
@@ -412,6 +406,8 @@ Alternative option used by other Software Carpentries</li>
 <li>
 <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" class="external-link">Windows
 Subsystem for Linux</a> — advanced option for Windows 10</li>
+<li>
+</li>
 </ul><div id="alternatives-to-mobaxterm-and-git-for-windows" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -436,28 +432,23 @@ Subsystem for Linux</a>
 <li>Use the Windows <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core?view=powershell-7" class="external-link">Powershell</a>
 </li>
 <li>Read up on <a href="https://faculty.smu.edu/reynolds/unixtut/windows.html" class="external-link">Using a
-Unix/Linux emulator (Cygwin) or Secure Shell (SSH) client (Putty)</a>
-&gt; ## Warning &gt; &gt; Commands in the Windows Subsystem for Linux
-(WSL), Powershell, or Cygwin &gt; may differ slightly from those shown
-in the lesson or presented in the &gt; workshop. Please ask if you
-encounter such a mismatch — you’re &gt; probably not alone.</li>
-</ul></div>
+Unix/Linux emulator (Cygwin) or Secure Shell (SSH) client
+(Putty)</a>
+</li>
+</ul><div class="section level2">
+<h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h2>
+<p>Commands in the Windows Subsystem for Linux (WSL), Powershell, or
+Cygwin may differ slightly from those shown in the lesson or presented
+in the workshop. Please ask if you encounter such a mismatch — you’re
+probably not alone.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2">
-  MacOS
-  </h4>
-</button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
-<div class="accordion-body">
+<div class="section level3">
+<h3 id="unix-shell-on-macos">Unix Shell on macOS<a class="anchor" aria-label="anchor" href="#unix-shell-on-macos"></a></h3>
 <p>On macOS, the default Unix Shell is accessible by running the
 Terminal program from the <code>/Application/Utilities</code> folder in
 Finder.</p>
@@ -466,24 +457,11 @@ Finder.</p>
 Terminal in the Utilities folder and open it.</li>
 <li>Use the Mac ‘Spotlight’ computer search function. Search for:
 <code>Terminal</code> and press <kbd>Return</kbd>.</li>
-</ul><div class="section level4">
-<h4 id="reference-1">Reference<a class="anchor" aria-label="anchor" href="#reference-1"></a></h4>
-<p><a href="https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/" class="external-link">How
+</ul><p>For an introduction, see <a href="https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/" class="external-link">How
 to Use Terminal on a Mac</a></p>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
-  <h4 class="accordion-header" id="headingSolution3">
-  Linux
-  </h4>
-</button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
-<div class="accordion-body">
+<div class="section level3">
+<h3 id="linux">Linux<a class="anchor" aria-label="anchor" href="#linux"></a></h3>
 <p>On most versions of Linux, the default Unix Shell is accessible by
 running the <a href="https://help.gnome.org/users/gnome-terminal/stable/" class="external-link">(Gnome)
 Terminal</a> or <a href="https://konsole.kde.org/" class="external-link">(KDE) Konsole</a> or
@@ -497,9 +475,6 @@ online search for: <code>Unix shell [your operating system]</code>.</p>
 you have an SSH client installed and registering for an ARCHER2 account
 (you can also use an existing ARCHER2 account if you are already a
 user).</p>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -519,14 +494,14 @@ you do not already have one.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1">
   Windows
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Modern versions of Windows have SSH available in Powershell. You can
 test if it is available by typing <code>ssh --help</code> in Powershell.
@@ -540,14 +515,14 @@ Powershell works, you do not need this.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
-  <h4 class="accordion-header" id="headingSolution5">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2">
   macOS
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>macOS comes with SSH pre-installed, so you should not need to install
 anything. Use your “Terminal” app.</p>
@@ -555,14 +530,14 @@ anything. Use your “Terminal” app.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
-  <h4 class="accordion-header" id="headingSolution6">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3">
   Linux
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Linux users do not need to install anything, you should be set! Use
 your terminal application.</p>
