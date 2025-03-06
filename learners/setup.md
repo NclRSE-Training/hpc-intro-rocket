@@ -7,6 +7,9 @@ title: Setup
 There are several pieces of software you will wish to install before the
 workshop. Though installation help will be provided at the workshop, we
 recommend that these tools are installed (or at least downloaded) beforehand.
+1. [A terminal application or command-line interface](#where-to-type-commands-how-to-open-a-new-shell)
+2. [A Secure Shell application](#ssh-for-secure-connections)
+
 
 ::: prereq
 
@@ -30,7 +33,7 @@ on a server.
 
 ## Shell Setup
 
-::::::::::::::::::::::::::::::::::::::: discussion
+::: discussion
 
 ### Details
 
@@ -39,11 +42,9 @@ tag. They will join to this discussion block, so you can give a general overview
 of the software used in this lesson here and fill out the individual operating
 systems (and potentially add more, e.g. online setup) in the solutions blocks.
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::
+:::
 
-:::::::::::::::: solution
-
-### Windows
+### Unix Shells on Windows
 
 Computers with Windows operating systems do not automatically have a Unix Shell
 program installed. In this lesson, we encourage you to use an emulator included
@@ -52,13 +53,12 @@ in MobaXterm for Windows, which gives you access to both Bash shell commands and
 Once installed, you can open a terminal by running the program MobaXterm from
 the Windows start menu.
 
-#### Reference
+#### Shell Programs for Windows
 
-* [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html) &mdash; *Recommended*
-* [Git for Windows](https://gitforwindows.org/) &mdash; Alternative option used by other Software Carpentries
-* [Windows Subsystem for Linux](
-  https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-  &mdash; advanced option for Windows 10
+- [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html) &mdash; *Recommended*
+- [Git for Windows](https://gitforwindows.org/) &mdash; Alternative option used by other Software Carpentries
+- [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) &mdash; advanced option for Windows 10
+- 
 
 ::: discussion
 ## Alternatives to MobaXterm and Git for Windows 
@@ -76,20 +76,20 @@ For advanced users, you may choose one of the following alternatives:
  * Install the [Windows Subsystem for   Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
  * Use the Windows [Powershell](https://docs.microsoft.com/en-us/powershell/scripting/learn/remoting/ssh-remoting-in-powershell-core?view=powershell-7)
  * Read up on [Using a Unix/Linux emulator (Cygwin) or Secure Shell (SSH) client (Putty)](https://faculty.smu.edu/reynolds/unixtut/windows.html)
-> ## Warning
->
-> Commands in the Windows Subsystem for Linux (WSL), Powershell, or Cygwin
-> may differ slightly from those shown in the lesson or presented in the
-> workshop. Please ask if you encounter such a mismatch &mdash; you're
-> probably not alone.
+
+
+## Warning
+
+Commands in the Windows Subsystem for Linux (WSL), Powershell, or Cygwin
+may differ slightly from those shown in the lesson or presented in the
+workshop. Please ask if you encounter such a mismatch &mdash; you're
+probably not alone.
 
 :::
 
-:::::::::::::::::::::::::
 
-:::::::::::::::: solution
 
-### MacOS
+### Unix Shell on macOS
 
 On macOS, the default Unix Shell is accessible by running the Terminal program
 from the `/Application/Utilities` folder in Finder.
@@ -101,15 +101,11 @@ To open Terminal, try one or both of the following:
 * Use the Mac ‘Spotlight’ computer search function. Search for: `Terminal` and
   press <kbd>Return</kbd>.
 
-#### Reference 
-
-[How to Use Terminal on a Mac](
+For an introduction, see [How to Use Terminal on a Mac](
 https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/)
 
-:::::::::::::::::::::::::
 
 
-:::::::::::::::: solution
 
 ### Linux
 
@@ -128,12 +124,10 @@ This setup takes you through getting ready for the course by ensuring you have a
 and registering for an ARCHER2 account (you can also use an existing ARCHER2 account if you are already
 a user).
 
-:::::::::::::::::::::::::
-
 
 ## Setup an SSH client
 
-::::::::::::::::::::::::: discussion
+::: discussion
 
 ### Details
 
@@ -142,7 +136,7 @@ SSH is a tool that allows us to connect to and use a remote computer as our own.
 Please follow the directions below to install an SSH client for your system if you do not 
 already have one.
 
-:::::::::::::::::::::::::
+:::
 
 ::: solution
 
@@ -169,4 +163,4 @@ macOS comes with SSH pre-installed, so you should not need to install anything. 
 
 Linux users do not need to install anything, you should be set! Use your terminal application.
 
-::::::::::::::::::::::
+:::
