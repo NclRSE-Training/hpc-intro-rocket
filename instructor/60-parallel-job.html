@@ -806,15 +806,15 @@ python3 pi.py 100000000</code></pre>
 of the job using the <code>--mem</code>, <code>--mem-per-cpu</code>,
 <code>--mem-per-gpu</code> options. However, on Cirrus you cannot
 specify the memory for a job. The amount of memory you are assigned is
-calculated from the amount of primary resource you request. The primary
-resource you request on standard compute nodes are CPU cores. The
-maximum amount of memory you are allocated is computed as the number of
-CPU cores you requested multiplied by 1/36th of the total memory
-available (as there are 36 CPU cores per node). So, if you request the
-full node (36 cores), then you will be allocated a maximum of all of the
-memory (256 GB) available on the node; however, if you request 1 core,
-then you will be assigned a maximum of 256/36 = 7.1 GB of the memory
-available on the node.</p>
+calculated from the amount of primary resource you request.</p>
+<p>The primary resource you request on standard compute nodes are CPU
+cores. The maximum amount of memory you are allocated is computed as the
+number of CPU cores you requested multiplied by 1/22 of the total memory
+available (as there are 22 CPU cores per node). So, if you request a
+full standard node (22 cores), then you will be allocated a maximum of
+all of the memory (128 GB) available on the node; however, if you
+request 1 core, then you will be assigned a maximum of 128/22 = 2.9 GB
+of the memory available on the node.e.</p>
 </div>
 </div>
 </div>
@@ -895,12 +895,7 @@ variables set when the job is launched.</p>
 <div id="what-changes-are-needed-for-an-mpi-version-of-the-π-calculator" class="callout-inner">
 <h3 class="callout-title">What Changes Are Needed for an MPI Version of the π Calculator?</h3>
 <div class="callout-content">
-<p>On Cirrus we need to first import <code>mpi4py.rc</code> and set
-<code>mpi4py.rc.initialize = False</code> before we can import the
-standard <code>mpi4py</code> Python module. This may not be necessary on
-other HPC systems and you should consult the documentation if you
-experience problems setting up MPI.</p>
-<p>Next, we need to import the <code>MPI</code> object from the Python
+<p>First, we need to import the <code>MPI</code> object from the Python
 module <code>mpi4py</code> by adding an
 <code>from mpi4py import MPI</code> line immediately below the
 <code>import datetime</code> line.</p>
