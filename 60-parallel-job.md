@@ -417,11 +417,12 @@ On some HPC systems you may need to specify the memory requirements of the job
 using the `--mem`, `--mem-per-cpu`, `--mem-per-gpu` options. However, on Cirrus
 you cannot specify the memory for a job. The amount of memory you are assigned 
 is calculated from the amount of primary resource you request.
-The primary resource you request on standard compute nodes are CPU cores. The maximum amount of memory you 
-are allocated is computed as the number of CPU cores you requested multiplied by 1/36th of the total memory 
-available (as there are 36 CPU cores per node). So, if you request the full node (36 cores), then you will 
-be allocated a maximum of all of the memory (256 GB) available on the node; however, if you request 1 core, 
-then you will be assigned a maximum of 256/36 = 7.1 GB of the memory available on the node.
+
+The primary resource you request on standard compute nodes are CPU cores. The 
+maximum amount of memory you are allocated is computed as the number of CPU cores you requested multiplied by 1/22 of the total memory 
+available (as there are 22 CPU cores per node). So, if you request a full standard node (22 cores), then you will 
+be allocated a maximum of all of the memory (128 GB) available on the node; however, if you request 1 core, 
+then you will be assigned a maximum of 128/22 = 2.9 GB of the memory available on the node.e.
 :::
 
 Then submit your job.
@@ -496,12 +497,7 @@ by examining the environment variables set when the job is launched.
 :::discussion
 ## What Changes Are Needed for an MPI Version of the π Calculator?
 
-On Cirrus we need to first import `mpi4py.rc` and set `mpi4py.rc.initialize = False`
-before we can import the standard `mpi4py` Python module. This may not be necessary
-on other HPC systems and you should consult the documentation if you experience
-problems setting up MPI.
-
-Next, we need to import the `MPI` object from the Python module `mpi4py` by
+First, we need to import the `MPI` object from the Python module `mpi4py` by
 adding an `from mpi4py import MPI` line immediately below the `import
 datetime` line.
 
