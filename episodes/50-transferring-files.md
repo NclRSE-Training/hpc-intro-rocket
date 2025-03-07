@@ -18,7 +18,7 @@ exercises: 15
 
 ## Required Files
 
-The program used in this example can be retrieved using wget or a browser and copied to the remote.
+The program used in this example can be retrieved using wget or a browser on your laptop and then copied to the remote HPC.
 
 **Using wget**: 
 ```bash
@@ -83,8 +83,8 @@ To *download from* another computer:
 [user@laptop ~]$  scp userid@rocket.hpc:/path/on/Rocket/file.txt path/to/local/
 ```
 
-Note that everything after the `:` is relative to our home directory on the
-remote computer. We can leave it at that if we don't care where the file goes.
+Note that everything after the `:` is optional. If you don't specify a path on the
+remote computer, the file will be transferred to your home directory.
 
 ```bash
 [user@laptop ~]$  scp local-file.txt userid@rocket.hpc:
@@ -103,20 +103,10 @@ Rocket.
 :::
 :::
 
-::: discussion
-## Why Not Download on Rocket Directly?
-Some computer clusters are behind firewalls set to only allow transfers
-initiated from the *outside*. This means that the `curl` command will fail,
-as an address outside the firewall is unreachable from the inside. To get
-around this, run the `curl` or `wget` command from your local machine to 
-download the file, then use the `scp` command (just below here) to upload
-it to the cluster.
-
-:::
 
 ::: challenge
 
-## Can you download from the server directly?
+## Can you download to the HPC directly?
 
 Try downloading the file directly using `curl` or `wget`. Do the commands understand file locations on your local machine over SSH? Note that it may well fail, and that's
 OK!
@@ -134,6 +124,14 @@ or
 
 Did it work? If not, what does the terminal output tell you about what
 happened?
+
+### Why Not Download on Rocket Directly?
+Some computer clusters are behind firewalls set to only allow transfers
+initiated from the *outside*. This means that the `curl` command will fail,
+as an address outside the firewall is unreachable from the inside. To get
+around this, run the `curl` or `wget` command from your local machine to 
+download the file, then use the `scp` command (just below here) to upload
+it to the cluster.
 :::
 :::
 
