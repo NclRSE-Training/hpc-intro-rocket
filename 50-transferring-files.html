@@ -351,7 +351,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Transferring files with remote computers</h1>
-        <p>Last updated on 2025-02-26 |
+        <p>Last updated on 2025-03-07 |
 
         <a href="https://github.com/NclRSE-Training/hpc-intro-rocket/edit/main/episodes/50-transferring-files.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -396,7 +396,7 @@ internet.</li>
 <h3 class="callout-title">Required Files</h3>
 <div class="callout-content">
 <p>The program used in this example can be retrieved using wget or a
-browser and copied to the remote.</p>
+browser on your laptop and then copied to the remote HPC.</p>
 <p><strong>Using wget</strong>:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -468,9 +468,9 @@ new users, but we’ll break it down.</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp userid@rocket.hpc:/path/on/Rocket/file.txt path/to/local/</span></code></pre>
 </div>
-<p>Note that everything after the <code>:</code> is relative to our home
-directory on the remote computer. We can leave it at that if we don’t
-care where the file goes.</p>
+<p>Note that everything after the <code>:</code> is optional. If you
+don’t specify a path on the remote computer, the file will be
+transferred to your home directory.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -504,29 +504,12 @@ directory on Rocket.</p>
 </div>
 </div>
 </div>
-<div id="why-not-download-on-rocket-directly" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="why-not-download-on-rocket-directly" class="callout-inner">
-<h3 class="callout-title">Why Not Download on Rocket Directly?</h3>
-<div class="callout-content">
-<p>Some computer clusters are behind firewalls set to only allow
-transfers initiated from the <em>outside</em>. This means that the
-<code>curl</code> command will fail, as an address outside the firewall
-is unreachable from the inside. To get around this, run the
-<code>curl</code> or <code>wget</code> command from your local machine
-to download the file, then use the <code>scp</code> command (just below
-here) to upload it to the cluster.</p>
-</div>
-</div>
-</div>
-<div id="can-you-download-from-the-server-directly" class="callout challenge">
+<div id="can-you-download-to-the-hpc-directly" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="can-you-download-from-the-server-directly" class="callout-inner">
-<h3 class="callout-title">Can you download from the server directly?</h3>
+<div id="can-you-download-to-the-hpc-directly" class="callout-inner">
+<h3 class="callout-title">Can you download to the HPC directly?</h3>
 <div class="callout-content">
 <p>Try downloading the file directly using <code>curl</code> or
 <code>wget</code>. Do the commands understand file locations on your
@@ -553,6 +536,16 @@ following:</p>
 </div>
 <p>Did it work? If not, what does the terminal output tell you about
 what happened?</p>
+<div class="section level3">
+<h3 id="why-not-download-on-rocket-directly">Why Not Download on Rocket Directly?<a class="anchor" aria-label="anchor" href="#why-not-download-on-rocket-directly"></a></h3>
+<p>Some computer clusters are behind firewalls set to only allow
+transfers initiated from the <em>outside</em>. This means that the
+<code>curl</code> command will fail, as an address outside the firewall
+is unreachable from the inside. To get around this, run the
+<code>curl</code> or <code>wget</code> command from your local machine
+to download the file, then use the <code>scp</code> command (just below
+here) to upload it to the cluster.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1200,7 +1193,7 @@ any links that you are not going to use.
   "url": "https://NclRSE-Training.github.io/hpc-intro-rocket/50-transferring-files.html",
   "identifier": "https://NclRSE-Training.github.io/hpc-intro-rocket/50-transferring-files.html",
   "dateCreated": "2025-02-12",
-  "dateModified": "2025-02-26",
+  "dateModified": "2025-03-07",
   "datePublished": "2025-03-07"
 }
 
