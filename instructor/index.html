@@ -330,8 +330,56 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
 
-<p>This is a new lesson built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
+<p>This workshop is an introduction to using high-performance computing
+systems effectively. We can’t cover every case or give an exhaustive
+course on parallel programming in just two days’ teaching time. Instead,
+this workshop is intended to give students a good introduction and
+overview of the tools available and how to use them effectively.</p>
+<div id="prerequisites" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="prerequisites" class="callout-inner">
+<h3 class="callout-title">Prerequisites</h3>
+<div class="callout-content">
+<p>Command line experience is necessary for this lesson. We recommend
+the participants to go through <a href="https://swcarpentry.github.io/shell-novice/" class="external-link">shell-novice</a>, if
+new to the command line (also known as terminal or shell).</p>
+</div>
+</div>
+</div>
+<p>By the end of this workshop, students will know how to:</p>
+<ul><li>Identify problems a cluster can help solve</li>
+<li>Use the UNIX shell (also known as terminal or command line) to
+connect to a cluster.</li>
+<li>Transfer files onto a cluster.</li>
+<li>Submit and manage jobs on a cluster using a scheduler.</li>
+<li>Observe the benefits and limitations of parallel execution.</li>
+</ul><div id="getting-started" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="getting-started" class="callout-inner">
+<h3 class="callout-title">Getting Started</h3>
+<div class="callout-content">
+<p>To get started, follow the directions in the “<a href="../%7B%7B%20page.root%20%7D%7D/setup.html">Setup</a>” tab to download
+data to your computer and follow any installation instructions.</p>
+</div>
+</div>
+</div>
+<p>Note that this is the draft HPC Carpentry release. Comments and
+feedback are welcome.</p>
+<div id="for-instructors" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="for-instructors" class="callout-inner">
+<h3 class="callout-title">For Instructors</h3>
+<div class="callout-content">
+<p>If you are teaching this lesson in a workshop, please see the <a href="instructor-notes.html">Instructor notes</a>.</p>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -440,9 +488,12 @@ any links that you are not going to use.
 <p>There are several pieces of software you will wish to install before
 the workshop. Though installation help will be provided at the workshop,
 we recommend that these tools are installed (or at least downloaded)
-beforehand. 1. <a href="#where-to-type-commands-how-to-open-a-new-shell">A terminal
-application or command-line interface</a> 2. <a href="#ssh-for-secure-connections">A Secure Shell application</a></p>
-<div id="bash-and-ssh" class="callout prereq">
+beforehand.</p>
+<ol style="list-style-type: decimal"><li><a href="#where-to-type-commands-how-to-open-a-new-shell">A terminal
+application or command-line interface</a></li>
+<li><a href="#ssh-for-secure-connections">A Secure Shell
+application</a></li>
+</ol><div id="bash-and-ssh" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
@@ -465,17 +516,6 @@ describe some methods for identifying and opening a Unix Shell program
 if you already have one installed. There are also options for
 identifying and downloading a Unix Shell program, a Linux/UNIX emulator,
 or a program to access a Unix Shell on a server.</p>
-</div>
-<div class="section level2">
-<h2 id="shell-setup">Shell Setup<a class="anchor" aria-label="anchor" href="#shell-setup"></a></h2>
-<div class="section level3">
-<h3 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h3>
-<p>Setup for different systems can be presented in dropdown menus via a
-<code>solution</code> tag. They will join to this discussion block, so
-you can give a general overview of the software used in this lesson here
-and fill out the individual operating systems (and potentially add more,
-e.g. online setup) in the solutions blocks.</p>
-</div>
 <div class="section level3">
 <h3 id="unix-shells-on-windows">Unix Shells on Windows<a class="anchor" aria-label="anchor" href="#unix-shells-on-windows"></a></h3>
 <p>Computers with Windows operating systems do not automatically have a
@@ -496,8 +536,6 @@ Alternative option used by other Software Carpentries</li>
 <li>
 <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" class="external-link">Windows
 Subsystem for Linux</a> — advanced option for Windows 10</li>
-<li>
-</li>
 </ul><div id="alternatives-to-mobaxterm-and-git-for-windows" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -551,7 +589,7 @@ Terminal in the Utilities folder and open it.</li>
 to Use Terminal on a Mac</a></p>
 </div>
 <div class="section level3">
-<h3 id="linux">Linux<a class="anchor" aria-label="anchor" href="#linux"></a></h3>
+<h3 id="unix-shell-on-linux">Unix Shell on Linux<a class="anchor" aria-label="anchor" href="#unix-shell-on-linux"></a></h3>
 <p>On most versions of Linux, the default Unix Shell is accessible by
 running the <a href="https://help.gnome.org/users/gnome-terminal/stable/" class="external-link">(Gnome)
 Terminal</a> or <a href="https://konsole.kde.org/" class="external-link">(KDE) Konsole</a> or
@@ -561,20 +599,16 @@ found via the applications menu or the search bar.</p>
 <h4 id="special-cases">Special cases<a class="anchor" aria-label="anchor" href="#special-cases"></a></h4>
 <p>If none of the options above address your circumstances, try an
 online search for: <code>Unix shell [your operating system]</code>.</p>
-<p>This setup takes you through getting ready for the course by ensuring
-you have an SSH client installed and registering for an ARCHER2 account
-(you can also use an existing ARCHER2 account if you are already a
-user).</p>
 </div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="setup-an-ssh-client">Setup an SSH client<a class="anchor" aria-label="anchor" href="#setup-an-ssh-client"></a></h2>
-<div id="details-1" class="callout discussion">
+<div id="details" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="details-1" class="callout-inner">
+<div id="details" class="callout-inner">
 <h3 class="callout-title">Details</h3>
 <div class="callout-content">
 <p>All attendees should have an SSH client installed. SSH is a tool that
@@ -591,7 +625,7 @@ you do not already have one.</p>
   Windows
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Modern versions of Windows have SSH available in Powershell. You can
 test if it is available by typing <code>ssh --help</code> in Powershell.
@@ -612,7 +646,7 @@ Powershell works, you do not need this.</p>
   macOS
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>macOS comes with SSH pre-installed, so you should not need to install
 anything. Use your “Terminal” app.</p>
@@ -627,7 +661,7 @@ anything. Use your “Terminal” app.</p>
   Linux
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Linux users do not need to install anything, you should be set! Use
 your terminal application.</p>
@@ -691,8 +725,8 @@ any links that you are not going to use.
   "url": "https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/index.html",
   "identifier": "https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/index.html",
   "dateCreated": "2025-02-12",
-  "dateModified": "2025-03-06",
-  "datePublished": "2025-03-06"
+  "dateModified": "2025-03-07",
+  "datePublished": "2025-03-07"
 }
 
   </script><script>
