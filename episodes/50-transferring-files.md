@@ -183,14 +183,16 @@ Because `/rdw` is a mounted filesystem, we an use `cp` instead of `scp`:
 [userid@login01 ~]$ cp file.txt /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
 [userid@login01 rse-hpc]$ cd /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
 [userid@login01 userid]$ pwd
+```
+```output
 /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+```
+```bash
 [userid@login01 userid]$ ls
 ```
-```ouptput
+```output
 file.txt
 ```
-
-
 
 ::: discussion
 
