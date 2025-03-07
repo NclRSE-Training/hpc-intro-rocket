@@ -255,11 +255,18 @@ total 57
 -rwxrwx--- 1 userid domainusers  0 Feb 26 15:52 file2.txt
 -rwxrwx--- 1 userid domainusers 39 Feb 26 15:52 file.txt
 ```
+It’s still easier to read output without errors that we have to ignore, so let’s remove that error.
 
-It's easier to read output without errors that we have to ignore, so let's remove that error by allowing the destination to set its default group using `--no-group`.  It's also possible to add `--no-owner`, allowing the destination to set file ownership to match the directory we're copying into.
+The `-a` (archive) option preserves permissions, this is why we see group modification errors above.  
+For Rocket and RDW, replace `-av` with `-rltv`  
+`-r` = recurse through subdirectories    
+`-l` = copy symlinks    
+`-t` = preserve timestamps   
+`-v` = verbose    
+
 
 ```bash
-[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid --no-group
+[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
 ```
 ```output
 sending incremental file list
@@ -270,48 +277,39 @@ file2.txt
 sent 203 bytes  received 57 bytes  
 ```
 
-## Windows Users - Transferring Files interactively with MobaXterm
-MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can even be used from home.
-
 
 :::callout
+
 ## Large data copies
-When copying large amounts of data, rsync really comes into its own.  If a copy is interrupted, the same command can pick up where it left off.
-
-
-
-### special case:  rsync on the same filesytem / very fast connection
-RDW has a super-fast connection to Rocket, which means that it takes more resource to compress and un-compress the data than it does to do the transfer
-
-[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
-
-The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-avzP` with `-rltv`    
-`-r` = recurse through subdirectories    
-`-l` = copy symlinks    
-`-t` = preserve timestamps   
---inplace --whole-file --size-only to speed up transfer and prevent rsync filling up space with a large temp directory    
---itemize-changes --progress --stats for more informative output  
-
-For big transfers, rerun the rsync command to check it completed.
-:::
-
-
-
-::: discussion
-
-## Large copies over fast and slow networks with `rsync`
-When you're copying a lot of data, it's important to keep track in case the copy is interrupted.  Rsync is great because it can pick up where it left off, rather than starting the copy all over again.  It's useful to output to a log so you can see what was transferred and find any errors that need to be addressed.
+When copying large amounts of data, rsync really comes into its own. When you're copying a lot of data, it's important to keep track in case the copy is interrupted.  Rsync is great because it can pick up where it left off, rather than starting the copy all over again.  It's also useful to output to a log so you can see what was transferred and find any errors that need to be addressed.
 
 ### Fast Connections
 Transfers from Rocket to RDW don’t leave our fast data centre network.  If you're using rsync with a fast network or disk to disk in the same machine:
 
-Don’t use compression -z
-Do use --inplace
+- DON'T use compression `-z`
+- DO use `--inplace`
 
-Why?  compression uses lots of CPU, Rsync usually creates a temp file on disk before copying.  For fast transfers, this places too much load on the CPU and hard drive.  --inplace tells rsync not to create the temp file but send the data straight away.  It doesn’t matter if the connection is interrupted, because rsync keeps track and tries again.  Always re-run transfer command to ensure nothing was missed.  The second run should be very fast, just listing all the files and not copying anything.
+Why?  compression uses lots of CPU, Rsync usually creates a temp file on disk before copying.  For fast transfers, this places too much load on the CPU and hard drive.    
+`--inplace` tells rsync not to create the temp file but send the data straight away.  It doesn’t matter if the connection is interrupted, because rsync keeps track and tries again.  Always re-run transfer command to ensure nothing was missed.  The second run should be very fast, just listing all the files and not copying anything.
 
 ### Slow Connections
-For a slow connection like the internet, DO use compression and DON’T use --inplace.  
+For a slow connection like the internet:
+ 
+- DO use compression `-z` 
+- DON’T use `--inplace`.  
+
+### Special case:  Large transfers using rsync on the same filesytem / very fast connection
+RDW has a super-fast connection to Rocket, which means that it takes more resource to compress and un-compress the data than it does to do the transfer
+
+[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid
+
+The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-av` with `-rltv`    
+`-v` = verbose    
+`-r` = recurse through subdirectories    
+`-l` = copy symlinks    
+`-t` = preserve timestamps   
+`--inplace --whole-file --size-only` to speed up transfer and prevent rsync filling up space with a large temp directory    
+`--itemize-changes --progress --stats` for more informative output  
 :::
 
 :::challenge
@@ -331,7 +329,7 @@ rsync -avv --inplace --itemize-changes --progress --stats --whole-file --size-on
 :::
 
 
-::: discussion
+:::discussion
 ## A Note on Ports
 All file transfers using the above methods use SSH to encrypt data sent
 through the network. So, if you can connect via SSH, you will be able to
@@ -361,6 +359,10 @@ See https://rsync.samba.org/ for updates, bug reports, and answers
 ```
 :::
 :::
+
+
+## Windows Users - Transferring Files interactively with MobaXterm
+MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can even be used from home.
 
 ## Archiving Files
 
