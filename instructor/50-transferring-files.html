@@ -258,6 +258,7 @@
 <li><a href="#whats-in-a">What’s in a <code>/</code>?</a></li>
 <li><a href="#transferring-files-to-and-from-campus-storage-for-research-data-rdw">Transferring files to and from Campus Storage for Research Data
 (RDW)</a></li>
+<li><a href="#using-rsync-to-copy-to-rdw">Using rsync to copy to RDW</a></li>
 <li><a href="#windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm</a></li>
 <li><a href="#archiving-files">Archiving Files</a></li>
         </ul></div><!--/div.accordion-body-->
@@ -542,7 +543,7 @@ following:</p>
 <p>Did it work? If not, what does the terminal output tell you about
 what happened?</p>
 <div class="section level3">
-<h3 id="why-not-download-on-rocket-directly">Why Not Download on Rocket Directly?<a class="anchor" aria-label="anchor" href="#why-not-download-on-rocket-directly"></a></h3>
+<h3 id="why-not-download-directly-to-the-cluster">Why Not Download Directly to the cluster?<a class="anchor" aria-label="anchor" href="#why-not-download-directly-to-the-cluster"></a></h3>
 <p>Some computer clusters are behind firewalls set to only allow
 transfers initiated from the <em>outside</em>. This means that the
 <code>curl</code> command will fail, as an address outside the firewall
@@ -604,7 +605,7 @@ rsync to transfer data to RDW in the same way as copying to any other
 directory on Rocket.</p>
 <div class="section level3">
 <h3 id="using-cp-to-copy-to-rdw">Using cp to copy to RDW<a class="anchor" aria-label="anchor" href="#using-cp-to-copy-to-rdw"></a></h3>
-<p>Because <code>/rdw</code> is a mounted filesystem, we an use
+<p>Because <code>/rdw</code> is a mounted filesystem, we can use
 <code>cp</code> instead of <code>scp</code>:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -628,23 +629,19 @@ directory on Rocket.</p>
 </h3>
 <pre class="output" tabindex="0"><code><span><span class="va">file.txt</span></span></code></pre>
 </div>
-<div id="a-note-on-rsync" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="a-note-on-rsync" class="callout-inner">
-<h3 class="callout-title">A Note on <code>rsync</code>
-</h3>
-<div class="callout-content">
-<p>As you gain experience with transferring files, you may find the
+</section><section><h2 class="section-heading" id="using-rsync-to-copy-to-rdw">Using rsync to copy to RDW<a class="anchor" aria-label="anchor" href="#using-rsync-to-copy-to-rdw"></a></h2>
+<hr class="half-width"><p>As you gain experience with transferring files, you may find the
 <code>scp</code> command limiting. The <a href="https://rsync.samba.org/" class="external-link">rsync</a> utility provides advanced
 features for file transfer and is typically faster compared to both
 <code>scp</code> and <code>sftp</code> (see below). It is especially
 useful for transferring large and/or many files and creating synced
 backup folders. The syntax is similar to <code>cp</code> and
-<code>scp</code>.</p>
-<p>To transfer <em>to</em> RDW from your work area on Rocket</p>
-<p>Try out a dry run:</p>
+<code>scp</code>. Rsync can be used on a locally mounted filesystem or a
+remote filesystem.</p>
+<p>Transfer <em>to</em> RDW from your work area on Rocket</p>
+<div class="section level3">
+<h3 id="try-out-a-dry-run">Try out a dry run:<a class="anchor" aria-label="anchor" href="#try-out-a-dry-run"></a></h3>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -661,7 +658,9 @@ file2.txt
 sent 119 bytes  received 25 bytes  288.00 bytes/sec
 total size is 39  speedup is 0.27 (DRY RUN)</code></pre>
 </div>
-<p>Run ‘for real’:</p>
+</div>
+<div class="section level3">
+<h3 id="run-for-real">Run ‘for real’:<a class="anchor" aria-label="anchor" href="#run-for-real"></a></h3>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -733,9 +732,6 @@ file.txt
 file2.txt
 
 sent 203 bytes  received 57 bytes  </code></pre>
-</div>
-</div>
-</div>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm<a class="anchor" aria-label="anchor" href="#windows-users---transferring-files-interactively-with-mobaxterm"></a></h2>
