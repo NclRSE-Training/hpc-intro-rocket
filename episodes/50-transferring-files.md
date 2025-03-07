@@ -18,7 +18,7 @@ exercises: 15
 
 ## Required Files
 
-The program used in this example can be retrieved using wget or a browser on your laptop and then copied to the remote cluster.
+The files used in this example can be retrieved using wget or a browser on your laptop and then copied to the remote cluster.
 
 **Using wget**: 
 ```bash
@@ -30,8 +30,8 @@ The program used in this example can be retrieved using wget or a browser on you
 [http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz](http://training.researchcomputing.ncl.ac.uk/training-materials/hpc-intro-data.tar.gz)
 :::
 
-Computing with a remote computer offers very limited use if we cannot get files
-to or from the cluster. There are several options for transferring data between
+A remote cluster offers very limited use if we cannot get files
+to or from it. There are several options for transferring data between
 computing resources, from command line options to GUI programs, which we will
 cover here.
 
@@ -71,13 +71,13 @@ mouthful, later on.
 To copy a single file to or from the cluster, we can use `scp` ("secure copy").
 The syntax can be a little complex for new users, but we'll break it down.
 
-To *upload to* another computer:
+To *upload to* a remote computer:
 
 ```bash
 [user@laptop ~]$  scp path/to/local/file.txt userid@rocket.hpc:/path/on/Rocket
 ```
 
-To *download from* another computer:
+To *download from* a remote computer:
 
 ```bash
 [user@laptop ~]$  scp userid@rocket.hpc:/path/on/Rocket/file.txt path/to/local/
@@ -87,7 +87,7 @@ Note that everything after the `:` is optional. If you don't specify a path on t
 remote computer, the file will be transferred to your home directory. 
 It's a good idea to be clear about where you are putting the file though, 
 so use `~/` to upload to the top level in your home directory.
-(using the handy `~` as shorthand your home directory.)
+(using the handy `~` as shorthand for your home directory.)
 
 ```bash
 [user@laptop ~]$  scp local-file.txt userid@rocket.hpc:
