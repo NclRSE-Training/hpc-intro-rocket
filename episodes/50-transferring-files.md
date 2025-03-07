@@ -128,13 +128,14 @@ or
 Did it work? If not, what does the terminal output tell you about what
 happened?
 
-### Why Not Download on Rocket Directly?
+### Why Not Download Directly to the cluster?
 Some computer clusters are behind firewalls set to only allow transfers
 initiated from the *outside*. This means that the `curl` command will fail,
 as an address outside the firewall is unreachable from the inside. To get
 around this, run the `curl` or `wget` command from your local machine to 
 download the file, then use the `scp` command (just below here) to upload
 it to the cluster.
+
 :::
 :::
 
@@ -177,7 +178,7 @@ A trailing slash on the target directory is optional, and has no effect for
 RDW is mounted on Rocket at `/rdw`.  You can use scp and rsync to transfer data to RDW in the same way as copying to any other directory on Rocket.  
 
 ### Using cp to copy to RDW
-Because `/rdw` is a mounted filesystem, we an use `cp` instead of `scp`:
+Because `/rdw` is a mounted filesystem, we can use `cp` instead of `scp`:
 
 ```bash
 [userid@login01 ~]$ cp file.txt /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
@@ -194,19 +195,18 @@ Because `/rdw` is a mounted filesystem, we an use `cp` instead of `scp`:
 file.txt
 ```
 
-::: discussion
+## Using rsync to copy to RDW
 
-## A Note on `rsync`
 As you gain experience with transferring files, you may find the `scp`
 command limiting. The [rsync](https://rsync.samba.org/) utility provides
 advanced features for file transfer and is typically faster compared to both
 `scp` and `sftp` (see below). It is especially useful for transferring large
 and/or many files and creating synced backup folders.
-The syntax is similar to `cp` and `scp`. 
+The syntax is similar to `cp` and `scp`.  Rsync can be used on a locally mounted filesystem or a remote filesystem.
 
-To transfer *to* RDW from your work area on Rocket
+Transfer *to* RDW from your work area on Rocket
 
-Try out a dry run:
+### Try out a dry run:
 ```bash
 [userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid --dry-run
 ```
@@ -219,7 +219,7 @@ file2.txt
 sent 119 bytes  received 25 bytes  288.00 bytes/sec
 total size is 39  speedup is 0.27 (DRY RUN)
 ```
-Run ‘for real’:
+### Run ‘for real’:
 ```bash
 [userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
 ```
