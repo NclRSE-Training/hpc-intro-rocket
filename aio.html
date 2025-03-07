@@ -620,7 +620,7 @@ results.</p>
   Some Ideas
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li>Checking email: your computer (possibly in your pocket) contacts a
@@ -880,7 +880,7 @@ neighbors.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> It’s a Beautiful Day in the Neighborhood </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The deepest layer should differ: <strong>userid</strong> is uniquely
 yours. Are there differences in the path at higher levels?</p>
@@ -1004,7 +1004,7 @@ computer cluster, you need to log out first. To do so, type
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>There are several ways to do this. Most operating systems have a
 graphical system monitor, like the Windows Task Manager. More detailed
@@ -1051,7 +1051,7 @@ node.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2248,7 +2248,7 @@ login node is loaded on a compute node).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2820,15 +2820,16 @@ the files.</p>
 -rwxrwx--- 1 userid domainusers  0 Feb 26 15:52 file2.txt
 -rwxrwx--- 1 userid domainusers 39 Feb 26 15:52 file.txt</code></pre>
 </div>
-<p>It’s easier to read output without errors that we have to ignore, so
-let’s remove that error by allowing the destination to set its default
-group using <code>--no-group</code>. It’s also possible to add
-<code>--no-owner</code>, allowing the destination to set file ownership
-to match the directory we’re copying into.</p>
+<p>It’s still easier to read output without errors that we have to
+ignore, so let’s remove that error.</p>
+<p>The <code>-a</code> (archive) option preserves permissions, this is
+why we see group modification errors above.<br>
+For Rocket and RDW, replace <code>-av</code> with
+<code>-rltv</code><br><code>-r</code> = recurse through subdirectories<br><code>-l</code> = copy symlinks<br><code>-t</code> = preserve timestamps<br><code>-v</code> = verbose</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-av</span> testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid <span class="at">--no-group</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-rltv</span> testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2840,13 +2841,6 @@ file2.txt
 
 sent 203 bytes  received 57 bytes  </code></pre>
 </div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm<a class="anchor" aria-label="anchor" href="#windows-users---transferring-files-interactively-with-mobaxterm"></a>
-</h2>
-<hr class="half-width">
-<p>MobaXterm is a free ssh client. It allows connections via a ‘jump
-host’ so can even be used from home.</p>
 <div id="large-data-copies" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -2855,53 +2849,27 @@ host’ so can even be used from home.</p>
 <h3 class="callout-title">Large data copies</h3>
 <div class="callout-content">
 <p>When copying large amounts of data, rsync really comes into its own.
-If a copy is interrupted, the same command can pick up where it left
-off.</p>
-<div class="section level3">
-<h3 id="special-case-rsync-on-the-same-filesytem-very-fast-connection">special case: rsync on the same filesytem / very fast
-connection<a class="anchor" aria-label="anchor" href="#special-case-rsync-on-the-same-filesytem-very-fast-connection"></a>
-</h3>
-<p>RDW has a super-fast connection to Rocket, which means that it takes
-more resource to compress and un-compress the data than it does to do
-the transfer</p>
-<p>[<a href="mailto:userid@login01" class="email">userid@login01</a> ~]$
-rsync -rltv testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid</p>
-<p>The <code>-a</code> option preserves permissions, this is why we saw
-group modification errors above. For Rocket and RDW, replace
-<code>-avzP</code> with <code>-rltv</code><br><code>-r</code> = recurse through subdirectories<br><code>-l</code> = copy symlinks<br><code>-t</code> = preserve timestamps<br>
-–inplace –whole-file –size-only to speed up transfer and prevent rsync
-filling up space with a large temp directory<br>
-–itemize-changes –progress –stats for more informative output</p>
-<p>For big transfers, rerun the rsync command to check it completed.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="large-copies-over-fast-and-slow-networks-with-rsync" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="large-copies-over-fast-and-slow-networks-with-rsync" class="callout-inner">
-<h3 class="callout-title">Large copies over fast and slow networks with
-<code>rsync</code>
-</h3>
-<div class="callout-content">
-<p>When you’re copying a lot of data, it’s important to keep track in
-case the copy is interrupted. Rsync is great because it can pick up
-where it left off, rather than starting the copy all over again. It’s
-useful to output to a log so you can see what was transferred and find
-any errors that need to be addressed.</p>
+When you’re copying a lot of data, it’s important to keep track in case
+the copy is interrupted. Rsync is great because it can pick up where it
+left off, rather than starting the copy all over again. It’s also useful
+to output to a log so you can see what was transferred and find any
+errors that need to be addressed.</p>
 <div class="section level3">
 <h3 id="fast-connections">Fast Connections<a class="anchor" aria-label="anchor" href="#fast-connections"></a>
 </h3>
 <p>Transfers from Rocket to RDW don’t leave our fast data centre
 network. If you’re using rsync with a fast network or disk to disk in
 the same machine:</p>
-<p>Don’t use compression -z Do use –inplace</p>
+<ul>
+<li>DON’T use compression <code>-z</code>
+</li>
+<li>DO use <code>--inplace</code>
+</li>
+</ul>
 <p>Why? compression uses lots of CPU, Rsync usually creates a temp file
 on disk before copying. For fast transfers, this places too much load on
-the CPU and hard drive. –inplace tells rsync not to create the temp file
-but send the data straight away. It doesn’t matter if the connection is
+the CPU and hard drive.<br><code>--inplace</code> tells rsync not to create the temp file but send
+the data straight away. It doesn’t matter if the connection is
 interrupted, because rsync keeps track and tries again. Always re-run
 transfer command to ensure nothing was missed. The second run should be
 very fast, just listing all the files and not copying anything.</p>
@@ -2909,8 +2877,27 @@ very fast, just listing all the files and not copying anything.</p>
 <div class="section level3">
 <h3 id="slow-connections">Slow Connections<a class="anchor" aria-label="anchor" href="#slow-connections"></a>
 </h3>
-<p>For a slow connection like the internet, DO use compression and DON’T
-use –inplace.</p>
+<p>For a slow connection like the internet:</p>
+<ul>
+<li>DO use compression <code>-z</code>
+</li>
+<li>DON’T use <code>--inplace</code>.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="special-case-large-transfers-using-rsync-on-the-same-filesytem-very-fast-connection">Special case: Large transfers using rsync on the same filesytem /
+very fast connection<a class="anchor" aria-label="anchor" href="#special-case-large-transfers-using-rsync-on-the-same-filesytem-very-fast-connection"></a>
+</h3>
+<p>RDW has a super-fast connection to Rocket, which means that it takes
+more resource to compress and un-compress the data than it does to do
+the transfer</p>
+<p>[<a href="mailto:userid@login01" class="email">userid@login01</a> ~]$
+rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid</p>
+<p>The <code>-a</code> option preserves permissions, this is why we saw
+group modification errors above. For Rocket and RDW, replace
+<code>-av</code> with <code>-rltv</code><br><code>-v</code> = verbose<br><code>-r</code> = recurse through subdirectories<br><code>-l</code> = copy symlinks<br><code>-t</code> = preserve timestamps<br><code>--inplace --whole-file --size-only</code> to speed up transfer and
+prevent rsync filling up space with a large temp directory<br><code>--itemize-changes --progress --stats</code> for more informative
+output</p>
 </div>
 </div>
 </div>
@@ -3003,6 +2990,13 @@ page if you’re unsure.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm<a class="anchor" aria-label="anchor" href="#windows-users---transferring-files-interactively-with-mobaxterm"></a>
+</h2>
+<hr class="half-width">
+<p>MobaXterm is a free ssh client. It allows connections via a ‘jump
+host’ so can even be used from home.</p>
 </section><section><h2 class="section-heading" id="archiving-files">Archiving Files<a class="anchor" aria-label="anchor" href="#archiving-files"></a>
 </h2>
 <hr class="half-width">
@@ -3436,7 +3430,7 @@ difficult.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ul>
 <li>Computers are deterministic and produce pseudo random numbers using
@@ -4858,7 +4852,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Building software, creating directories, and unpacking software are
 common and acceptable tasks for the login node: options #2
@@ -5095,7 +5089,7 @@ mounted filesystem?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Lets go through each option</p>
 <ol style="list-style-type: decimal">
