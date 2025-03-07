@@ -18,7 +18,7 @@ exercises: 15
 
 ## Required Files
 
-The program used in this example can be retrieved using wget or a browser on your laptop and then copied to the remote HPC.
+The program used in this example can be retrieved using wget or a browser on your laptop and then copied to the remote cluster.
 
 **Using wget**: 
 ```bash
@@ -84,7 +84,10 @@ To *download from* another computer:
 ```
 
 Note that everything after the `:` is optional. If you don't specify a path on the
-remote computer, the file will be transferred to your home directory.
+remote computer, the file will be transferred to your home directory. 
+It's a good idea to be clear about where you are putting the file though, 
+so use `~/` to upload to the top level in your home directory.
+(using the handy `~` as shorthand your home directory.)
 
 ```bash
 [user@laptop ~]$  scp local-file.txt userid@rocket.hpc:
@@ -106,7 +109,7 @@ Rocket.
 
 ::: challenge
 
-## Can you download to the HPC directly?
+## Can you download to the cluster directly?
 
 Try downloading the file directly using `curl` or `wget`. Do the commands understand file locations on your local machine over SSH? Note that it may well fail, and that's
 OK!
