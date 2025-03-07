@@ -174,6 +174,9 @@ directory *is* the destination.
 A trailing slash on the target directory is optional, and has no effect for
 `scp -r`, but is important in other commands, like `rsync`.
 
+## Windows Users - Transferring Files interactively with MobaXterm
+MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can even be used from home.
+
 ## Transferring files to and from Campus Storage for Research Data (RDW)
 RDW is mounted on Rocket at `/rdw`.  You can use scp and rsync to transfer data to RDW in the same way as copying to any other directory on Rocket.  
 
@@ -297,37 +300,47 @@ For a slow connection like the internet:
  
 - DO use compression `-z` 
 - DON’T use `--inplace`.  
-
-### Special case:  Large transfers using rsync on the same filesytem / very fast connection
-RDW has a super-fast connection to Rocket, which means that it takes more resource to compress and un-compress the data than it does to do the transfer
-
-[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid
-
-The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-av` with `-rltv`    
-`-v` = verbose    
-`-r` = recurse through subdirectories    
-`-l` = copy symlinks    
-`-t` = preserve timestamps   
-`--inplace --whole-file --size-only` to speed up transfer and prevent rsync filling up space with a large temp directory    
-`--itemize-changes --progress --stats` for more informative output  
 :::
 
 :::challenge
-### Back up data from rocket to RDW
-Set up an rsync command to copy files and provide helpful output to a log file.
+##  Large Transfer to RDW
+RDW has a super-fast connection to Rocket, which means that it takes more resource to compress and un-compress the data than it does to do the transfer.
+What command would best for backing up a large amount of data from Rocket to RDW?
 
+:::solution
+```bash
+[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid
+```
+
+The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-av` with `-rltv`    
+`-r` = recurse through subdirectories    
+`-l` = copy symlinks    
+`-t` = preserve timestamps   
+`-v` = verbose    
+:::
+:::
+
+:::challenge
+## add a dry run and a log file
+ 
 :::solution
 Try out a dry run:
 ```bash
-rsync --dry-run -avv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log1
+rsync --dry-run -rltv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log1
 ```
 Run ‘for real’:
 ```bash
-rsync -avv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log2
+rsync -rltv --inplace --itemize-changes --progress --stats --whole-file --size-only /nobackup/myusername/source /rdw/path/to/my/share/destination/ 2>&1 | tee /home/myusername/meaningful-log-name.log2
 ```
-:::
-:::
 
+- `--inplace --whole-file --size-only` speed up transfer and prevent rsync filling up space with a large temporary directory    
+- `--itemize-changes --progress --stats` for more informative output    
+- Remember `|` from the Unix Shell workshop?    
+ `| tee` sends output both to the screen and to a log file    
+- All the arguments can be single letters like `-v` or full words like `--verbose`. Use `man rsync` to craft your favourite arguments list.
+
+:::
+:::
 
 :::discussion
 ## A Note on Ports
@@ -360,9 +373,6 @@ See https://rsync.samba.org/ for updates, bug reports, and answers
 :::
 :::
 
-
-## Windows Users - Transferring Files interactively with MobaXterm
-MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can even be used from home.
 
 ## Archiving Files
 
