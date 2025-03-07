@@ -195,7 +195,7 @@ Because `/rdw` is a mounted filesystem, we can use `cp` instead of `scp`:
 file.txt
 ```
 
-## Using rsync to copy to RDW
+### Using rsync to copy to RDW
 
 As you gain experience with transferring files, you may find the `scp`
 command limiting. The [rsync](https://rsync.samba.org/) utility provides
@@ -206,7 +206,7 @@ The syntax is similar to `cp` and `scp`.  Rsync can be used on a locally mounted
 
 Transfer *to* RDW from your work area on Rocket
 
-### Try out a dry run:
+#### Try out a dry run:
 ```bash
 [userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid --dry-run
 ```
@@ -219,7 +219,7 @@ file2.txt
 sent 119 bytes  received 25 bytes  288.00 bytes/sec
 total size is 39  speedup is 0.27 (DRY RUN)
 ```
-### Run ‘for real’:
+#### Run ‘for real’:
 ```bash
 [userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
 ```
@@ -278,57 +278,24 @@ MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can 
 ## Large data copies
 When copying large amounts of data, rsync really comes into its own.  If a copy is interrupted, the same command can pick up where it left off.
 
+
+
 ### special case:  rsync on the same filesytem / very fast connection
 RDW has a super-fast connection to Rocket, which means that it takes more resource to compress and un-compress the data than it does to do the transfer
 
 [userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
 
-The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-avzP` with `-rltv`
-`-r` = recurse through subdirectories
-`-l` = copy symlinks
-`-t` = preserve timestamps
---inplace --whole-file --size-only to speed up transfer and prevent rsync filling up space with a large temp directory
---itemize-changes --progress --stats for more informative output
+The `-a` option preserves permissions, this is why we saw group modification errors above.  For Rocket and RDW, replace `-avzP` with `-rltv`    
+`-r` = recurse through subdirectories    
+`-l` = copy symlinks    
+`-t` = preserve timestamps   
+--inplace --whole-file --size-only to speed up transfer and prevent rsync filling up space with a large temp directory    
+--itemize-changes --progress --stats for more informative output  
 
 For big transfers, rerun the rsync command to check it completed.
 :::
 
-:::callout
-## To transfer *to* Rocket from a campus laptop
-Because the transfer has to pass through the slower campus network, or even the internet, it's a good idea to use rsync's built-in compression `-z`
-commonly used options:
 
-```bash
-[user@laptop ~]$  rsync -avzP path/to/local/file.txt userid@rocket.hpc:directory/path/on/Rocket/
-```
-
-The `a` (archive) option preserves file timestamps and permissions among
-other things; the `v` (verbose) option gives verbose output to help monitor
-the transfer; the `z` (compression) option compresses the file during transit
-to reduce size and transfer time; and the `P` (partial/progress) option
-preserves partially transferred files in case of an interruption and also
-displays the progress of the transfer.
-
-To recursively copy a directory, we can use the same options:
-
-```bash
-[user@laptop ~]$  rsync -avzP path/to/local/dir userid@rocket.hpc:directory/path/on/Rocket/
-```
-
-As written, this will place the local directory and its contents under the
-specified directory on the remote system. If the trailing slash is omitted on
-the destination, a new directory corresponding to the transferred directory
-('dir' in the example) will not be created, and the contents of the source
-directory will be copied directly into the destination directory.
-
-The `a` (archive) option implies recursion.
-
-To download a file, we simply change the source and destination:
-
-```bash
-[user@laptop ~]$  rsync -avzP userid@rocket.hpc:path/on/Rocket/file.txt path/to/local/
-```
-:::
 
 ::: discussion
 
