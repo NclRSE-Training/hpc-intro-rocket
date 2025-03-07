@@ -256,9 +256,9 @@
 <li><a href="#transferring-single-files-and-folders-with-scp">Transferring Single Files and Folders With <code>scp</code></a></li>
 <li><a href="#transferring-a-directory">Transferring a Directory</a></li>
 <li><a href="#whats-in-a">What’s in a <code>/</code>?</a></li>
+<li><a href="#windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm</a></li>
 <li><a href="#transferring-files-to-and-from-campus-storage-for-research-data-rdw">Transferring files to and from Campus Storage for Research Data
 (RDW)</a></li>
-<li><a href="#windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm</a></li>
 <li><a href="#archiving-files">Archiving Files</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -496,7 +496,7 @@ directory on Rocket.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -525,7 +525,7 @@ local machine over SSH? Note that it may well fail, and that’s OK!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Using <code>curl</code> or <code>wget</code> commands like the
 following:</p>
@@ -595,6 +595,9 @@ destination.</p>
 <p>A trailing slash on the target directory is optional, and has no
 effect for <code>scp -r</code>, but is important in other commands, like
 <code>rsync</code>.</p>
+</section><section><h2 class="section-heading" id="windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm<a class="anchor" aria-label="anchor" href="#windows-users---transferring-files-interactively-with-mobaxterm"></a></h2>
+<hr class="half-width"><p>MobaXterm is a free ssh client. It allows connections via a ‘jump
+host’ so can even be used from home.</p>
 </section><section><h2 class="section-heading" id="transferring-files-to-and-from-campus-storage-for-research-data-rdw">Transferring files to and from Campus Storage for Research Data
 (RDW)<a class="anchor" aria-label="anchor" href="#transferring-files-to-and-from-campus-storage-for-research-data-rdw"></a></h2>
 <hr class="half-width"><p>RDW is mounted on Rocket at <code>/rdw</code>. You can use scp and
@@ -767,34 +770,22 @@ very fast, just listing all the files and not copying anything.</p>
 <p>For a slow connection like the internet:</p>
 <ul><li>DO use compression <code>-z</code>
 </li>
-<li>DON’T use <code>--inplace</code>.</li>
+<li>DON’T use <code>--inplace</code>.<br></li>
 </ul></div>
-<div class="section level3">
-<h3 id="special-case-large-transfers-using-rsync-on-the-same-filesytem-very-fast-connection">Special case: Large transfers using rsync on the same filesytem /
-very fast connection<a class="anchor" aria-label="anchor" href="#special-case-large-transfers-using-rsync-on-the-same-filesytem-very-fast-connection"></a></h3>
-<p>RDW has a super-fast connection to Rocket, which means that it takes
-more resource to compress and un-compress the data than it does to do
-the transfer</p>
-<p>[<a href="mailto:userid@login01" class="email">userid@login01</a> ~]$
-rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid</p>
-<p>The <code>-a</code> option preserves permissions, this is why we saw
-group modification errors above. For Rocket and RDW, replace
-<code>-av</code> with <code>-rltv</code><br><code>-v</code> = verbose<br><code>-r</code> = recurse through subdirectories<br><code>-l</code> = copy symlinks<br><code>-t</code> = preserve timestamps<br><code>--inplace --whole-file --size-only</code> to speed up transfer and
-prevent rsync filling up space with a large temp directory<br><code>--itemize-changes --progress --stats</code> for more informative
-output</p>
 </div>
 </div>
 </div>
-</div>
-<div id="back-up-data-from-rocket-to-rdw" class="callout challenge">
+<div id="large-transfer-to-rdw" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
-<div id="back-up-data-from-rocket-to-rdw" class="callout-inner">
-<h3 class="callout-title">Back up data from rocket to RDW</h3>
+<div id="large-transfer-to-rdw" class="callout-inner">
+<h3 class="callout-title">Large Transfer to RDW</h3>
 <div class="callout-content">
-<p>Set up an rsync command to copy files and provide helpful output to a
-log file.</p>
+<p>RDW has a super-fast connection to Rocket, which means that it takes
+more resource to compress and un-compress the data than it does to do
+the transfer. What command would best for backing up a large amount of
+data from Rocket to RDW?</p>
 </div>
 </div>
 </div>
@@ -803,21 +794,63 @@ log file.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
-<p>Try out a dry run:</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-avv</span> <span class="at">--inplace</span> <span class="at">--itemize-changes</span> <span class="at">--progress</span> <span class="at">--stats</span> <span class="at">--whole-file</span> <span class="at">--size-only</span> /nobackup/myusername/source /rdw/path/to/my/share/destination/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> /home/myusername/meaningful-log-name.log1</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-rltv</span> testDir/ /rdw/03/rse-hpc/training/userid</span></code></pre>
 </div>
-<p>Run ‘for real’:</p>
+<p>The <code>-a</code> option preserves permissions, this is why we saw
+group modification errors above. For Rocket and RDW, replace
+<code>-av</code> with <code>-rltv</code><br><code>-r</code> = recurse through subdirectories<br><code>-l</code> = copy symlinks<br><code>-t</code> = preserve timestamps<br><code>-v</code> = verbose</p>
+</div>
+</div>
+</div>
+</div>
+<div id="add-a-dry-run-and-a-log-file" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="add-a-dry-run-and-a-log-file" class="callout-inner">
+<h3 class="callout-title">add a dry run and a log file</h3>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<p>Try out a dry run:</p>
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-avv</span> <span class="at">--inplace</span> <span class="at">--itemize-changes</span> <span class="at">--progress</span> <span class="at">--stats</span> <span class="at">--whole-file</span> <span class="at">--size-only</span> /nobackup/myusername/source /rdw/path/to/my/share/destination/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> /home/myusername/meaningful-log-name.log2</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">--dry-run</span> <span class="at">-rltv</span> <span class="at">--inplace</span> <span class="at">--itemize-changes</span> <span class="at">--progress</span> <span class="at">--stats</span> <span class="at">--whole-file</span> <span class="at">--size-only</span> /nobackup/myusername/source /rdw/path/to/my/share/destination/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> /home/myusername/meaningful-log-name.log1</span></code></pre>
 </div>
+<p>Run ‘for real’:</p>
+<div class="codewrapper sourceCode" id="cb26">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-rltv</span> <span class="at">--inplace</span> <span class="at">--itemize-changes</span> <span class="at">--progress</span> <span class="at">--stats</span> <span class="at">--whole-file</span> <span class="at">--size-only</span> /nobackup/myusername/source /rdw/path/to/my/share/destination/ <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> /home/myusername/meaningful-log-name.log2</span></code></pre>
 </div>
+<ul><li>
+<code>--inplace --whole-file --size-only</code> speed up transfer
+and prevent rsync filling up space with a large temporary
+directory<br></li>
+<li>
+<code>--itemize-changes --progress --stats</code> for more
+informative output<br></li>
+<li>Remember <code>|</code> from the Unix Shell workshop?<br><code>| tee</code> sends output both to the screen and to a log
+file<br></li>
+<li>All the arguments can be single letters like <code>-v</code> or full
+words like <code>--verbose</code>. Use <code>man rsync</code> to craft
+your favourite arguments list.</li>
+</ul></div>
 </div>
 </div>
 </div>
@@ -847,28 +880,28 @@ page if you’re unsure.</p>
 <div class="callout-content">
 <p>Say we have to connect <code>rsync</code> through port 768 instead of
 22. How would we modify this command?</p>
-<div class="codewrapper sourceCode" id="cb26">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync test.txt userid@rocket.hpc:</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
-</button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
-<div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">--help</span> <span class="kw">|</span> <span class="fu">grep</span> port</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>     <span class="ex">--port=PORT</span>             specify double-colon alternate port number</span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="ex">See</span> https://rsync.samba.org/ for updates, bug reports, and answers</span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">--port</span><span class="op">=</span>768 test.txt userid@rocket.hpc:</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync test.txt userid@rocket.hpc:</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb28">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">--help</span> <span class="kw">|</span> <span class="fu">grep</span> port</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>     <span class="ex">--port=PORT</span>             specify double-colon alternate port number</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="ex">See</span> https://rsync.samba.org/ for updates, bug reports, and answers</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  rsync <span class="at">--port</span><span class="op">=</span>768 test.txt userid@rocket.hpc:</span></code></pre>
 </div>
 </div>
 </div>
@@ -876,9 +909,6 @@ page if you’re unsure.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="windows-users---transferring-files-interactively-with-mobaxterm">Windows Users - Transferring Files interactively with MobaXterm<a class="anchor" aria-label="anchor" href="#windows-users---transferring-files-interactively-with-mobaxterm"></a></h2>
-<hr class="half-width"><p>MobaXterm is a free ssh client. It allows connections via a ‘jump
-host’ so can even be used from home.</p>
 </section><section><h2 class="section-heading" id="archiving-files">Archiving Files<a class="anchor" aria-label="anchor" href="#archiving-files"></a></h2>
 <hr class="half-width"><p>One of the biggest challenges we often face when transferring data
 between remote HPC systems is that of large numbers of files. There is
@@ -904,42 +934,42 @@ that archive with <code>gzip</code> to save space. Let’s check using
 specified by <code>-f &lt;filename&gt;</code>, on the remote computer.
 Note that you can concatenate the two flags, instead of writing
 <code>-t -f</code> separately.</p>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  ssh userid@rocket.hpc</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ tar <span class="at">-tf</span> hpc-lesson-data.tar.gz</span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="ex">hpc-intro-data/</span></span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/</span></span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01971Z.txt</span></span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/goostats</span></span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/goodiff</span></span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02040B.txt</span></span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01978B.txt</span></span>
-<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02043B.txt</span></span>
-<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02018B.txt</span></span>
-<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01843A.txt</span></span>
-<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01978A.txt</span></span>
-<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01751B.txt</span></span>
-<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01736A.txt</span></span>
-<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01812A.txt</span></span>
-<span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02043A.txt</span></span>
-<span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01729B.txt</span></span>
-<span id="cb28-19"><a href="#cb28-19" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02040A.txt</span></span>
-<span id="cb28-20"><a href="#cb28-20" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01843B.txt</span></span>
-<span id="cb28-21"><a href="#cb28-21" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01751A.txt</span></span>
-<span id="cb28-22"><a href="#cb28-22" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01729A.txt</span></span>
-<span id="cb28-23"><a href="#cb28-23" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02040Z.txt</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  ssh userid@rocket.hpc</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ tar <span class="at">-tf</span> hpc-lesson-data.tar.gz</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="ex">hpc-intro-data/</span></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/</span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01971Z.txt</span></span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/goostats</span></span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/goodiff</span></span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02040B.txt</span></span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01978B.txt</span></span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02043B.txt</span></span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02018B.txt</span></span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01843A.txt</span></span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01978A.txt</span></span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01751B.txt</span></span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01736A.txt</span></span>
+<span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01812A.txt</span></span>
+<span id="cb29-17"><a href="#cb29-17" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02043A.txt</span></span>
+<span id="cb29-18"><a href="#cb29-18" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01729B.txt</span></span>
+<span id="cb29-19"><a href="#cb29-19" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02040A.txt</span></span>
+<span id="cb29-20"><a href="#cb29-20" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01843B.txt</span></span>
+<span id="cb29-21"><a href="#cb29-21" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01751A.txt</span></span>
+<span id="cb29-22"><a href="#cb29-22" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE01729A.txt</span></span>
+<span id="cb29-23"><a href="#cb29-23" tabindex="-1"></a><span class="ex">hpc-intro-data/north-pacific-gyre/NENE02040Z.txt</span></span></code></pre>
 </div>
 <p>This shows a folder containing another folder, which contains a bunch
 of files. If you’ve taken The Carpentries’ Shell lesson recently, these
 might look familiar. Let’s see about that compression, using
 <code>du</code> for “<strong>d</strong>isk <strong>u</strong>sage”.</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ du <span class="at">-sh</span> hpc-lesson-data.tar.gz</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="ex">36K</span>     hpc-intro-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ du <span class="at">-sh</span> hpc-lesson-data.tar.gz</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="ex">36K</span>     hpc-intro-data.tar.gz</span></code></pre>
 </div>
 <div id="files-occupy-at-least-one-block" class="callout">
 <div class="callout-square">
@@ -979,17 +1009,17 @@ flags.</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
-  <h4 class="accordion-header" id="headingSolution5"> Commands </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6"> Commands </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ tar <span class="at">-xvzf</span> hpc-lesson-data.tar.gz</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ tar <span class="at">-xvzf</span> hpc-lesson-data.tar.gz</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1018,11 +1048,11 @@ flags.</p>
 </div>
 <p>Note that we did not type out <code>-x -v -z -f</code>, thanks to the
 flag concatenation, though the command works identically either way.</p>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ du <span class="at">-sh</span> hpc-lesson-data</span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="ex">144K</span>    hpc-intro-data</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ du <span class="at">-sh</span> hpc-lesson-data</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="ex">144K</span>    hpc-intro-data</span></code></pre>
 </div>
 </div>
 </div>
@@ -1043,10 +1073,10 @@ size of the raw data!</p>
 <p>If you want to reverse the process — compressing raw data instead of
 extracting it — set a <code>c</code> flag instead of <code>x</code>, set
 the archive filename, then provide a directory to compress:</p>
-<div class="codewrapper sourceCode" id="cb33">
+<div class="codewrapper sourceCode" id="cb34">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  tar <span class="at">-cvzf</span> compressed_data.tar.gz hpc-intro-data</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  tar <span class="at">-cvzf</span> compressed_data.tar.gz hpc-intro-data</span></code></pre>
 </div>
 <div id="working-with-windows" class="callout discussion">
 <div class="callout-square">
