@@ -269,8 +269,6 @@ file2.txt
 
 sent 203 bytes  received 57 bytes  
 ```
-:::
-
 
 ## Windows Users - Transferring Files interactively with MobaXterm
 MobaXterm is a free ssh client.  It allows connections via a 'jump host' so can even be used from home.
