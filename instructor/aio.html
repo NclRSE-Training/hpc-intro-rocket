@@ -623,7 +623,7 @@ results.</p>
   Some Ideas
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li>Checking email: your computer (possibly in your pocket) contacts a
@@ -884,7 +884,7 @@ neighbors.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> It’s a Beautiful Day in the Neighborhood </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The deepest layer should differ: <strong>userid</strong> is uniquely
 yours. Are there differences in the path at higher levels?</p>
@@ -1008,7 +1008,7 @@ computer cluster, you need to log out first. To do so, type
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>There are several ways to do this. Most operating systems have a
 graphical system monitor, like the Windows Task Manager. More detailed
@@ -1055,7 +1055,7 @@ node.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2254,7 +2254,7 @@ login node is loaded on a compute node).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2496,7 +2496,7 @@ internet.</li>
 <div id="required-files" class="callout-inner">
 <h3 class="callout-title">Required Files</h3>
 <div class="callout-content">
-<p>The program used in this example can be retrieved using wget or a
+<p>The files used in this example can be retrieved using wget or a
 browser on your laptop and then copied to the remote cluster.</p>
 <p><strong>Using wget</strong>:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -2509,10 +2509,10 @@ browser on your laptop and then copied to the remote cluster.</p>
 </div>
 </div>
 </div>
-<p>Computing with a remote computer offers very limited use if we cannot
-get files to or from the cluster. There are several options for
-transferring data between computing resources, from command line options
-to GUI programs, which we will cover here.</p>
+<p>A remote cluster offers very limited use if we cannot get files to or
+from it. There are several options for transferring data between
+computing resources, from command line options to GUI programs, which we
+will cover here.</p>
 <section><h2 class="section-heading" id="download-files-from-the-internet">Download Files From the Internet<a class="anchor" aria-label="anchor" href="#download-files-from-the-internet"></a>
 </h2>
 <hr class="half-width">
@@ -2561,13 +2561,13 @@ the majority of HPC cluster machines run. You may also see the extension
 <p>To copy a single file to or from the cluster, we can use
 <code>scp</code> (“secure copy”). The syntax can be a little complex for
 new users, but we’ll break it down.</p>
-<p>To <em>upload to</em> another computer:</p>
+<p>To <em>upload to</em> a remote computer:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp path/to/local/file.txt userid@rocket.hpc:/path/on/Rocket</span></code></pre>
 </div>
-<p>To <em>download from</em> another computer:</p>
+<p>To <em>download from</em> a remote computer:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2578,7 +2578,7 @@ don’t specify a path on the remote computer, the file will be
 transferred to your home directory. It’s a good idea to be clear about
 where you are putting the file though, so use <code>~/</code> to upload
 to the top level in your home directory. (using the handy <code>~</code>
-as shorthand your home directory.)</p>
+as shorthand for your home directory.)</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -4219,7 +4219,7 @@ worked or not.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Creating a file called <code>submit-pi-mpi.slurm</code>:</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -4404,7 +4404,7 @@ figure for the Calculation core seconds. Is this what you observe?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The table below shows example timings for runs on ARCHER2 (HPC at
 Edinburgh)</p>
@@ -4617,7 +4617,7 @@ choose this option?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>The table below gives example results for ARCHER2 (HPC at Edinburgh)
 based on the example runtimes given in the solution above.</p>

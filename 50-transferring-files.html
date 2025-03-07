@@ -395,7 +395,7 @@ internet.</li>
 <div id="required-files" class="callout-inner">
 <h3 class="callout-title">Required Files</h3>
 <div class="callout-content">
-<p>The program used in this example can be retrieved using wget or a
+<p>The files used in this example can be retrieved using wget or a
 browser on your laptop and then copied to the remote cluster.</p>
 <p><strong>Using wget</strong>:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -408,10 +408,10 @@ browser on your laptop and then copied to the remote cluster.</p>
 </div>
 </div>
 </div>
-<p>Computing with a remote computer offers very limited use if we cannot
-get files to or from the cluster. There are several options for
-transferring data between computing resources, from command line options
-to GUI programs, which we will cover here.</p>
+<p>A remote cluster offers very limited use if we cannot get files to or
+from it. There are several options for transferring data between
+computing resources, from command line options to GUI programs, which we
+will cover here.</p>
 <section><h2 class="section-heading" id="download-files-from-the-internet">Download Files From the Internet<a class="anchor" aria-label="anchor" href="#download-files-from-the-internet"></a></h2>
 <hr class="half-width"><p>One of the most straightforward ways to download files is to use
 either <code>curl</code> or <code>wget</code>, one of these is usually
@@ -456,13 +456,13 @@ the majority of HPC cluster machines run. You may also see the extension
 <hr class="half-width"><p>To copy a single file to or from the cluster, we can use
 <code>scp</code> (“secure copy”). The syntax can be a little complex for
 new users, but we’ll break it down.</p>
-<p>To <em>upload to</em> another computer:</p>
+<p>To <em>upload to</em> a remote computer:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">[user@laptop</span> ~]$  scp path/to/local/file.txt userid@rocket.hpc:/path/on/Rocket</span></code></pre>
 </div>
-<p>To <em>download from</em> another computer:</p>
+<p>To <em>download from</em> a remote computer:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -473,7 +473,7 @@ don’t specify a path on the remote computer, the file will be
 transferred to your home directory. It’s a good idea to be clear about
 where you are putting the file though, so use <code>~/</code> to upload
 to the top level in your home directory. (using the handy <code>~</code>
-as shorthand your home directory.)</p>
+as shorthand for your home directory.)</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
