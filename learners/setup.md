@@ -7,6 +7,7 @@ title: Setup
 There are several pieces of software you will wish to install before the
 workshop. Though installation help will be provided at the workshop, we
 recommend that these tools are installed (or at least downloaded) beforehand.
+
 1. [A terminal application or command-line interface](#where-to-type-commands-how-to-open-a-new-shell)
 2. [A Secure Shell application](#ssh-for-secure-connections)
 
@@ -31,14 +32,6 @@ have one installed. There are also options for identifying and downloading a
 Unix Shell program, a Linux/UNIX emulator, or a program to access a Unix Shell
 on a server.
 
-## Shell Setup
-
-### Details
-
-Setup for different systems can be presented in dropdown menus via a `solution`
-tag. They will join to this discussion block, so you can give a general overview
-of the software used in this lesson here and fill out the individual operating
-systems (and potentially add more, e.g. online setup) in the solutions blocks.
 
 ### Unix Shells on Windows
 
@@ -54,7 +47,7 @@ the Windows start menu.
 - [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html) &mdash; *Recommended*
 - [Git for Windows](https://gitforwindows.org/) &mdash; Alternative option used by other Software Carpentries
 - [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) &mdash; advanced option for Windows 10
-- 
+
 
 ::: discussion
 ## Alternatives to MobaXterm and Git for Windows 
@@ -103,7 +96,7 @@ https://www.macworld.co.uk/feature/mac-software/how-use-terminal-on-mac-3608274/
 
 
 
-### Linux
+### Unix Shell on Linux
 
 On most versions of Linux, the default Unix Shell is accessible by running the
 [(Gnome) Terminal](https://help.gnome.org/users/gnome-terminal/stable/) or
@@ -115,10 +108,6 @@ applications menu or the search bar.
 
 If none of the options above address your circumstances, try an online search
 for: `Unix shell [your operating system]`.
-
-This setup takes you through getting ready for the course by ensuring you have an SSH client installed
-and registering for an ARCHER2 account (you can also use an existing ARCHER2 account if you are already
-a user).
 
 
 ## Setup an SSH client
