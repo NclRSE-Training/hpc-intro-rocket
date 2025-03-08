@@ -477,7 +477,7 @@ an analysis or we are attempting to debug something that went wrong with a previ
 Fortunately, SLURM makes it easy to start an interactive job with `srun`:
 
 ```bash
-[userid@login01 userid]$  srun --partition=short --pty /bin/bash
+[userid@login01 userid]$  srun --partition=interactive --pty /bin/bash
 ```
 
 You should be presented with a bash prompt. Note that the prompt may change
