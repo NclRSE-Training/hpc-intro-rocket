@@ -250,25 +250,7 @@ and a lot of detail about the memory by reading the file `/proc/meminfo`:
 :::
 :::
 
-You can also explore the available filesystems using `df` to show **d**isk
-**f**ree space. The `-h` flag renders the sizes in a human-friendly format,
-i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
-each resource is.
 
-```bash
-[userid@login01 ~]$  df -Th
-```
-
-
-::: callout
-## Different results from `df`
-- The local filesystems (ext, tmp, xfs, zfs) will depend on whether you're
-on the same login node (or compute node, later on).
-- Networked filesystems
-(beegfs, cifs, gpfs, nfs, pvfs) will be similar --- but may include
-userid, depending on how it is [mounted](
-https://en.wikipedia.org/wiki/Mount_(computing)).
-:::
 
 ::: callout
 ## Shared Filesystems
@@ -308,6 +290,105 @@ research work on the different systems and nodes?
 Many HPC clusters have a variety of nodes optimized for particular workloads.
 Some nodes may have larger amount of memory, or specialized resources such as
 Graphical Processing Units (GPUs).
+:::
+
+
+## Filesystems
+
+### Home Directory
+All users have a home directory on Rocket, you arrive here whenever you log in.  Although you may choose to set permissions allowing others to view files in your home directory, files stored here cannot be made available to your project leader or collaborators after you leave, so DO NOT store project work here.
+
+ 
+
+### Project Directory
+All users on Rocket are members of one or more registered projects, and each project
+has a directory on `/nobackup` for shared files. For the duration of this course you have
+been made a member of the training project.
+`/nobackup/proj/training`
+
+:::challenge
+## Work Directory
+Create a directory under our `training` project directory to store your work on Rocket.  CHECK: Can your collaborators read files you create?
+
+:::solution
+
+```bash
+mkdir /nobackup/proj/training/userid 
+cd /nobackup/proj/training/userid/
+touch testfile.txt
+ls -la
+```
+```output
+[userid@login01 userid]$ ls -la
+total 8
+drwx--S--- 2 userid rockhpc_training 4096 Mar  8 20:10 .
+drwxrws--- 3 root   rockhpc_training 4096 Mar  8 07:42 ..
+-rw------- 1 userid rockhpc_training    0 Mar  8 20:10 testfile.txt
+```
+
+Linux file permissions are covered in [Unix Shell extras](https://carpentries-incubator.github.io/shell-extras/04-permissions/index.html).  
+
+NOTE: By default a file you create on Rocket will allow ONLY you (the owner) to read and write to it: `-rw-------`.  
+
+It's a good idea to change permissions on new files so that your PI and collaborators can see your work, using `chmod` (or `chmod -R` to recurse through directories).  `750` grants read permissions to everyone in your group, `755` grants read permissions to everyone:
+
+```bash
+[userid@login01 userid]$ chmod 750 file.txt 
+```
+or
+```bash
+[userid@login01 userid]$ chmod -R 755 /nobackup/proj/training/userid/
+```
+:::
+:::
+
+### Local Scratch Space
+Home and project directories are accessible across the Rocket cluster. There is also local
+space on each node, which can be used for temporary files and for more efficient I/O
+during jobs. This space is only accessible to that node and is always called `/scratch`.
+When you run jobs on the compute nodes, a subdirectory will be created on `/scratch`
+for each job and can be referred to using the environment variable `$TMPDIR`. Use
+this rather than the top level `/scratch`. it helps avoid conflicts between jobs and allows
+the automatic removal of files when jobs finish.
+Use of `/scratch` can make a significant difference to your computations’ speed, for
+example if you:
+
+- Write temporary files that are used only while a computation is running
+- Read from or write to a file numerous times during a computation
+- Access numerous small files
+
+You can view the local storage on the login node you are working on with `ls /scratch`
+
+### RDW - Research Data Warehouse
+
+Research Data Warehouse storage has been designed to provide safe, secure, very-large capacity, low-performance storage to Research groups on-campus.  This is the best place to store research data, but not intended for interactive use.  Working data on rocket should be backed up to RDW.  Data to be worked on should first be copied down to working storage (project directory).
+
+RDW is [mounted](https://en.wikipedia.org/wiki/Mount_(computing)) at `/rdw` on the login nodes only.  Project leaders can request a share on RDW.  For each project, the first 5TB are free, additional space is charged per TB per year.  
+
+Project shares have paths like: `/rdw/03/rse-hpc/` and can also be viewed on campus Windows computers at `\\campus\rdw\rse-hpc`.  
+
+:::challenge
+## Mounted Filesystems
+
+You can also explore the available filesystems using `df` to show **d**isk
+**f**ree space. The `-h` flag renders the sizes in a human-friendly format,
+i.e., GB instead of B. The **t**ype flag `-T` shows what kind of filesystem
+each resource is.
+
+```bash
+[userid@login01 ~]$  df -Th
+```
+
+
+:::solution
+## Different results from `df`
+- The local filesystems (ext, tmp, xfs, zfs) will depend on whether you're
+on the same login node (or compute node, later on).
+- Networked filesystems
+(beegfs, cifs, gpfs, nfs, pvfs) will be similar --- but may include
+userid, depending on how it is [mounted](
+https://en.wikipedia.org/wiki/Mount_(computing)).
+:::
 :::
 
 With all of this in mind, we will now cover how to talk to the cluster's
