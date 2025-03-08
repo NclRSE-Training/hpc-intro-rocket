@@ -1072,33 +1072,6 @@ file <code>/proc/meminfo</code>:</p>
 </div>
 </div>
 </div>
-<p>You can also explore the available filesystems using <code>df</code>
-to show <strong>d</strong>isk <strong>f</strong>ree space. The
-<code>-h</code> flag renders the sizes in a human-friendly format, i.e.,
-GB instead of B. The <strong>t</strong>ype flag <code>-T</code> shows
-what kind of filesystem each resource is.</p>
-<div class="codewrapper sourceCode" id="cb14">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  df <span class="at">-Th</span></span></code></pre>
-</div>
-<div id="different-results-from-df" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="different-results-from-df" class="callout-inner">
-<h3 class="callout-title">Different results from <code>df</code>
-</h3>
-<div class="callout-content">
-<ul>
-<li>The local filesystems (ext, tmp, xfs, zfs) will depend on whether
-you’re on the same login node (or compute node, later on).</li>
-<li>Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be
-similar — but may include userid, depending on how it is <a href="https://en.wikipedia.org/wiki/Mount_(computing)" class="external-link">mounted</a>.</li>
-</ul>
-</div>
-</div>
-</div>
 <div id="shared-filesystems" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1121,10 +1094,10 @@ similar — but may include userid, depending on how it is <a href="https://en.w
 <p>Finally, let’s look at the resources available on the worker nodes
 where your jobs will actually run. Try running this command to see the
 name, CPUs and memory available on one of the worker nodes:</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sinfo <span class="at">-n</span> <span class="at">-o</span> <span class="st">"%n %c %m"</span> <span class="at">-o</span> <span class="st">"%n %c %m"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  sinfo <span class="at">-n</span> <span class="at">-o</span> <span class="st">"%n %c %m"</span> <span class="at">-o</span> <span class="st">"%n %c %m"</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1157,6 +1130,164 @@ resources such as Graphical Processing Units (GPUs).</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="filesystems">Filesystems<a class="anchor" aria-label="anchor" href="#filesystems"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="home-directory">Home Directory<a class="anchor" aria-label="anchor" href="#home-directory"></a>
+</h3>
+<p>All users have a home directory on Rocket, you arrive here whenever
+you log in. Although you may choose to set permissions allowing others
+to view files in your home directory, files stored here cannot be made
+available to your project leader or collaborators after you leave, so DO
+NOT store project work here.</p>
+</div>
+<div class="section level3">
+<h3 id="project-directory">Project Directory<a class="anchor" aria-label="anchor" href="#project-directory"></a>
+</h3>
+<p>All users on Rocket are members of one or more registered projects,
+and each project has a directory on <code>/nobackup</code> for shared
+files. For the duration of this course you have been made a member of
+the training project. <code>/nobackup/proj/training</code></p>
+<div id="work-directory" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="work-directory" class="callout-inner">
+<h3 class="callout-title">Work Directory</h3>
+<div class="callout-content">
+<p>Create a directory under our <code>training</code> project directory
+to store your work on Rocket. CHECK: Can your collaborators read files
+you create?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">mkdir</span> /nobackup/proj/training/userid </span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="bu">cd</span> /nobackup/proj/training/userid/</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="fu">touch</span> testfile.txt</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>[userid@login01 userid]$ ls -la
+total 8
+drwx--S--- 2 userid rockhpc_training 4096 Mar  8 20:10 .
+drwxrws--- 3 root   rockhpc_training 4096 Mar  8 07:42 ..
+-rw------- 1 userid rockhpc_training    0 Mar  8 20:10 testfile.txt</code></pre>
+</div>
+<p>Linux file permissions are covered in <a href="https://carpentries-incubator.github.io/shell-extras/04-permissions/index.html" class="external-link">Unix
+Shell extras</a>.</p>
+<p>NOTE: By default a file you create on Rocket will allow ONLY you (the
+owner) to read and write to it: <code>-rw-------</code>.</p>
+<p>It’s a good idea to change permissions on new files so that your PI
+and collaborators can see your work, using <code>chmod</code> (or
+<code>chmod -R</code> to recurse through directories). <code>750</code>
+grants read permissions to everyone in your group, <code>755</code>
+grants read permissions to everyone:</p>
+<div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$ chmod 750 file.txt </span></code></pre>
+</div>
+<p>or</p>
+<div class="codewrapper sourceCode" id="cb18">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$ chmod <span class="at">-R</span> 755 /nobackup/proj/training/userid/</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="local-scratch-space">Local Scratch Space<a class="anchor" aria-label="anchor" href="#local-scratch-space"></a>
+</h3>
+<p>Home and project directories are accessible across the Rocket
+cluster. There is also local space on each node, which can be used for
+temporary files and for more efficient I/O during jobs. This space is
+only accessible to that node and is always called <code>/scratch</code>.
+When you run jobs on the compute nodes, a subdirectory will be created
+on <code>/scratch</code> for each job and can be referred to using the
+environment variable <code>$TMPDIR</code>. Use this rather than the top
+level <code>/scratch</code>. it helps avoid conflicts between jobs and
+allows the automatic removal of files when jobs finish. Use of
+<code>/scratch</code> can make a significant difference to your
+computations’ speed, for example if you:</p>
+<ul>
+<li>Write temporary files that are used only while a computation is
+running</li>
+<li>Read from or write to a file numerous times during a
+computation</li>
+<li>Access numerous small files</li>
+</ul>
+<p>You can view the local storage on the login node you are working on
+with <code>ls /scratch</code></p>
+</div>
+<div class="section level3">
+<h3 id="rdw---research-data-warehouse">RDW - Research Data Warehouse<a class="anchor" aria-label="anchor" href="#rdw---research-data-warehouse"></a>
+</h3>
+<p>Research Data Warehouse storage has been designed to provide safe,
+secure, very-large capacity, low-performance storage to Research groups
+on-campus. This is the best place to store research data, but not
+intended for interactive use. Working data on rocket should be backed up
+to RDW. Data to be worked on should first be copied down to working
+storage (project directory).</p>
+<p>RDW is <a href="https://en.wikipedia.org/wiki/Mount_(computing)" class="external-link">mounted</a> at
+<code>/rdw</code> on the login nodes only. Project leaders can request a
+share on RDW. For each project, the first 5TB are free, additional space
+is charged per TB per year.</p>
+<p>Project shares have paths like: <code>/rdw/03/rse-hpc/</code> and can
+also be viewed on campus Windows computers at
+<code>\\campus\rdw\rse-hpc</code>.</p>
+<div id="mounted-filesystems" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="mounted-filesystems" class="callout-inner">
+<h3 class="callout-title">Mounted Filesystems</h3>
+<div class="callout-content">
+<p>You can also explore the available filesystems using <code>df</code>
+to show <strong>d</strong>isk <strong>f</strong>ree space. The
+<code>-h</code> flag renders the sizes in a human-friendly format, i.e.,
+GB instead of B. The <strong>t</strong>ype flag <code>-T</code> shows
+what kind of filesystem each resource is.</p>
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$  df <span class="at">-Th</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Different results from df </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div class="accordion-body">
+<ul>
+<li>The local filesystems (ext, tmp, xfs, zfs) will depend on whether
+you’re on the same login node (or compute node, later on).</li>
+<li>Networked filesystems (beegfs, cifs, gpfs, nfs, pvfs) will be
+similar — but may include userid, depending on how it is <a href="https://en.wikipedia.org/wiki/Mount_(computing)" class="external-link">mounted</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <p>With all of this in mind, we will now cover how to talk to the
 cluster’s scheduler, and use it to start running our scripts and
 programs!</p>
@@ -1186,6 +1317,7 @@ mounted filesystems, etc.).</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></section><section id="aio-30-scheduler"><p>Content from <a href="30-scheduler.html">Working with the scheduler</a></p>
 <hr>
 <p>Last updated on 2025-03-08 |
@@ -1329,7 +1461,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1373,7 +1505,7 @@ wait in the queue behind bigger jobs.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Partitions on Rocket </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <pre><code>Partition (queue)	Nodes		Max concurrent 	Time limit (wallclock)	Default time limit (wallclock)	Default memory per core
 defq			standard	528 cores	2 days			2 days				2.5 GB
@@ -1585,7 +1717,7 @@ options we have been specifying on the command line
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1635,7 +1767,7 @@ that it prints out the location from which the job was submitted.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2594,7 +2726,7 @@ directory on Rocket.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2623,7 +2755,7 @@ local machine over SSH? Note that it may well fail, and that’s OK!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Using <code>curl</code> or <code>wget</code> commands like the
 following:</p>
@@ -2912,7 +3044,7 @@ data from Rocket to RDW?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2942,7 +3074,7 @@ group modification errors above. For Rocket and RDW, replace
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Try out a dry run:</p>
 <div class="codewrapper sourceCode" id="cb25">
@@ -3016,7 +3148,7 @@ page if you’re unsure.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3141,7 +3273,7 @@ flags.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Commands </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4210,7 +4342,7 @@ worked or not.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Creating a file called <code>submit-pi-mpi.slurm</code>:</p>
 <div class="codewrapper sourceCode" id="cb2">
@@ -4395,7 +4527,7 @@ figure for the Calculation core seconds. Is this what you observe?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The table below shows example timings for runs on ARCHER2 (HPC at
 Edinburgh)</p>
@@ -4608,7 +4740,7 @@ choose this option?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>The table below gives example results for ARCHER2 (HPC at Edinburgh)
 based on the example runtimes given in the solution above.</p>
@@ -4887,7 +5019,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Building software, creating directories, and unpacking software are
 common and acceptable tasks for the login node: options #2
@@ -5124,7 +5256,7 @@ mounted filesystem?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Lets go through each option</p>
 <ol style="list-style-type: decimal">
