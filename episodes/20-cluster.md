@@ -247,6 +247,8 @@ and a lot of detail about the memory by reading the file `/proc/meminfo`:
 ```bash
 [userid@login01 ~]$  less /proc/meminfo
 ```
+:::
+:::
 
 You can also explore the available filesystems using `df` to show **d**isk
 **f**ree space. The `-h` flag renders the sizes in a human-friendly format,
@@ -275,8 +277,8 @@ This is an important point to remember: files saved on one node
 (computer) are often available everywhere on the cluster!
 :::
 
-:::
-:::
+
+
 
 
 ::: challenge
