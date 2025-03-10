@@ -47,6 +47,25 @@ command (or series of commands) that you want to run on the cluster is called a
 *job*, and the process of using a scheduler to run the job is called *batch job
 submission*.
 
+:::challenge
+## work in the project directory
+First, let's get in the habit of working in the project directory.  This makes it easier to ensure our collaborators can see the codes and results we produce.
+
+:::solution
+## cd to your directory under your project
+
+```bash
+cd /nobackup/proj/training/userid/
+```
+:::
+:::
+
+:::callout
+## Substitute your username for `userid`
+
+In all our examples, you will see `userid` in the place of your own username. 
+:::
+
 In this case, the job we want to run is a shell script -- essentially a
 text file containing a list of UNIX commands to be executed in a sequential
 manner. Our shell script will have three parts:
@@ -65,17 +84,12 @@ manner. Our shell script will have three parts:
   name of the machine the script is run on.
 * After our script is saved, we must make it executable, or linux system security will not allow it to run.  Use `chmod +x` to do this.
 
-:::callout
-## Substitute your username for `userid`
-
-In all our examples, you will see `userid` in the place of your own username. 
-:::
 
 
 ```bash
-[userid@login01 ~]$  nano example-job.sh
-[userid@login01 ~]$  chmod +x example-job.sh
-[userid@login01 ~]$  cat example-job.sh
+[userid@login01 userid]$  nano example-job.sh
+[userid@login01 userid]$  chmod +x example-job.sh
+[userid@login01 userid]$  cat example-job.sh
 ```
 
 ```output
@@ -91,7 +105,7 @@ hostname
 Run the script. Does it execute on the cluster or just our login node?
 
 ```bash
-[userid@login01 ~]$  ./example-job.sh
+[userid@login01 userid]$  ./example-job.sh
 ```
 
 ::: solution
@@ -132,7 +146,7 @@ interactive		all		1 node		1 day or 2 hours idle time 2 hours			2.5 GB
 
 
 ```bash
-[userid@login01 ~]$  sbatch --partition=short example-job.sh
+[userid@login01 userid]$  sbatch --partition=short example-job.sh
 ```
 
 ```output
@@ -303,7 +317,7 @@ echo "This script has finished successfully."
 ```
 
 ```bash
-[userid@login01 ~]$  sbatch example-job.sh
+[userid@login01 userid]$  sbatch example-job.sh
 ```
 
 Why are the Slurm runtime and `sleep` time not identical?
@@ -320,8 +334,8 @@ Using the `SLURM_SUBMIT_DIR` variable, modify your job so that it prints out the
 
 ::: solution
 ```bash
-[userid@login01 ~]$  nano example-job.sh
-[userid@login01 ~]$  cat example-job.sh
+[userid@login01 userid]$  nano example-job.sh
+[userid@login01 userid]$  cat example-job.sh
 ```
 
 ```output

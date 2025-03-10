@@ -184,12 +184,12 @@ RDW is mounted on Rocket at `/rdw`.  You can use scp and rsync to transfer data 
 Because `/rdw` is a mounted filesystem, we can use `cp` instead of `scp`:
 
 ```bash
-[userid@login01 ~]$ cp file.txt /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
-[userid@login01 rse-hpc]$ cd /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
+[userid@login01 ~]$ cp file.txt /rdw/03/rse-hpc/training/userid/
+[userid@login01 rse-hpc]$ cd /rdw/03/rse-hpc/training/userid/
 [userid@login01 userid]$ pwd
 ```
 ```output
-/rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+/rdw/03/rse-hpc/training/userid
 ```
 ```bash
 [userid@login01 userid]$ ls
@@ -211,7 +211,7 @@ Transfer *to* RDW from your work area on Rocket
 
 #### Try out a dry run:
 ```bash
-[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid --dry-run
+[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/training/userid --dry-run
 ```
 ```output
 sending incremental file list
@@ -224,17 +224,17 @@ total size is 39  speedup is 0.27 (DRY RUN)
 ```
 #### Run ‘for real’:
 ```bash
-[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/training/userid
 ```
 ```output
 
 sending incremental file list
-rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/." failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/." failed: Invalid argument (22)
 ./
 file.txt
 file2.txt
-rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/.file.txt.SS0gps" failed: Invalid argument (22)
-rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/.file2.txt.XAYkoB" failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/.file.txt.SS0gps" failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/.file2.txt.XAYkoB" failed: Invalid argument (22)
 
 sent 234 bytes  received 376 bytes  1,220.00 bytes/sec
 total size is 39  speedup is 0.06
@@ -251,7 +251,7 @@ total 4
 -rw------- 1 userid rocketloginaccess 39 Feb 26 15:31 file.txt
 ```
 ```bash
-[userid@login01 ~]$ ls -l /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/
+[userid@login01 ~]$ ls -l /rdw/03/rse-hpc/training/userid/
 ```
 ```output
 total 57
@@ -269,7 +269,7 @@ For Rocket and RDW, replace `-av` with `-rltv`
 
 
 ```bash
-[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid
+[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid
 ```
 ```output
 sending incremental file list
