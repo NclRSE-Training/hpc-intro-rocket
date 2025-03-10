@@ -351,7 +351,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Transferring files with remote computers</h1>
-        <p>Last updated on 2025-03-07 |
+        <p>Last updated on 2025-03-10 |
 
         <a href="https://github.com/NclRSE-Training/hpc-intro-rocket/edit/main/episodes/50-transferring-files.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -496,7 +496,7 @@ directory on Rocket.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -525,7 +525,7 @@ local machine over SSH? Note that it may well fail, and that’s OK!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>Using <code>curl</code> or <code>wget</code> commands like the
 following:</p>
@@ -610,14 +610,14 @@ directory on Rocket.</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ cp file.txt /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">[userid@login01</span> rse-hpc]$ cd /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/</span>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ cp file.txt /rdw/03/rse-hpc/training/userid/</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="ex">[userid@login01</span> rse-hpc]$ cd /rdw/03/rse-hpc/training/userid/</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="ex">[userid@login01</span> userid]$ pwd</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>/rdw/03/rse-hpc/rockhpc_training_TEMP/userid</code></pre>
+<pre class="output" tabindex="0"><code>/rdw/03/rse-hpc/training/userid</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -646,7 +646,7 @@ remote filesystem.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-av</span> testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid <span class="at">--dry-run</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-av</span> testDir/ /rdw/03/rse-hpc/training/userid <span class="at">--dry-run</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -665,19 +665,19 @@ total size is 39  speedup is 0.27 (DRY RUN)</code></pre>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-av</span> testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-av</span> testDir/ /rdw/03/rse-hpc/training/userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>
 sending incremental file list
-rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/." failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/." failed: Invalid argument (22)
 ./
 file.txt
 file2.txt
-rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/.file.txt.SS0gps" failed: Invalid argument (22)
-rsync: chgrp "/rdw/03/rse-hpc/rockhpc_training_TEMP/userid/.file2.txt.XAYkoB" failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/.file.txt.SS0gps" failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/.file2.txt.XAYkoB" failed: Invalid argument (22)
 
 sent 234 bytes  received 376 bytes  1,220.00 bytes/sec
 total size is 39  speedup is 0.06
@@ -705,7 +705,7 @@ the files.</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls <span class="at">-l</span> /rdw/03/rse-hpc/rockhpc_training_TEMP/userid/</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ ls <span class="at">-l</span> /rdw/03/rse-hpc/training/userid/</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -723,7 +723,7 @@ For Rocket and RDW, replace <code>-av</code> with
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-rltv</span> testDir/ /rdw/03/rse-hpc/rockhpc_training_TEMP/userid</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">[userid@login01</span> ~]$ rsync <span class="at">-rltv</span> testDir/ /rdw/03/rse-hpc/training/userid</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -794,7 +794,7 @@ data from Rocket to RDW?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -824,7 +824,7 @@ group modification errors above. For Rocket and RDW, replace
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>Try out a dry run:</p>
 <div class="codewrapper sourceCode" id="cb25">
@@ -893,7 +893,7 @@ page if you’re unsure.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
   <h4 class="accordion-header" id="headingSolution5"> Show me the solution </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1014,7 +1014,7 @@ flags.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
   <h4 class="accordion-header" id="headingSolution6"> Commands </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1179,8 +1179,8 @@ any links that you are not going to use.
   "url": "https://NclRSE-Training.github.io/hpc-intro-rocket/50-transferring-files.html",
   "identifier": "https://NclRSE-Training.github.io/hpc-intro-rocket/50-transferring-files.html",
   "dateCreated": "2025-02-12",
-  "dateModified": "2025-03-07",
-  "datePublished": "2025-03-08"
+  "dateModified": "2025-03-10",
+  "datePublished": "2025-03-10"
 }
 
   </script><script>
