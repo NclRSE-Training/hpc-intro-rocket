@@ -12,6 +12,7 @@ exercises: 15
 ::: objectives
  - `wget` and `curl -O` download a file from the internet.
  - `scp` transfers files to and from your computer.
+ - `rsync` transfers within the filesystem as well as to and from your computer
 :::
 
 ::: prereq
@@ -303,15 +304,14 @@ TestDir  testfile1  testfile2
 testfile1  testfile2
 
 ```
-:::
-:::
-
 
 We now have too many files!  The first rsync command copied `TestDir` because there was no trailing `/`.   
 The second rsync command only copied the contents of `TestDir` because of the trailing `/`.  
 We could have spotted this by looking at the output of `--dry-run` but this shows it's a good idea to check the destination after you copy.
 
-:::callout
+:::
+:::
+
 
 ## Large data copies
 When copying large amounts of data, rsync really comes into its own. When you're copying a lot of data, it's important to keep track in case the copy is interrupted.  Rsync is great because it can pick up where it left off, rather than starting the copy all over again.  It's also useful to output to a log so you can see what was transferred and find any errors that need to be addressed.
@@ -330,7 +330,7 @@ For a slow connection like the internet:
  
 - DO use compression `-z` 
 - DON’T use `--inplace`.  
-:::
+
 
 :::challenge
 ##  Large Transfer to RDW
@@ -563,6 +563,7 @@ back to Windows format, you can run `unix2dos filename`.)
 :::
 
 ::: keypoints
- - "`wget` and `curl -O` download a file from the internet."
- - "`scp` transfers files to and from your computer."
+ - `wget` and `curl -O` download a file from the internet.
+ - `scp` transfers files to and from your computer.
+ - `rsync` is good for large transfers because it only transfers changed files
 :::
