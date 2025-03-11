@@ -12,6 +12,7 @@ exercises: 15
 ::: objectives
  - `wget` and `curl -O` download a file from the internet.
  - `scp` transfers files to and from your computer.
+ - `rsync` transfers within the filesystem as well as to and from your computer
 :::
 
 ::: prereq
@@ -211,52 +212,58 @@ Transfer *to* RDW from your work area on Rocket
 
 #### Try out a dry run:
 ```bash
-[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/training/userid --dry-run
+[userid@login01 ~]$ cd /nobackup/proj/training/userid/
+[userid@sb024 userid]$ mkdir TestDir
+[userid@sb024 userid]$ touch TestDir/testfile1
+[userid@sb024 userid]$ touch TestDir/testfile2
+[userid@login01 userid]$ rsync -av TestDir /rdw/03/rse-hpc/training/userid --dry-run
 ```
 ```output
 sending incremental file list
-./
-file.txt
-file2.txt
+TestDir/
+TestDir/testfile1
+TestDir/testfile2
 
-sent 119 bytes  received 25 bytes  288.00 bytes/sec
-total size is 39  speedup is 0.27 (DRY RUN)
+sent 121 bytes  received 26 bytes  294.00 bytes/sec
+total size is 0  speedup is 0.00 (DRY RUN)
 ```
+
 #### Run ‘for real’:
 ```bash
-[userid@login01 ~]$ rsync -av testDir/ /rdw/03/rse-hpc/training/userid
+[userid@login01 userid]$ rsync -av TestDir /rdw/03/rse-hpc/training/userid
 ```
 ```output
-
 sending incremental file list
-rsync: chgrp "/rdw/03/rse-hpc/training/userid/." failed: Invalid argument (22)
-./
-file.txt
-file2.txt
-rsync: chgrp "/rdw/03/rse-hpc/training/userid/.file.txt.SS0gps" failed: Invalid argument (22)
-rsync: chgrp "/rdw/03/rse-hpc/training/userid/.file2.txt.XAYkoB" failed: Invalid argument (22)
+created directory /rdw/03/rse-hpc/training/userid
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/TestDir" failed: Invalid argument (22)
+TestDir/
+TestDir/testfile1
+TestDir/testfile2
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/TestDir/.testfile1.ofeRqX" failed: Invalid argument (22)
+rsync: chgrp "/rdw/03/rse-hpc/training/userid/TestDir/.testfile2.fS1m6j" failed: Invalid argument (22)
 
-sent 234 bytes  received 376 bytes  1,220.00 bytes/sec
-total size is 39  speedup is 0.06
+sent 197 bytes  received 415 bytes  408.00 bytes/sec
+total size is 0  speedup is 0.00
 rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1179) [sender=3.1.2]
 ```
-What happened?  `rsync` returned an error. `files/attrs were not transferred `  This is because RDW doesn't 'know' about rocket's groups.  The transfer was successful though! Only the 'group' attribute of the file couldn't be transferred.  RDW has 'trumped' our local permissions and imposed its own standard permissions.  This isn't important, the correct user keeps ownership of the files.
+What happened?  `rsync` returned an error. `files/attrs were not transferred `  This is because RDW doesn't 'know' about Rocket's groups.  The transfer was successful though! Only the 'group' attribute of the file couldn't be transferred.  RDW has 'trumped' our local permissions and imposed its own standard permissions.  This isn't important, the correct user keeps ownership of the files.
 
 ```bash
-[userid@login01 ~]$ ls -l testDir/
+[userid@login01 userid]$ ls -l TestDir/
 ```
 ```output
-total 4
--rw------- 1 userid rocketloginaccess  0 Feb 26 15:31 file2.txt
--rw------- 1 userid rocketloginaccess 39 Feb 26 15:31 file.txt
+total 0
+-rw------- 1 userid rockhpc_training 0 Mar 11 20:06 testfile1
+-rw------- 1 userid rockhpc_training 0 Mar 11 20:06 testfile2
+
 ```
 ```bash
-[userid@login01 ~]$ ls -l /rdw/03/rse-hpc/training/userid/
+[userid@login01 userid]$ ls -l /rdw/03/rse-hpc/training/userid/TestDir/
 ```
 ```output
-total 57
--rwxrwx--- 1 userid domainusers  0 Feb 26 15:52 file2.txt
--rwxrwx--- 1 userid domainusers 39 Feb 26 15:52 file.txt
+total 33
+-rwxrwx--- 1 userid domainusers 0 Mar 11 20:10 testfile1
+-rwxrwx--- 1 userid domainusers 0 Mar 11 20:10 testfile2
 ```
 It’s still easier to read output without errors that we have to ignore, so let’s remove that error.
 
@@ -269,19 +276,42 @@ For Rocket and RDW, replace `-av` with `-rltv`
 
 
 ```bash
-[userid@login01 ~]$ rsync -rltv testDir/ /rdw/03/rse-hpc/training/userid
+[userid@login01 userid]$ rsync -rltv TestDir/ /rdw/03/rse-hpc/training/userid 
 ```
 ```output
 sending incremental file list
 ./
-file.txt
-file2.txt
+testfile1
+testfile2
 
-sent 203 bytes  received 57 bytes  
+sent 150 bytes  received 57 bytes  414.00 bytes/sec
+total size is 0  speedup is 0.00
 ```
 
+:::challenge
+## Spot the difference
+Can you spot the difference betweent the 2 previous rsync commands?  Try `ls -l` on the destination.
 
-:::callout
+:::solution
+```bash
+[userid@login01 userid]$ ls -R /rdw/03/rse-hpc/training/userid/
+```
+```output
+/rdw/03/rse-hpc/training/userid/:
+TestDir  testfile1  testfile2
+
+/rdw/03/rse-hpc/training/userid/TestDir:
+testfile1  testfile2
+
+```
+
+We now have too many files!  The first rsync command copied `TestDir` because there was no trailing `/`.   
+The second rsync command only copied the contents of `TestDir` because of the trailing `/`.  
+We could have spotted this by looking at the output of `--dry-run` but this shows it's a good idea to check the destination after you copy.
+
+:::
+:::
+
 
 ## Large data copies
 When copying large amounts of data, rsync really comes into its own. When you're copying a lot of data, it's important to keep track in case the copy is interrupted.  Rsync is great because it can pick up where it left off, rather than starting the copy all over again.  It's also useful to output to a log so you can see what was transferred and find any errors that need to be addressed.
@@ -300,7 +330,7 @@ For a slow connection like the internet:
  
 - DO use compression `-z` 
 - DON’T use `--inplace`.  
-:::
+
 
 :::challenge
 ##  Large Transfer to RDW
@@ -533,6 +563,7 @@ back to Windows format, you can run `unix2dos filename`.)
 :::
 
 ::: keypoints
- - "`wget` and `curl -O` download a file from the internet."
- - "`scp` transfers files to and from your computer."
+ - `wget` and `curl -O` download a file from the internet.
+ - `scp` transfers files to and from your computer.
+ - `rsync` is good for large transfers because it only transfers changed files
 :::
