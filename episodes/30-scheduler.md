@@ -253,7 +253,7 @@ stuck with your site's default resources, which is probably not what you want.
 
 The following are several key resource requests:
 
-`--account=<project>` your account is typically your project code, for example `training`. Rocket does not charge users but other HPCs use the --account option for charging to a project budget.
+`--account=<project>` your account is typically your project code, for example `training`. Rocket does not charge users but other HPCs use the `--account` option for charging to a project budget.
 
 `--partition=<partition>` The partition specifies the set of nodes you want to run on. More information on available partitions is given in the [Rocket documentation](https://www.ncl.ac.uk/itservice/research/hpc).
 
