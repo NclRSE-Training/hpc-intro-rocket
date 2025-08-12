@@ -494,8 +494,10 @@ functions and parsing command-line parameters.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="run-the-code-on-your-development-machine-e.g.-your-laptop" class="callout-inner">
-<h3 class="callout-title">Run the code on your development machine (e.g. your laptop)</h3>
+<h3 class="callout-title">Run the code on your development machine
+(e.g. your laptop)</h3>
 <div class="callout-content">
 <p>A normal workflow would be to develop and run scripts on your own
 machine, then move the working code up to HPC if more resource is needed
@@ -516,6 +518,7 @@ script print its estimate of π:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="try-out-code-on-the-login-node" class="callout-inner">
 <h3 class="callout-title">Try out code on the login node ?</h3>
 <div class="callout-content">
@@ -540,6 +543,7 @@ start:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -559,7 +563,7 @@ difficult.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul><li>Computers are deterministic and produce pseudo random numbers using
 an algorithm. The choice of algorithm and its parameters determines how
@@ -799,6 +803,7 @@ python3 pi.py 100000000</code></pre>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="memory-requirements" class="callout-inner">
 <h3 class="callout-title">Memory Requirements</h3>
 <div class="callout-content">
@@ -850,6 +855,7 @@ for parallelism – this is a common tool on HPC systems.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="what-is-mpi" class="callout-inner">
 <h3 class="callout-title">What is MPI?</h3>
 <div class="callout-content">
@@ -874,6 +880,7 @@ that the appropriate run-time support for parallelism is included.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="mpi-runtime-arguments" class="callout-inner">
 <h3 class="callout-title">MPI Runtime Arguments</h3>
 <div class="callout-content">
@@ -892,8 +899,10 @@ variables set when the job is launched.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="what-changes-are-needed-for-an-mpi-version-of-the-π-calculator" class="callout-inner">
-<h3 class="callout-title">What Changes Are Needed for an MPI Version of the π Calculator?</h3>
+<h3 class="callout-title">What Changes Are Needed for an MPI Version of
+the π Calculator?</h3>
 <div class="callout-content">
 <p>First, we need to import the <code>MPI</code> object from the Python
 module <code>mpi4py</code> by adding an
@@ -1106,8 +1115,8 @@ lesson</a> lesson.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>“Parallel programming allows applications to take advantage of
 parallel hardware; serial code will not ‘just work.’”</li>
@@ -1160,7 +1169,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.16.12" class="external-link">sandpaper (0.16.12)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.6" class="external-link">varnish (1.0.6)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -1183,7 +1192,7 @@ any links that you are not going to use.
   "identifier": "https://NclRSE-Training.github.io/hpc-intro-rocket/instructor/60-parallel-job.html",
   "dateCreated": "2025-02-12",
   "dateModified": "2025-03-06",
-  "datePublished": "2025-08-05"
+  "datePublished": "2025-08-12"
 }
 
   </script><script>
