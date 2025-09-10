@@ -1,3 +1,5 @@
+# Lesson moved to https://github.com/NewcastleRSE-Training/hpc-intro-rocket
+
 # The Carpentries Workbench Template Markdown Lesson
 
 This lesson is a template lesson that uses [The Carpentries Workbench][workbench]. 
